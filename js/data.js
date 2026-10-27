@@ -1,7 +1,37 @@
 /**
- * DATA.JS - Danh sách 11 thẻ đặc quyền mặc định, biểu tượng SVG & lưu trữ LocalStorage
+ * DATA.JS - Danh sách 11 thẻ đặc quyền mặc định, bộ icon 3D Microsoft Fluent & LocalStorage
  * Dành riêng cho: LỚP 1B1 - CÔ NGUYỄN THỊ HOÀI THANH
  */
+
+const FLUENT_3D_ICONS = {
+  crown: 'assets/icons/crown.png',
+  medal: 'assets/icons/medal.png',
+  shield: 'assets/icons/shield.png',
+  twoStars: 'assets/icons/twoStars.png',
+  star: 'assets/icons/star.png',
+  swap: 'assets/icons/swap.png',
+  clap: 'assets/icons/clap.png',
+  dice: 'assets/icons/dice.png',
+  board: 'assets/icons/board.png',
+  fan: 'assets/icons/fan.png',
+  candy: 'assets/icons/candy.png',
+  gift: 'assets/icons/gift.png',
+  sunflower: 'assets/icons/sunflower.png'
+};
+
+const iconImgCache = {};
+
+function getCardIconImage(key) {
+  if (iconImgCache[key]) return iconImgCache[key];
+  const src = FLUENT_3D_ICONS[key] || FLUENT_3D_ICONS.gift;
+  const img = new Image();
+  img.src = src;
+  iconImgCache[key] = img;
+  return img;
+}
+
+// Khởi tạo trước bộ nhớ cache ảnh icon 3D
+Object.keys(FLUENT_3D_ICONS).forEach(k => getCardIconImage(k));
 
 const SVG_ICONS = {
   crown: `
@@ -364,4 +394,6 @@ const DataStore = {
 window.SVG_ICONS = SVG_ICONS;
 window.DEFAULT_CARDS = DEFAULT_CARDS;
 window.getSvgImage = getSvgImage;
+window.FLUENT_3D_ICONS = FLUENT_3D_ICONS;
+window.getCardIconImage = getCardIconImage;
 window.DataStore = DataStore;

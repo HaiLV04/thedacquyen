@@ -287,12 +287,12 @@ const UI = {
       if (card.rarity === 'ORANGE') badgeColor = 'bg-orange-100 text-orange-950 border-orange-400';
       if (card.rarity === 'GREEN') badgeColor = 'bg-emerald-100 text-emerald-950 border-emerald-400';
 
-      const svgSnippet = SVG_ICONS[card.iconType] || SVG_ICONS.gift;
+      const iconSrc = FLUENT_3D_ICONS[card.iconType] || FLUENT_3D_ICONS.gift;
 
       item.innerHTML = `
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white border-2 border-amber-400 flex items-center justify-center p-1.5 shadow-sm">
-            <div class="w-full h-full">${svgSnippet}</div>
+          <div class="w-10 h-10 rounded-xl bg-white border-2 border-amber-400 flex items-center justify-center p-1 shadow-sm">
+            <img src="${iconSrc}" class="w-full h-full object-contain" alt="${card.title}">
           </div>
           <div>
             <div class="flex items-center gap-2">

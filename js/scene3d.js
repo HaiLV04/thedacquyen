@@ -185,18 +185,16 @@ const Scene3D = {
     ctx.lineWidth = 4;
     ctx.strokeRect(30, 30, 452, 640);
 
-    const backSvgImg = getSvgImage('magicBack');
+    const backImg = getCardIconImage('sunflower');
     const drawCenterCrest = () => {
-      ctx.drawImage(backSvgImg, 146, 225, 220, 220);
+      ctx.drawImage(backImg, 151, 230, 210, 210);
+      texture.needsUpdate = true;
     };
 
-    if (backSvgImg.complete) {
+    if (backImg.complete && backImg.naturalWidth > 0) {
       drawCenterCrest();
     } else {
-      backSvgImg.onload = () => {
-        drawCenterCrest();
-        texture.needsUpdate = true;
-      };
+      backImg.onload = drawCenterCrest;
     }
 
     ctx.font = '900 28px "Baloo 2", "Nunito", sans-serif';
@@ -302,17 +300,17 @@ const Scene3D = {
       ctx.stroke();
 
       const iconKey = card.iconType || 'gift';
-      const svgImg = getSvgImage(iconKey);
+      const iconImg = getCardIconImage(iconKey);
 
-      const renderSvg = () => {
-        ctx.drawImage(svgImg, 171, 155, 170, 170);
+      const renderIcon = () => {
+        ctx.drawImage(iconImg, 171, 155, 170, 170);
         texture.needsUpdate = true;
       };
 
-      if (svgImg.complete) {
-        renderSvg();
+      if (iconImg.complete && iconImg.naturalWidth > 0) {
+        renderIcon();
       } else {
-        svgImg.onload = renderSvg;
+        iconImg.onload = renderIcon;
       }
 
       // Tên đặc quyền: màu đen than đậm đà (#0f172a), font Baloo 2 + Nunito siêu nét tiếng Việt
