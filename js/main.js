@@ -17,6 +17,13 @@ window.addEventListener('DOMContentLoaded', () => {
   Scene3D.buildCards();
   UI.updateCardCounters();
 
+  // Đảm bảo khi bộ font tiếng Việt (Nunito, Baloo 2) tải xong từ CDN thì tự động làm mới texture siêu nét
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      Scene3D.buildCards();
+    });
+  }
+
   // 5. Bắt đầu vòng lặp chuyển động render 3D
   Scene3D.animate();
 

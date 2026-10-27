@@ -22,9 +22,9 @@ const Scene3D = {
 
   currentState: STATE_IDLE,
   CAROUSEL_RADIUS: 5.6,
-  CARD_WIDTH: 2.3,
-  CARD_HEIGHT: 3.3,
-  CARD_DEPTH: 0.06,
+  CARD_WIDTH: 2.05,
+  CARD_HEIGHT: 2.95,
+  CARD_DEPTH: 0.05,
 
   activeCardIndex: 0,
   revealedCardMesh: null,
@@ -199,12 +199,12 @@ const Scene3D = {
       };
     }
 
-    ctx.font = '900 28px "Quicksand", sans-serif';
+    ctx.font = '900 28px "Baloo 2", "Nunito", sans-serif';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#78350f';
     ctx.fillText('🌸 BÉ NGOAN LỚP 1B1 🌸', 256, 125);
 
-    ctx.font = '800 20px "Quicksand", sans-serif';
+    ctx.font = '800 20px "Nunito", sans-serif';
     ctx.fillStyle = '#9a3412';
     ctx.fillText('✦ CÔ HOÀI THANH KHEN TẶNG ✦', 256, 560);
 
@@ -222,20 +222,20 @@ const Scene3D = {
 
     let themeColor = '#d97706';
     let rarityText = '★ BÉ NGOAN ★';
-    let subColor = '#c2410c';
+    let subColor = '#92400e';
 
     if (card.rarity === 'SSR') {
       themeColor = '#d97706';
       rarityText = '★ ĐẶC QUYỀN VÀNG KIM ★';
-      subColor = '#b45309';
+      subColor = '#92400e';
     } else if (card.rarity === 'SR') {
       themeColor = '#7e22ce';
       rarityText = '★ ĐẶC QUYỀN TÍM PASTEL ★';
-      subColor = '#6b21a8';
+      subColor = '#581c87';
     } else if (card.rarity === 'PINK') {
       themeColor = '#be185d';
       rarityText = '★ ĐẶC QUYỀN HỒNG DÂU ★';
-      subColor = '#9d174d';
+      subColor = '#831843';
     } else if (card.rarity === 'ORANGE') {
       themeColor = '#c2410c';
       rarityText = '★ ĐẶC QUYỀN CAM TƯƠI ★';
@@ -243,11 +243,11 @@ const Scene3D = {
     } else if (card.rarity === 'GREEN') {
       themeColor = '#15803d';
       rarityText = '★ ĐẶC QUYỀN XANH LÁ ★';
-      subColor = '#166534';
+      subColor = '#14532d';
     } else {
-      themeColor = '#1d4ed8';
+      themeColor = '#0284c7';
       rarityText = '★ ĐẶC QUYỀN XANH TRỜI ★';
-      subColor = '#1e40af';
+      subColor = '#0369a1';
     }
 
     const texture = new THREE.CanvasTexture(c);
@@ -271,31 +271,31 @@ const Scene3D = {
 
       // Băng rôn tiêu đề
       ctx.fillStyle = themeColor;
-      ctx.fillRect(38, 38, 436, 48);
+      ctx.fillRect(38, 36, 436, 46);
 
-      ctx.font = '900 22px "Quicksand", sans-serif';
+      ctx.font = '900 20px "Baloo 2", "Nunito", sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('🌸 LỚP 1B1 • CÔ HOÀI THANH 🌸', 256, 62);
+      ctx.fillText('🌸 LỚP 1B1 • CÔ HOÀI THANH 🌸', 256, 60);
 
       // Badge độ hiếm
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.roundRect(120, 98, 272, 34, 17);
+      ctx.roundRect(120, 94, 272, 32, 16);
       ctx.fill();
       ctx.strokeStyle = themeColor;
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
-      ctx.font = '900 15px "Quicksand", sans-serif';
+      ctx.font = '800 14px "Nunito", sans-serif';
       ctx.fillStyle = themeColor;
-      ctx.fillText(rarityText, 256, 115);
+      ctx.fillText(rarityText, 256, 110);
 
       // Nền tròn icon
       ctx.fillStyle = '#fef3c7';
       ctx.beginPath();
-      ctx.arc(256, 255, 115, 0, Math.PI * 2);
+      ctx.arc(256, 240, 105, 0, Math.PI * 2);
       ctx.fill();
       ctx.strokeStyle = themeColor;
       ctx.lineWidth = 4.5;
@@ -305,7 +305,7 @@ const Scene3D = {
       const svgImg = getSvgImage(iconKey);
 
       const renderSvg = () => {
-        ctx.drawImage(svgImg, 166, 165, 180, 180);
+        ctx.drawImage(svgImg, 171, 155, 170, 170);
         texture.needsUpdate = true;
       };
 
@@ -315,8 +315,8 @@ const Scene3D = {
         svgImg.onload = renderSvg;
       }
 
-      // Tên đặc quyền: màu đen than đậm đà (#0f172a), font 900
-      ctx.font = '900 40px "Quicksand", sans-serif';
+      // Tên đặc quyền: màu đen than đậm đà (#0f172a), font Baloo 2 + Nunito siêu nét tiếng Việt
+      ctx.font = '900 36px "Baloo 2", "Nunito", sans-serif';
       ctx.fillStyle = '#0f172a';
 
       const words = (card.title || '').split(' ');
@@ -325,7 +325,7 @@ const Scene3D = {
 
       for (let i = 1; i < words.length; i++) {
         const testLine = currentLine + ' ' + words[i];
-        if (ctx.measureText(testLine).width < 420) {
+        if (ctx.measureText(testLine).width < 410) {
           currentLine = testLine;
         } else {
           lines.push(currentLine);
@@ -334,28 +334,28 @@ const Scene3D = {
       }
       lines.push(currentLine);
 
-      const titleStartY = lines.length > 1 ? 430 : 445;
+      const titleStartY = lines.length > 1 ? 410 : 425;
       lines.forEach((line, index) => {
-        ctx.fillText(line, 256, titleStartY + index * 48);
+        ctx.fillText(line, 256, titleStartY + index * 46);
       });
 
-      // Lời nhắn / phụ đề
+      // Lời nhắn / phụ đề: màu đậm rõ nét, font Nunito
       if (card.subtitle) {
-        ctx.font = '800 23px "Quicksand", sans-serif';
+        ctx.font = '800 22px "Nunito", sans-serif';
         ctx.fillStyle = subColor;
-        ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 48 + 22);
+        ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 46 + 18);
       }
 
       // Chân thẻ
       ctx.fillStyle = '#fef3c7';
-      ctx.fillRect(40, 615, 432, 40);
+      ctx.fillRect(40, 620, 432, 38);
       ctx.strokeStyle = themeColor;
       ctx.lineWidth = 1.5;
-      ctx.strokeRect(40, 615, 432, 40);
+      ctx.strokeRect(40, 620, 432, 38);
 
-      ctx.font = '900 15px "Quicksand", sans-serif';
+      ctx.font = '800 14px "Nunito", sans-serif';
       ctx.fillStyle = themeColor;
-      ctx.fillText('✦ BÉ CHĂM NGOAN • CẢ LỚP YÊU QUÝ ✦', 256, 635);
+      ctx.fillText('✦ BÉ CHĂM NGOAN • CẢ LỚP YÊU QUÝ ✦', 256, 639);
 
       texture.needsUpdate = true;
     }
@@ -554,24 +554,24 @@ const Scene3D = {
   },
 
   revealWinningCard(mesh) {
-    const targetRadius = this.CAROUSEL_RADIUS + 2.5;
+    const targetRadius = this.CAROUSEL_RADIUS + 0.35;
     const angle = mesh.userData.baseAngle;
 
-    // Di chuyển đều cả X và Z để tọa độ trung tâm tuyệt đối X = 0
+    // Di chuyển đều cả X và Z để tọa độ trung tâm tuyệt đối X = 0, kích thước vừa vặn màn hình
     gsap.to(mesh.position, {
       x: Math.sin(angle) * targetRadius,
       z: Math.cos(angle) * targetRadius,
-      y: 0.25,
+      y: 0.2,
       duration: 1.3,
       ease: 'power2.out'
     });
 
     gsap.to(mesh.scale, {
-      x: 1.38,
-      y: 1.38,
-      z: 1.38,
+      x: 1.05,
+      y: 1.05,
+      z: 1.05,
       duration: 1.3,
-      ease: 'back.out(1.5)'
+      ease: 'back.out(1.2)'
     });
 
     gsap.to(mesh.rotation, {

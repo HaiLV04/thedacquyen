@@ -4,8 +4,12 @@
 
 body {
   background: linear-gradient(135deg, #fef08a 0%, #fef9c3 35%, #fed7aa 70%, #fce7f3 100%);
-  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Nunito', 'Baloo 2', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #0f172a;
+}
+
+.font-vietnam {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
 }
 
 /* Three.js 3D Canvas Background */
