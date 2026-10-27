@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CHỌN THẺ ĐẶC QUYỀN 3D - Magic Privilege Cards</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cosmic: '#06091e',
+            neonCyan: '#00f2fe',
+            neonPink: '#ff0844',
+            neonPurple: '#7928ca',
+            neonGold: '#f6d365',
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 14s linear infinite',
+            'bounce-subtle': 'bounce 2s infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Be Vietnam Pro & Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- External Libraries via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      user-select: none;
+      -webkit-user-select: none;
+      box-sizing: border-box;
+      outline: none;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #06091e;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .font-orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+    /* Glow Utilities */
+    .glow-cyan {
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.45), 0 0 40px rgba(0, 242, 254, 0.2);
+    }
+    .glow-gold {
+      box-shadow: 0 0 30px rgba(246, 211, 101, 0.6), 0 0 60px rgba(253, 160, 133, 0.35);
+    }
+    .text-glow-gold {
+      text-shadow: 0 0 16px rgba(246, 211, 101, 0.85), 0 0 32px rgba(253, 160, 133, 0.55);
+    }
+    .text-glow-cyan {
+      text-shadow: 0 0 16px rgba(0, 242, 254, 0.85), 0 0 32px rgba(79, 172, 254, 0.55);
+    }
+    /* Custom Scrollbar for Modal */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(121, 40, 202, 0.6);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 242, 254, 0.8);
+    }
+    /* Glassmorphism Styles */
+    .glass-panel {
+      background: rgba(13, 20, 44, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .glass-btn {
+      background: rgba(26, 35, 64, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-btn:hover {
+      background: rgba(45, 59, 102, 0.9);
+      border-color: rgba(0, 242, 254, 0.65);
+      transform: translateY(-2px);
+    }
+    .glass-btn:active {
+      transform: translateY(1px);
+    }
+    #three-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(4, 7, 24, 0.88);
+      backdrop-filter: blur(14px);
+    }
+    /* Animated Gradient Borders */
+    @keyframes borderRotate {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    .rainbow-glow {
+      animation: borderRotate 10s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-cosmic text-white select-none overflow-hidden relative w-full h-full">
+
+  <!-- 3D WebGL Canvas Layer -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- 2D HUD UI Overlay (Z-Index: 10) -->
+  <div id="hud-overlay" class="relative z-10 w-full h-full pointer-events-none flex flex-col justify-between p-4 md:p-6">
+    
+    <!-- TOP HEADER BAR -->
+    <header class="flex flex-col md:flex-row items-center justify-between gap-4 w-full pointer-events-auto">
+      
+      <!-- Top Left: Editable Classroom Badge -->
+      <div class="flex items-center space-x-3">
+        <button id="btn-edit-classname" title="Bấm để đổi tên lớp / tên cô giáo"
+          class="group flex items-center space-x-2.5 px-4 py-2 rounded-2xl glass-panel hover:border-cyan-400 transition-all cursor-pointer glow-cyan">
+          <span class="text-xl animate-bounce-subtle">✨</span>
+          <div class="text-left">
+            <span class="text-[10px] tracking-wider uppercase text-cyan-300 font-semibold block leading-tight">Không Gian Lớp Học</span>
+            <span id="classroom-name-display" class="text-sm md:text-base font-extrabold text-white group-hover:text-cyan-200 transition-colors">
+              LỚP HỌC SÁNG TẠO 4.0
+            </span>
+          </div>
+          <span class="text-xs text-slate-400 group-hover:text-white ml-1">✏️</span>
+        </button>
+      </div>
+
+      <!-- Top Center: App Title & Sub-controls -->
+      <div class="flex flex-col items-center text-center">
+        <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wider uppercase font-orbitron bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-lg">
+          🎴 CHỌN THẺ ĐẶC QUYỀN 🎴
+        </h1>
+        
+        <div class="flex items-center gap-2.5 mt-1.5 text-xs md:text-sm text-slate-300">
+          <span id="deck-counter-badge" class="px-3 py-1 rounded-full bg-slate-900/80 border border-purple-500/50 font-bold text-yellow-300 shadow">
+            Đang có: <span id="card-count-active" class="text-cyan-300 text-base">11</span> / <span id="card-count-total">11</span> thẻ
+          </span>
+          <button id="btn-quick-add" class="hover:text-cyan-300 transition-colors flex items-center gap-1 font-semibold bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/80 cursor-pointer">
+            <span>➕</span> Thêm thẻ mới
+          </button>
+          <button id="btn-reset-default" class="hover:text-pink-300 transition-colors flex items-center gap-1 font-semibold bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/80 cursor-pointer">
+            <span>↻</span> Mặc định
+          </button>
+        </div>
+      </div>
+
+      <!-- Top Right: Tool & Settings Quick Buttons -->
+      <div class="flex items-center gap-2">
+        <button id="btn-sound-toggle" class="glass-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow cursor-pointer">
+          <span id="sound-icon">🔊</span>
+          <span id="sound-text">BẬT</span>
+        </button>
+        <button id="btn-fullscreen" title="Bật/Tắt Toàn Màn Hình TV" class="glass-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow cursor-pointer">
+          <span>⛶</span>
+          <span class="hidden sm:inline">TOÀN MÀN HÌNH</span>
+        </button>
+        <button id="btn-manage-cards" class="glass-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold text-cyan-300 border-cyan-500/40 hover:border-cyan-400 flex items-center gap-1.5 glow-cyan shadow cursor-pointer">
+          <span>⚙</span>
+          <span>QUẢN LÝ THẺ</span>
+        </button>
+      </div>
+
+    </header>
+
+    <!-- CENTER INSTRUCTION / STATUS TOAST -->
+    <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 transform -translate-y-2 opacity-95 my-auto text-center">
+      <div class="inline-block px-6 py-2.5 rounded-full bg-slate-900/85 border border-cyan-400/40 backdrop-blur-md shadow-2xl">
+        <span id="status-toast-text" class="text-sm md:text-lg font-bold text-cyan-200 tracking-wide">
+          ✨ Bấm <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> hoặc nhấp trực tiếp vào bất kỳ thẻ nào để bốc thẻ ma thuật! ✨
+        </span>
+      </div>
+    </div>
+
+    <!-- BOTTOM ACTION DOCK -->
+    <footer class="w-full flex flex-col items-center gap-3.5 pointer-events-auto pb-2">
+      
+      <!-- Primary Control Buttons Dock -->
+      <div id="controls-dock" class="flex flex-wrap items-center justify-center gap-3.5 md:gap-5 p-2 rounded-3xl glass-panel shadow-2xl border border-white/20">
+        
+        <!-- Big Start / Stop Shuffle Button -->
+        <button id="btn-main-action" class="group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-lg hover:shadow-cyan-400/50 hover:scale-105 active:scale-95">
+          <span class="relative z-10 flex items-center gap-3">
+            <span id="main-action-icon" class="text-2xl">▶</span>
+            <span id="main-action-label">BẮT ĐẦU</span>
+          </span>
+          <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+        </button>
+
+        <!-- Replay / Reset Layout Button -->
+        <button id="btn-replay" class="glass-btn px-6 py-3.5 md:py-4 rounded-2xl font-bold text-sm md:text-lg flex items-center gap-2 hover:text-cyan-300 border-purple-500/40 hover:border-purple-400 cursor-pointer">
+          <span class="text-xl">↻</span>
+          <span>XẾP LẠI BÀI</span>
+        </button>
+
+      </div>
+
+      <!-- Quick Classroom TV Hint -->
+      <div class="text-[11px] md:text-xs text-slate-400 font-medium tracking-wide flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>Phù hợp trình chiếu màn hình lớn, Smart TV lớp học & tương tác cảm ứng chạm</span>
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- REVEALED CARD HUD BANNER (Displays beneath the 3D card when flipped) -->
+  <div id="reveal-banner" class="fixed inset-x-0 bottom-6 md:bottom-8 z-20 flex flex-col items-center pointer-events-none transition-all duration-500 opacity-0 transform translate-y-8">
+    <div class="w-11/12 max-w-xl p-5 md:p-6 rounded-3xl glass-panel border border-yellow-400/50 shadow-2xl text-center pointer-events-auto relative overflow-hidden glow-gold">
+      
+      <!-- Top Rarity & Badge Ribbon -->
+      <div class="flex items-center justify-between mb-2">
+        <span id="reveal-rarity-badge" class="px-3.5 py-1 rounded-full text-xs font-black tracking-widest uppercase bg-yellow-400 text-slate-950 shadow-md">
+          SSR • HUYỀN THOẠI
+        </span>
+        <span class="text-xs text-slate-300 font-bold">🎉 CHÚC MỪNG EM ĐÃ BỐC TRÚNG!</span>
+      </div>
+
+      <!-- Card Big Title & Description -->
+      <h2 id="reveal-title" class="text-2xl md:text-4xl font-black text-yellow-300 mb-1.5 text-glow-gold tracking-wide">
+        Làm Lớp Trưởng
+      </h2>
+      <p id="reveal-subtitle" class="text-sm md:text-base text-slate-200 font-medium mb-4">
+        Chỉ huy lớp học trong 1 ngày
+      </p>
+
+      <!-- Action Buttons Row -->
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <!-- Keep in deck -->
+        <button id="btn-card-keep" class="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer">
+          <span>✅</span>
+          <span>Giữ lại trong bộ</span>
+        </button>
+
+        <!-- Remove from active deck -->
+        <button id="btn-card-remove" class="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer" title="Ẩn thẻ này để học sinh tiếp theo không bốc trùng">
+          <span>🗑️</span>
+          <span>Đã trao (Bỏ khỏi vòng quay)</span>
+        </button>
+      </div>
+
+      <!-- Special "Bốc Lại Ngay" Button (shown only if reroll card) -->
+      <button id="btn-card-reroll" class="hidden w-full mt-3 px-5 py-3 rounded-xl font-extrabold text-sm md:text-base bg-gradient-to-r from-amber-400 via-orange-500 to-pink-500 text-slate-950 shadow-xl animate-pulse hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
+        <span class="text-xl">🎲</span>
+        <span>KÍCH HOẠT BỐC LẠI NGAY LẬP TỨC!</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- MODAL: CARD MANAGEMENT (Quản lý danh sách thẻ & Thêm thẻ mới) -->
+  <div id="modal-manage" class="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 modal-backdrop hidden transition-opacity duration-300">
+    <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl glass-panel border border-cyan-400/40 shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-900/70">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">⚙️</span>
+          <div>
+            <h3 class="text-lg md:text-xl font-black text-cyan-300 font-orbitron">QUẢN LÝ BỘ THẺ ĐẶC QUYỀN</h3>
+            <p class="text-xs text-slate-400">Tùy chỉnh nội dung, bật/tắt hoặc thêm đặc quyền mới theo nhu cầu lớp học</p>
+          </div>
+        </div>
+        <button id="btn-close-modal" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center font-bold text-lg transition-colors cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+        
+        <!-- Section: Add New Card Form -->
+        <div class="p-4 md:p-5 rounded-2xl bg-slate-900/75 border border-purple-500/35 space-y-4">
+          <h4 class="text-sm font-extrabold uppercase tracking-wider text-purple-300 flex items-center gap-2">
+            <span>✨</span> THÊM THẺ ĐẶC QUYỀN MỚI
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="md:col-span-2">
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Tên đặc quyền <span class="text-rose-400">*</span></label>
+              <input type="text" id="new-card-title" placeholder="VD: Miễn 1 bài kiểm tra 15 phút..." class="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Biểu tượng / Emoji</label>
+              <input type="text" id="new-card-icon" placeholder="👑, 🎁, ⭐..." value="🎁" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm text-center">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Phụ đề / Lời chúc vui nhộn</label>
+              <input type="text" id="new-card-sub" placeholder="VD: Áp dụng trong tuần này" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Hạng thẻ (Độ hiếm & Màu sắc)</label>
+              <select id="new-card-rarity" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm cursor-pointer">
+                <option value="SSR">SSR - Vàng Kim Huyền Thoại</option>
+                <option value="SR" selected>SR - Tím Neon Lộng Lẫy</option>
+                <option value="R">R - Xanh Cyan Tươi Sáng</option>
+                <option value="PINK">SSR - Hồng Neon Cá Tính</option>
+                <option value="ORANGE">SR - Cam Rực Rỡ May Mắn</option>
+                <option value="RED">SSR - Đỏ Quyền Lực</option>
+                <option value="GREEN">R - Xanh Lá Thân Thiện</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Optional Custom Image Upload -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Hoặc tải ảnh mặt trước lá bài (Tự động nén tối ưu):</label>
+            <div class="flex items-center gap-3">
+              <input type="file" id="new-card-file" accept="image/*" class="text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-500 cursor-pointer">
+              <span id="file-chosen-name" class="text-xs text-slate-400 truncate max-w-xs">Chưa chọn ảnh</span>
+            </div>
+          </div>
+
+          <button id="btn-submit-add-card" class="w-full py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white shadow-lg transition-transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer">
+            <span>➕</span>
+            <span>Thêm Thẻ Vào Bộ Sưu Tập</span>
+          </button>
+        </div>
+
+        <!-- Section: Cards List -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-sm font-extrabold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <span>📋</span> DANH SÁCH THẺ HIỆN CÓ (<span id="modal-cards-count" class="text-cyan-400">11</span>)
+            </h4>
+            <div class="flex gap-2">
+              <button id="btn-enable-all" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 cursor-pointer">Bật tất cả</button>
+              <button id="btn-reset-cards-modal" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-rose-800 text-rose-300 border border-slate-700 cursor-pointer">Khôi phục 11 thẻ gốc</button>
+            </div>
+          </div>
+
+          <div id="cards-manager-list" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3.5 border-t border-white/10 bg-slate-900/80 flex items-center justify-between">
+        <span class="text-xs text-slate-400">Dữ liệu được lưu an toàn trong trình duyệt của bạn</span>
+        <button id="btn-save-modal" class="px-5 py-2 rounded-xl font-bold text-xs md:text-sm bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors cursor-pointer">
+          Đóng & Cập nhật bàn chơi 3D
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION LOGIC -->
+  <script>
+    /* ==========================================================================
+       0. KHỞI TẠO DỮ LIỆU & LOCAL STORAGE
+       ========================================================================== */
+    const DEFAULT_CARDS = [
+      { id: 'c1', title: 'Làm Lớp Trưởng', icon: '👑', rarity: 'SSR', subtitle: 'Chỉ huy lớp học trong 1 ngày', active: true },
+      { id: 'c2', title: 'Làm Lớp Phó', icon: '🎖️', rarity: 'SSR', subtitle: 'Trợ thủ đắc lực của lớp', active: true },
+      { id: 'c3', title: 'Làm Tổ Trưởng', icon: '🛡️', rarity: 'SR', subtitle: 'Dẫn dắt tổ thi đua giành điểm 10', active: true },
+      { id: 'c4', title: 'Được 2 Sticker', icon: '🌟🌟', rarity: 'SR', subtitle: 'Nhận ngay 2 sticker khen thưởng', active: true },
+      { id: 'c5', title: 'Được 1 Sticker', icon: '⭐', rarity: 'R', subtitle: 'Nhận ngay 1 sticker lấp lánh', active: true },
+      { id: 'c6', title: 'Đổi chỗ trong vòng 1 ngày', icon: '🔄🪑', rarity: 'PINK', subtitle: 'Chọn ngồi cạnh 1 người bạn bất kỳ', active: true },
+      { id: 'c7', title: '1 Tràng pháo tay', icon: '👏🎉', rarity: 'R', subtitle: 'Cả lớp vỗ tay tuyên dương thật to!', active: true },
+      { id: 'c8', title: 'Được bốc lại 1 lần nữa', icon: '🎲✨', rarity: 'ORANGE', subtitle: 'Thử vận may thêm 1 lượt nữa ngay!', active: true, isReroll: true },
+      { id: 'c9', title: 'Gọi 1 bạn lên bảng làm bài tập', icon: '🫵📚', rarity: 'RED', subtitle: 'Quyền chỉ định 1 bạn bất kỳ lên bảng', active: true },
+      { id: 'c10', title: 'Tắt quạt cuối giờ', icon: '🌀🔌', rarity: 'GREEN', subtitle: 'Chiến sĩ tiết kiệm điện của lớp', active: true },
+      { id: 'c11', title: '2 Cái kẹo mút', icon: '🍭🍭', rarity: 'PINK', subtitle: 'Nhận 2 chiếc kẹo mút từ cô giáo', active: true },
+    ];
+
+    let cardsData = [];
+    let customImageBase64 = null;
+    let soundEnabled = true;
+
+    function loadSavedData() {
+      try {
+        const saved = localStorage.getItem('privilege_cards_data_v3');
+        if (saved) {
+          cardsData = JSON.parse(saved);
+        } else {
+          cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
+        }
+      } catch (e) {
+        cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
+      }
+
+      const savedName = localStorage.getItem('classroom_name');
+      if (savedName) {
+        document.getElementById('classroom-name-display').textContent = savedName;
+      }
+    }
+
+    function saveCardsData() {
+      localStorage.setItem('privilege_cards_data_v3', JSON.stringify(cardsData));
+      updateCardCounters();
+    }
+
+    function getActiveCards() {
+      return cardsData.filter(c => c.active);
+    }
+
+    /* ==========================================================================
+       1. WEB AUDIO API SYNTHESIZER (Không cần file mp3 ngoài)
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) {
+            this.ctx = new AudioCtx();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playHover() {
+        if (!soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(560, now);
+        osc.frequency.exponentialRampToValueAtTime(920, now + 0.08);
+
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.08);
+      }
+
+      playTick() {
+        if (!soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(650 + Math.random() * 250, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.045);
+
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.045);
+      }
+
+      playWhoosh() {
+        if (!soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const bufferSize = this.ctx.sampleRate * 0.45;
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = this.ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(350, now);
+        filter.frequency.exponentialRampToValueAtTime(1600, now + 0.22);
+        filter.frequency.exponentialRampToValueAtTime(250, now + 0.45);
+        filter.Q.value = 2.2;
+
+        const gain = this.ctx.createGain();
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.2, now + 0.22);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        noise.start(now);
+        noise.stop(now + 0.45);
+      }
+
+      playFanfare() {
+        if (!soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+
+        // Fanfare chord arpeggio: C5 (523Hz), E5 (659Hz), G5 (784Hz), C6 (1046Hz)
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const noteTime = now + idx * 0.12;
+
+          osc.type = idx === 3 ? 'sine' : 'triangle';
+          osc.frequency.setValueAtTime(freq, noteTime);
+
+          gain.gain.setValueAtTime(0.001, noteTime);
+          gain.gain.linearRampToValueAtTime(0.22, noteTime + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 1.1);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(noteTime);
+          osc.stop(noteTime + 1.15);
+        });
+
+        // Magical sparkle chimes
+        for (let i = 0; i < 7; i++) {
+          const sparkOsc = this.ctx.createOscillator();
+          const sparkGain = this.ctx.createGain();
+          const sparkTime = now + 0.45 + i * 0.08;
+
+          sparkOsc.type = 'sine';
+          sparkOsc.frequency.setValueAtTime(1400 + Math.random() * 850, sparkTime);
+
+          sparkGain.gain.setValueAtTime(0.06, sparkTime);
+          sparkGain.gain.exponentialRampToValueAtTime(0.001, sparkTime + 0.25);
+
+          sparkOsc.connect(sparkGain);
+          sparkGain.connect(this.ctx.destination);
+
+          sparkOsc.start(sparkTime);
+          sparkOsc.stop(sparkTime + 0.25);
+        }
+      }
+
+      playClick() {
+        if (!soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(420, now + 0.05);
+
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    // Auto unlock audio on any user interaction
+    window.addEventListener('pointerdown', () => sound.init(), { once: true });
+
+    /* ==========================================================================
+       2. THREE.JS SCENE, CAMERA, LIGHTS & PORTAL SETUP
+       ========================================================================== */
+    const canvas = document.getElementById('three-canvas');
+    let scene, camera, renderer;
+    let cardMeshes = [];
+    let portalGroup, particlesMesh;
+    let raycaster, mouse;
+    let hoveredCard = null;
+
+    // Animation state variables
+    const STATE_IDLE = 'idle';
+    const STATE_SHUFFLING = 'shuffling';
+    const STATE_REVEALED = 'revealed';
+    let currentState = STATE_IDLE;
+    let activeRevealedCard = null;
+    let shuffleTickTimer = null;
+
+    function initThreeScene() {
+      // Scene
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x06091e);
+      scene.fog = new THREE.FogExp2(0x06091e, 0.024);
+
+      // Camera
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0, 11.5);
+
+      // Renderer
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: false,
+        powerPreference: 'high-performance'
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+
+      // Raycaster & Mouse
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2(-999, -999);
+
+      // Lighting Setup
+      const ambientLight = new THREE.AmbientLight(0x2a1f4d, 1.5);
+      scene.add(ambientLight);
+
+      // PointLight 1: Neon Cyan (Left Top)
+      const lightCyan = new THREE.PointLight(0x00f2fe, 3.2, 28);
+      lightCyan.position.set(-6.5, 5, 6);
+      scene.add(lightCyan);
+
+      // PointLight 2: Neon Magenta / Pink (Right Bottom)
+      const lightPink = new THREE.PointLight(0xff0844, 3.2, 28);
+      lightPink.position.set(6.5, -4.5, 6);
+      scene.add(lightPink);
+
+      // PointLight 3: Center Gold Light (Portal focal illumination)
+      const lightGold = new THREE.PointLight(0xf6d365, 2.5, 20);
+      lightGold.position.set(0, 0.5, 4.5);
+      scene.add(lightGold);
+
+      // Create Environment: 800 Particles & Central Summon Portal
+      createSpaceParticles();
+      createSummonPortal();
+
+      // Window events
+      window.addEventListener('resize', onWindowResize);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('click', onCanvasClick);
+      window.addEventListener('touchstart', onTouchStart, { passive: false });
+    }
+
+    /* 2.1 Floating Neon Dust Particles (800 Points) */
+    function createSpaceParticles() {
+      const particleCount = 800;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      const colorPalette = [
+        new THREE.Color(0x00f2fe), // Cyan
+        new THREE.Color(0xff0844), // Pink
+        new THREE.Color(0x7928ca), // Purple
+        new THREE.Color(0xf6d365), // Gold
+      ];
+
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 32;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 24;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 22 - 2;
+
+        const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      // Particle Texture via 2D Canvas
+      const particleCanvas = document.createElement('canvas');
+      particleCanvas.width = 64;
+      particleCanvas.height = 64;
+      const pCtx = particleCanvas.getContext('2d');
+      const grad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
+      grad.addColorStop(0, 'rgba(255,255,255,1)');
+      grad.addColorStop(0.35, 'rgba(255,255,255,0.8)');
+      grad.addColorStop(0.7, 'rgba(255,255,255,0.2)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      pCtx.fillStyle = grad;
+      pCtx.fillRect(0, 0, 64, 64);
+
+      const pTexture = new THREE.CanvasTexture(particleCanvas);
+
+      const material = new THREE.PointsMaterial({
+        size: 0.22,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.85,
+        map: pTexture,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      particlesMesh = new THREE.Points(geometry, material);
+      scene.add(particlesMesh);
+    }
+
+    /* 2.2 Central Summon Portal (Khung Triệu Hồi Trung Tâm) */
+    function createSummonPortal() {
+      portalGroup = new THREE.Group();
+      portalGroup.position.set(0, 0.2, 0);
+
+      // Outer Glowing Frame (Neon Rectangle)
+      const framePoints = [
+        new THREE.Vector3(-1.65, -2.2, 0),
+        new THREE.Vector3(1.65, -2.2, 0),
+        new THREE.Vector3(1.65, 2.2, 0),
+        new THREE.Vector3(-1.65, 2.2, 0)
+      ];
+      const frameGeo = new THREE.BufferGeometry().setFromPoints([...framePoints, framePoints[0]]);
+      const frameMat = new THREE.LineBasicMaterial({
+        color: 0x00f2fe,
+        linewidth: 2,
+        transparent: true,
+        opacity: 0.75
+      });
+      const frameLine = new THREE.Line(frameGeo, frameMat);
+      portalGroup.add(frameLine);
+
+      // Rotating Magic Circle Rings
+      const ringGeo1 = new THREE.RingGeometry(2.35, 2.44, 64);
+      const ringMat1 = new THREE.MeshBasicMaterial({
+        color: 0x7928ca,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.5
+      });
+      const ringMesh1 = new THREE.Mesh(ringGeo1, ringMat1);
+      ringMesh1.position.z = -0.15;
+      portalGroup.add(ringMesh1);
+
+      const ringGeo2 = new THREE.RingGeometry(2.85, 2.92, 48);
+      const ringMat2 = new THREE.MeshBasicMaterial({
+        color: 0x00f2fe,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.35
+      });
+      const ringMesh2 = new THREE.Mesh(ringGeo2, ringMat2);
+      ringMesh2.position.z = -0.2;
+      portalGroup.add(ringMesh2);
+
+      // Subtle Center Portal Background Disc
+      const discGeo = new THREE.CircleGeometry(2.25, 36);
+      const discMat = new THREE.MeshBasicMaterial({
+        color: 0x0f1638,
+        transparent: true,
+        opacity: 0.45,
+        side: THREE.DoubleSide
+      });
+      const discMesh = new THREE.Mesh(discGeo, discMat);
+      discMesh.position.z = -0.25;
+      portalGroup.add(discMesh);
+
+      scene.add(portalGroup);
+    }
+
+    /* ==========================================================================
+       3. TEXTURE GENERATORS (Canvas 2D High Resolution)
+       ========================================================================== */
+
+    /* 3.1 Back Face Texture: Mystery Clown & Cosmic Magic */
+    function generateBackFaceTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 700;
+      const ctx = c.getContext('2d');
+
+      // Cosmic Deep Blue Gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, 512, 700);
+      bgGrad.addColorStop(0, '#0a0d2a');
+      bgGrad.addColorStop(0.5, '#13194a');
+      bgGrad.addColorStop(1, '#080a21');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, 512, 700);
+
+      // Geometric Cosmic Grid Lines
+      ctx.strokeStyle = 'rgba(121, 40, 202, 0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let i = 40; i < 512; i += 70) {
+        ctx.moveTo(i, 30); ctx.lineTo(i, 670);
+      }
+      for (let j = 40; j < 700; j += 70) {
+        ctx.moveTo(30, j); ctx.lineTo(482, j);
+      }
+      ctx.stroke();
+
+      // Outer Neon Cyber Border
+      ctx.strokeStyle = '#00f2fe';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(20, 20, 472, 660);
+
+      // Inner Neon Pink Border
+      ctx.strokeStyle = '#ff0844';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(32, 32, 448, 636);
+
+      // Corner Ornaments
+      const drawCorner = (x, y) => {
+        ctx.fillStyle = '#f6d365';
+        ctx.beginPath();
+        ctx.arc(x, y, 7, 0, Math.PI * 2);
+        ctx.fill();
+      };
+      drawCorner(32, 32);
+      drawCorner(480, 32);
+      drawCorner(32, 668);
+      drawCorner(480, 668);
+
+      // Center Magic Circle
+      ctx.save();
+      ctx.translate(256, 335);
+
+      ctx.beginPath();
+      ctx.arc(0, 0, 130, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.7)';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, 110, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 8, 68, 0.6)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Mystery Central Icon (Clown / Jester / Gift)
+      ctx.font = '95px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🎭', 0, -10);
+
+      ctx.restore();
+
+      // Top & Bottom Magic Inscriptions
+      ctx.font = 'bold 24px "Orbitron", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#00f2fe';
+      ctx.shadowColor = '#00f2fe';
+      ctx.shadowBlur = 14;
+      ctx.fillText('★ MAGIC CARD ★', 256, 120);
+
+      ctx.font = 'bold 18px "Orbitron", sans-serif';
+      ctx.fillStyle = '#f6d365';
+      ctx.shadowColor = '#f6d365';
+      ctx.shadowBlur = 12;
+      ctx.fillText('✦ ĐẶC QUYỀN HỌC SINH ✦', 256, 560);
+
+      const texture = new THREE.CanvasTexture(c);
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
+      return texture;
+    }
+
+    /* 3.2 Front Face Texture: Dynamic custom drawing per card */
+    function generateFrontFaceTexture(card) {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 700;
+      const ctx = c.getContext('2d');
+
+      // Theme Colors based on Rarity & Style
+      let primaryColor = '#00f2fe';
+      let secondaryColor = '#4facfe';
+      let rarityBadge = 'R • PHỔ THÔNG';
+      let bgDark = '#09152b';
+
+      if (card.rarity === 'SSR') {
+        primaryColor = '#f6d365';
+        secondaryColor = '#fda085';
+        rarityBadge = 'SSR • HUYỀN THOẠI';
+        bgDark = '#261702';
+      } else if (card.rarity === 'SR') {
+        primaryColor = '#e056fd';
+        secondaryColor = '#686de0';
+        rarityBadge = 'SR • HIẾM';
+        bgDark = '#1c082e';
+      } else if (card.rarity === 'PINK') {
+        primaryColor = '#ff416c';
+        secondaryColor = '#ff4b2b';
+        rarityBadge = 'SSR • HỒNG NEON';
+        bgDark = '#2b0718';
+      } else if (card.rarity === 'ORANGE') {
+        primaryColor = '#f7971e';
+        secondaryColor = '#ffd200';
+        rarityBadge = 'SR • CAM RỰC RỠ';
+        bgDark = '#2b1604';
+      } else if (card.rarity === 'RED') {
+        primaryColor = '#ff1361';
+        secondaryColor = '#fff800';
+        rarityBadge = 'SSR • ĐỎ QUYỀN LỰC';
+        bgDark = '#2b050d';
+      } else if (card.rarity === 'GREEN') {
+        primaryColor = '#10b981';
+        secondaryColor = '#059669';
+        rarityBadge = 'R • XANH LÁ';
+        bgDark = '#03261a';
+      }
+
+      const texture = new THREE.CanvasTexture(c);
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
+
+      // Render standard graphics onto canvas
+      function drawStandardCard() {
+        // Base background
+        const bgGrad = ctx.createLinearGradient(0, 0, 0, 700);
+        bgGrad.addColorStop(0, bgDark);
+        bgGrad.addColorStop(0.5, '#0d1330');
+        bgGrad.addColorStop(1, '#06091e');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, 512, 700);
+
+        // Card Header Banner
+        const headerGrad = ctx.createLinearGradient(0, 0, 512, 0);
+        headerGrad.addColorStop(0, primaryColor);
+        headerGrad.addColorStop(1, secondaryColor);
+
+        // Outer Thick Border
+        ctx.strokeStyle = primaryColor;
+        ctx.lineWidth = 10;
+        ctx.strokeRect(18, 18, 476, 664);
+
+        // Inner Border
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(28, 28, 456, 644);
+
+        // Top Tag: "THẺ ĐẶC QUYỀN"
+        ctx.fillStyle = headerGrad;
+        ctx.fillRect(40, 42, 432, 42);
+        ctx.font = 'bold 20px "Orbitron", sans-serif';
+        ctx.fillStyle = '#0a0d24';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('★ THẺ ĐẶC QUYỀN ★', 256, 63);
+
+        // Rarity Badge Pill
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+        ctx.beginPath();
+        ctx.roundRect(140, 96, 232, 28, 14);
+        ctx.fill();
+        ctx.strokeStyle = primaryColor;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.font = 'bold 13px "Orbitron", sans-serif';
+        ctx.fillStyle = primaryColor;
+        ctx.fillText(rarityBadge, 256, 110);
+
+        // Center Icon Artwork Circle
+        const iconBoxGrad = ctx.createRadialGradient(256, 255, 20, 256, 255, 120);
+        iconBoxGrad.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+        iconBoxGrad.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
+        ctx.fillStyle = iconBoxGrad;
+        ctx.beginPath();
+        ctx.arc(256, 255, 115, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = primaryColor;
+        ctx.lineWidth = 3.5;
+        ctx.stroke();
+
+        // Big Emoji / Icon
+        ctx.font = '100px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(card.icon || '🎁', 256, 255);
+
+        // Card Title: Large, multi-line auto-wrapped
+        ctx.font = 'bold 36px "Be Vietnam Pro", sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = primaryColor;
+        ctx.shadowBlur = 12;
+
+        const words = (card.title || '').split(' ');
+        let lines = [];
+        let currentLine = words[0];
+
+        for (let i = 1; i < words.length; i++) {
+          const testLine = currentLine + ' ' + words[i];
+          if (ctx.measureText(testLine).width < 420) {
+            currentLine = testLine;
+          } else {
+            lines.push(currentLine);
+            currentLine = words[i];
+          }
+        }
+        lines.push(currentLine);
+
+        // Draw title lines
+        const titleStartY = lines.length > 1 ? 430 : 445;
+        lines.forEach((line, index) => {
+          ctx.fillText(line, 256, titleStartY + index * 44);
+        });
+        ctx.shadowBlur = 0; // reset
+
+        // Subtitle / Description text
+        if (card.subtitle) {
+          ctx.font = '500 19px "Be Vietnam Pro", sans-serif';
+          ctx.fillStyle = '#cbd5e1';
+          ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 44 + 25);
+        }
+
+        // Bottom Footer Bar
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        ctx.fillRect(40, 615, 432, 40);
+        ctx.font = 'bold 13px "Be Vietnam Pro", sans-serif';
+        ctx.fillStyle = primaryColor;
+        ctx.fillText('✦ LỚP HỌC HẠNH PHÚC ✦', 256, 635);
+
+        texture.needsUpdate = true;
+      }
+
+      // Draw initial standard face
+      drawStandardCard();
+
+      // If card has custom uploaded image
+      if (card.customImage) {
+        const img = new Image();
+        img.onload = () => {
+          ctx.clearRect(0, 0, 512, 700);
+          ctx.drawImage(img, 0, 0, 512, 700);
+          texture.needsUpdate = true;
+        };
+        img.src = card.customImage;
+      }
+
+      return texture;
+    }
+
+    /* ==========================================================================
+       4. BUILD & POSITION 3D CARD MESHES
+       ========================================================================== */
+    const CARD_WIDTH = 2.4;
+    const CARD_HEIGHT = 3.3;
+    const CARD_DEPTH = 0.06;
+
+    let sharedBackTexture = null;
+
+    function buildCards() {
+      // Clean up previous meshes
+      cardMeshes.forEach(item => {
+        scene.remove(item.mesh);
+        if (item.mesh.geometry) item.mesh.geometry.dispose();
+        if (Array.isArray(item.mesh.material)) {
+          item.mesh.material.forEach(m => m.dispose());
+        }
+      });
+      cardMeshes = [];
+
+      if (!sharedBackTexture) {
+        sharedBackTexture = generateBackFaceTexture();
+      }
+
+      const activeCards = getActiveCards();
+      const count = activeCards.length;
+      if (count === 0) return;
+
+      const cardGeometry = new THREE.BoxGeometry(CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH);
+
+      activeCards.forEach((card, index) => {
+        // Edge Material (sides)
+        const edgeMaterial = new THREE.MeshStandardMaterial({
+          color: 0x182038,
+          metalness: 0.8,
+          roughness: 0.25,
+          transparent: true,
+          opacity: 1.0
+        });
+
+        // Back Face Material: at index 5 (-Z normal)
+        const backMaterial = new THREE.MeshStandardMaterial({
+          map: sharedBackTexture,
+          metalness: 0.35,
+          roughness: 0.3,
+          transparent: true,
+          opacity: 1.0
+        });
+
+        // Front Face Material: at index 4 (+Z normal)
+        const frontTexture = generateFrontFaceTexture(card);
+        const frontMaterial = new THREE.MeshStandardMaterial({
+          map: frontTexture,
+          metalness: 0.35,
+          roughness: 0.3,
+          transparent: true,
+          opacity: 1.0
+        });
+
+        // BoxGeometry face order: [+X, -X, +Y, -Y, +Z (Front), -Z (Back)]
+        const materials = [
+          edgeMaterial,
+          edgeMaterial.clone(),
+          edgeMaterial.clone(),
+          edgeMaterial.clone(),
+          frontMaterial,
+          backMaterial
+        ];
+
+        const mesh = new THREE.Mesh(cardGeometry, materials);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+
+        mesh.userData = {
+          cardData: card,
+          index: index,
+          originalPos: new THREE.Vector3(),
+          originalRot: new THREE.Euler(),
+          isHovered: false
+        };
+
+        scene.add(mesh);
+        cardMeshes.push({
+          mesh: mesh,
+          cardData: card
+        });
+      });
+
+      positionCardsInIdleArc();
+    }
+
+    /* 4.1 Arrange Cards in 3D Arc (Idle State) */
+    function positionCardsInIdleArc() {
+      const count = cardMeshes.length;
+      if (count === 0) return;
+
+      const radius = 6.2;
+      const totalAngle = Math.min(Math.PI * 0.96, count * 0.24);
+      const angleStep = count > 1 ? totalAngle / (count - 1) : 0;
+      const startAngle = -totalAngle / 2;
+
+      cardMeshes.forEach((item, i) => {
+        const mesh = item.mesh;
+        const angle = startAngle + i * angleStep;
+
+        const targetX = Math.sin(angle) * radius;
+        const targetZ = Math.cos(angle) * radius - radius * 0.88;
+        const targetY = -Math.cos(angle * 1.5) * 0.45;
+
+        // In Idle: Show BACK face to camera (-Z normal).
+        // When rotation.y = Math.PI, -Z face points towards camera (+Z direction in world space).
+        const targetRotY = Math.PI - angle * 0.65;
+        const targetRotZ = -angle * 0.18;
+
+        mesh.userData.originalPos.set(targetX, targetY, targetZ);
+        mesh.userData.originalRot.set(0, targetRotY, targetRotZ);
+
+        // Reset materials opacity
+        mesh.material.forEach(mat => {
+          gsap.to(mat, { opacity: 1.0, duration: 0.5 });
+        });
+
+        // Smooth entry animation with GSAP
+        gsap.to(mesh.position, {
+          x: targetX,
+          y: targetY,
+          z: targetZ,
+          duration: 1.2,
+          delay: i * 0.04,
+          ease: 'power3.out'
+        });
+
+        gsap.to(mesh.rotation, {
+          x: 0,
+          y: targetRotY,
+          z: targetRotZ,
+          duration: 1.2,
+          delay: i * 0.04,
+          ease: 'power3.out'
+        });
+
+        gsap.to(mesh.scale, {
+          x: 1,
+          y: 1,
+          z: 1,
+          duration: 0.6
+        });
+      });
+
+      currentState = STATE_IDLE;
+      updateStatusToast('✨ Bấm <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> hoặc nhấp trực tiếp vào bất kỳ thẻ nào để triệu hồi! ✨');
+      updateHUDControlsForState(STATE_IDLE);
+    }
+
+    /* ==========================================================================
+       5. INTERACTION & ANIMATION FLOW (GSAP + THREE.JS)
+       ========================================================================== */
+
+    /* 5.1 Hover Detection with Raycaster */
+    function checkRaycastHover() {
+      if (currentState !== STATE_IDLE && currentState !== STATE_SHUFFLING) {
+        if (hoveredCard) resetHover(hoveredCard);
+        hoveredCard = null;
+        return;
+      }
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
+
+      if (intersects.length > 0) {
+        const hit = intersects[0].object;
+        if (hoveredCard !== hit) {
+          if (hoveredCard) resetHover(hoveredCard);
+          hoveredCard = hit;
+          applyHover(hit);
+          sound.playHover();
+        }
+      } else {
+        if (hoveredCard) {
+          resetHover(hoveredCard);
+          hoveredCard = null;
+        }
+      }
+    }
+
+    function applyHover(mesh) {
+      document.body.style.cursor = 'pointer';
+      if (currentState === STATE_IDLE) {
+        gsap.to(mesh.scale, { x: 1.12, y: 1.12, z: 1.12, duration: 0.3, ease: 'back.out(2)' });
+        gsap.to(mesh.position, {
+          z: mesh.userData.originalPos.z + 0.65,
+          y: mesh.userData.originalPos.y + 0.35,
+          duration: 0.3
+        });
+      }
+    }
+
+    function resetHover(mesh) {
+      document.body.style.cursor = 'default';
+      if (currentState === STATE_IDLE) {
+        gsap.to(mesh.scale, { x: 1, y: 1, z: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.to(mesh.position, {
+          x: mesh.userData.originalPos.x,
+          y: mesh.userData.originalPos.y,
+          z: mesh.userData.originalPos.z,
+          duration: 0.3
+        });
+      }
+    }
+
+    /* 5.2 Start 3D Shuffling Vortex Orbit */
+    function startShuffle() {
+      if (cardMeshes.length === 0) {
+        alert('Không có thẻ nào đang kích hoạt! Vui lòng vào "QUẢN LÝ THẺ" để bật lại.');
+        return;
+      }
+
+      currentState = STATE_SHUFFLING;
+      hideRevealBanner();
+      updateStatusToast('🌀 Đang trộn bài ma thuật... Nhấp vào thẻ đang bay hoặc bấm "DỪNG" để chọn!');
+      updateHUDControlsForState(STATE_SHUFFLING);
+
+      sound.playWhoosh();
+
+      // Continuous ticking sound
+      if (shuffleTickTimer) clearInterval(shuffleTickTimer);
+      shuffleTickTimer = setInterval(() => {
+        sound.playTick();
+      }, 105);
+
+      // Kill any running tweens
+      cardMeshes.forEach(item => gsap.killTweensOf(item.mesh.position));
+      cardMeshes.forEach(item => gsap.killTweensOf(item.mesh.rotation));
+
+      // Step 1: Convergence to center portal
+      cardMeshes.forEach((item, i) => {
+        const mesh = item.mesh;
+        gsap.to(mesh.position, {
+          x: 0,
+          y: 0,
+          z: 0.5 + i * 0.03,
+          duration: 0.6,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            if (currentState === STATE_SHUFFLING) {
+              // Step 2: Continuous 3D Vortex Orbit
+              const orbitRadiusX = 4.2 + (i % 3) * 0.5;
+              const orbitRadiusY = 2.8 + (i % 2) * 0.4;
+              const offsetPhase = (i / cardMeshes.length) * Math.PI * 2;
+
+              const proxy = { angle: offsetPhase };
+              gsap.to(proxy, {
+                angle: offsetPhase + Math.PI * 16,
+                duration: 5.5,
+                ease: 'none',
+                repeat: -1,
+                onUpdate: () => {
+                  if (currentState === STATE_SHUFFLING) {
+                    mesh.position.x = Math.cos(proxy.angle) * orbitRadiusX;
+                    mesh.position.y = Math.sin(proxy.angle * 1.5) * orbitRadiusY * 0.75;
+                    mesh.position.z = Math.sin(proxy.angle) * 2.2;
+                    mesh.rotation.y = proxy.angle + Math.PI / 2;
+                    mesh.rotation.z = Math.cos(proxy.angle) * 0.35;
+                  }
+                }
+              });
+            }
+          }
+        });
+      });
+    }
+
+    /* 5.3 Stop Shuffle & Reveal Picked Card */
+    function stopShuffleAndPick(selectedMesh = null) {
+      if (currentState !== STATE_SHUFFLING && currentState !== STATE_IDLE) return;
+
+      if (shuffleTickTimer) {
+        clearInterval(shuffleTickTimer);
+        shuffleTickTimer = null;
+      }
+
+      // If no mesh passed (user clicked Stop button), pick random active card
+      if (!selectedMesh) {
+        const randIndex = Math.floor(Math.random() * cardMeshes.length);
+        selectedMesh = cardMeshes[randIndex].mesh;
+      }
+
+      revealCard(selectedMesh);
+    }
+
+    /* 5.4 Reveal Card Animation & Celebration */
+    function revealCard(mesh) {
+      currentState = STATE_REVEALED;
+      activeRevealedCard = mesh.userData.cardData;
+
+      updateStatusToast('🌟 ĐẶC QUYỀN ĐÃ XUẤT HIỆN! 🌟');
+      updateHUDControlsForState(STATE_REVEALED);
+
+      sound.playWhoosh();
+
+      // Scatter and fade all other cards
+      cardMeshes.forEach(item => {
+        gsap.killTweensOf(item.mesh.position);
+        gsap.killTweensOf(item.mesh.rotation);
+
+        if (item.mesh !== mesh) {
+          gsap.to(item.mesh.position, {
+            x: item.mesh.position.x * 2.4,
+            y: item.mesh.position.y * 2.4 - 2.5,
+            z: -7.0,
+            duration: 1.1,
+            ease: 'power3.out'
+          });
+          gsap.to(item.mesh.scale, {
+            x: 0.3,
+            y: 0.3,
+            z: 0.3,
+            duration: 0.9
+          });
+          item.mesh.material.forEach(mat => {
+            gsap.to(mat, { opacity: 0.12, duration: 0.9 });
+          });
+        }
+      });
+
+      // Selected card flies to Center Portal (0, 0.45, 3.6) close to Camera
+      // Executes 2 full 360-degree rotations and finishes with rotation.y = Math.PI * 4
+      // This displays the Front Face (+Z normal) perfectly unmirrored!
+      const tl = gsap.timeline();
+
+      tl.to(mesh.position, {
+        x: 0,
+        y: 0.45,
+        z: 3.6,
+        duration: 1.45,
+        ease: 'power3.out'
+      }, 0);
+
+      tl.to(mesh.scale, {
+        x: 1.25,
+        y: 1.25,
+        z: 1.25,
+        duration: 1.45,
+        ease: 'back.out(1.5)'
+      }, 0);
+
+      tl.to(mesh.rotation, {
+        x: 0,
+        y: Math.PI * 4,
+        z: 0,
+        duration: 1.45,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          sound.playFanfare();
+          launchConfetti();
+          showRevealBanner(activeRevealedCard);
+        }
+      }, 0);
+    }
+
+    /* 5.5 Confetti Fireworks Celebration */
+    function launchConfetti() {
+      if (typeof confetti !== 'function') return;
+
+      // Center blast
+      confetti({
+        particleCount: 130,
+        spread: 100,
+        origin: { y: 0.55 },
+        colors: ['#00f2fe', '#ff0844', '#f6d365', '#7928ca', '#ffffff']
+      });
+
+      // Left & Right Cannons
+      setTimeout(() => {
+        confetti({
+          particleCount: 90,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0.1, y: 0.75 },
+          colors: ['#f6d365', '#ff0844', '#00f2fe']
+        });
+        confetti({
+          particleCount: 90,
+          angle: 120,
+          spread: 70,
+          origin: { x: 0.9, y: 0.75 },
+          colors: ['#7928ca', '#00f2fe', '#f6d365']
+        });
+      }, 250);
+    }
+
+    /* ==========================================================================
+       6. UI STATE MANAGEMENT & HUD EVENT LISTENERS
+       ========================================================================== */
+    const mainActionBtn = document.getElementById('btn-main-action');
+    const mainActionIcon = document.getElementById('main-action-icon');
+    const mainActionLabel = document.getElementById('main-action-label');
+    const statusToastText = document.getElementById('status-toast-text');
+    const revealBanner = document.getElementById('reveal-banner');
+    const revealTitle = document.getElementById('reveal-title');
+    const revealSubtitle = document.getElementById('reveal-subtitle');
+    const revealRarityBadge = document.getElementById('reveal-rarity-badge');
+    const btnCardReroll = document.getElementById('btn-card-reroll');
+
+    function updateStatusToast(msg) {
+      statusToastText.innerHTML = msg;
+    }
+
+    function updateHUDControlsForState(state) {
+      if (state === STATE_IDLE) {
+        mainActionIcon.textContent = '▶';
+        mainActionLabel.textContent = 'BẮT ĐẦU';
+        mainActionBtn.className = 'group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-lg hover:shadow-cyan-400/50 hover:scale-105 active:scale-95';
+      } else if (state === STATE_SHUFFLING) {
+        mainActionIcon.textContent = '🛑';
+        mainActionLabel.textContent = 'DỪNG & RÚT NGẪU NHIÊN';
+        mainActionBtn.className = 'group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white font-orbitron shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 animate-pulse';
+      } else if (state === STATE_REVEALED) {
+        mainActionIcon.textContent = '↻';
+        mainActionLabel.textContent = 'LƯỢT TIẾP THEO';
+        mainActionBtn.className = 'group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 hover:from-purple-400 hover:to-cyan-400 text-white font-orbitron shadow-lg hover:shadow-purple-500/50 hover:scale-105 active:scale-95';
+      }
+    }
+
+    function showRevealBanner(card) {
+      revealTitle.textContent = `${card.icon || ''} ${card.title}`;
+      revealSubtitle.textContent = card.subtitle || 'Chúc mừng em đã nhận được đặc quyền lớp học!';
+
+      let badgeClass = 'px-3.5 py-1 rounded-full text-xs font-black tracking-widest uppercase shadow-md ';
+      if (card.rarity === 'SSR') {
+        revealRarityBadge.className = badgeClass + 'bg-yellow-400 text-slate-950';
+        revealRarityBadge.textContent = 'SSR • VÀNG KIM HUYỀN THOẠI';
+      } else if (card.rarity === 'SR') {
+        revealRarityBadge.className = badgeClass + 'bg-purple-500 text-white';
+        revealRarityBadge.textContent = 'SR • TÍM NEON HIẾM';
+      } else if (card.rarity === 'PINK') {
+        revealRarityBadge.className = badgeClass + 'bg-pink-500 text-white';
+        revealRarityBadge.textContent = 'SSR • HỒNG NEON';
+      } else if (card.rarity === 'ORANGE') {
+        revealRarityBadge.className = badgeClass + 'bg-amber-400 text-slate-950';
+        revealRarityBadge.textContent = 'SR • CAM RỰC RỠ';
+      } else if (card.rarity === 'RED') {
+        revealRarityBadge.className = badgeClass + 'bg-red-500 text-white';
+        revealRarityBadge.textContent = 'SSR • ĐỎ QUYỀN LỰC';
+      } else if (card.rarity === 'GREEN') {
+        revealRarityBadge.className = badgeClass + 'bg-emerald-400 text-slate-950';
+        revealRarityBadge.textContent = 'R • XANH LÁ';
+      } else {
+        revealRarityBadge.className = badgeClass + 'bg-cyan-400 text-slate-950';
+        revealRarityBadge.textContent = 'R • XANH CYAN PHỔ THÔNG';
+      }
+
+      // Check if this card allows a reroll
+      if (card.isReroll || card.title.toLowerCase().includes('bốc lại')) {
+        btnCardReroll.classList.remove('hidden');
+      } else {
+        btnCardReroll.classList.add('hidden');
+      }
+
+      revealBanner.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+    }
+
+    function hideRevealBanner() {
+      revealBanner.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+      btnCardReroll.classList.add('hidden');
+    }
+
+    function updateCardCounters() {
+      const active = getActiveCards().length;
+      const total = cardsData.length;
+      document.getElementById('card-count-active').textContent = active;
+      document.getElementById('card-count-total').textContent = total;
+      document.getElementById('modal-cards-count').textContent = total;
+    }
+
+    // Main Start/Stop Action Button Click
+    mainActionBtn.addEventListener('click', () => {
+      sound.playClick();
+      if (currentState === STATE_IDLE) {
+        startShuffle();
+      } else if (currentState === STATE_SHUFFLING) {
+        stopShuffleAndPick();
+      } else if (currentState === STATE_REVEALED) {
+        hideRevealBanner();
+        positionCardsInIdleArc();
+      }
+    });
+
+    // Replay / Reset Layout Button Click
+    document.getElementById('btn-replay').addEventListener('click', () => {
+      sound.playClick();
+      if (shuffleTickTimer) clearInterval(shuffleTickTimer);
+      hideRevealBanner();
+      positionCardsInIdleArc();
+    });
+
+    // Sound Toggle Button
+    const btnSoundToggle = document.getElementById('btn-sound-toggle');
+    btnSoundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      document.getElementById('sound-text').textContent = soundEnabled ? 'BẬT' : 'TẮT';
+      if (soundEnabled) sound.playClick();
+    });
+
+    // Fullscreen Toggle (Projector / Smart TV)
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    btnFullscreen.addEventListener('click', () => {
+      sound.playClick();
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Không thể bật toàn màn hình: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    // Editable Classroom Name Badge
+    document.getElementById('btn-edit-classname').addEventListener('click', () => {
+      sound.playClick();
+      const currentName = document.getElementById('classroom-name-display').textContent.trim();
+      const newName = prompt('Nhập tên lớp học hoặc tên thầy/cô:', currentName);
+      if (newName && newName.trim() !== '') {
+        const cleanName = newName.trim().toUpperCase();
+        document.getElementById('classroom-name-display').textContent = cleanName;
+        localStorage.setItem('classroom_name', cleanName);
+      }
+    });
+
+    // Keep Card in Deck Button
+    document.getElementById('btn-card-keep').addEventListener('click', () => {
+      sound.playClick();
+      hideRevealBanner();
+      positionCardsInIdleArc();
+    });
+
+    // Remove Card from Deck Button (Marked as Awarded)
+    document.getElementById('btn-card-remove').addEventListener('click', () => {
+      sound.playClick();
+      if (activeRevealedCard) {
+        const target = cardsData.find(c => c.id === activeRevealedCard.id);
+        if (target) {
+          target.active = false;
+          saveCardsData();
+        }
+      }
+      hideRevealBanner();
+      buildCards();
+    });
+
+    // Immediate Reroll Action Button
+    btnCardReroll.addEventListener('click', () => {
+      sound.playClick();
+      hideRevealBanner();
+      startShuffle();
+    });
+
+    // Quick Reset Default Cards
+    document.getElementById('btn-reset-default').addEventListener('click', () => {
+      if (confirm('Khôi phục danh sách về 11 thẻ đặc quyền mặc định ban đầu?')) {
+        sound.playClick();
+        cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
+        saveCardsData();
+        buildCards();
+      }
+    });
+
+    /* Mouse & Click Handling for 3D Cards */
+    function onMouseMove(e) {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      checkRaycastHover();
+    }
+
+    function onCanvasClick(e) {
+      if (currentState === STATE_IDLE || currentState === STATE_SHUFFLING) {
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
+        if (intersects.length > 0) {
+          const hit = intersects[0].object;
+          stopShuffleAndPick(hit);
+        }
+      }
+    }
+
+    function onTouchStart(e) {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+        if (currentState === STATE_IDLE || currentState === STATE_SHUFFLING) {
+          raycaster.setFromCamera(mouse, camera);
+          const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
+          if (intersects.length > 0) {
+            e.preventDefault();
+            stopShuffleAndPick(intersects[0].object);
+          }
+        }
+      }
+    }
+
+    function onWindowResize() {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    }
+
+    /* ==========================================================================
+       7. MODAL: QUẢN LÝ THẺ & THÊM THẺ MỚI
+       ========================================================================== */
+    const modalManage = document.getElementById('modal-manage');
+    const btnManageCards = document.getElementById('btn-manage-cards');
+    const btnQuickAdd = document.getElementById('btn-quick-add');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnSaveModal = document.getElementById('btn-save-modal');
+    const cardsManagerList = document.getElementById('cards-manager-list');
+
+    function openModal() {
+      sound.playClick();
+      renderModalCardsList();
+      modalManage.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      sound.playClick();
+      modalManage.classList.add('hidden');
+      buildCards();
+    }
+
+    btnManageCards.addEventListener('click', openModal);
+    btnQuickAdd.addEventListener('click', openModal);
+    btnCloseModal.addEventListener('click', closeModal);
+    btnSaveModal.addEventListener('click', closeModal);
+
+    // Optimized Image File Picker: Scales & Compresses to save localStorage space
+    const newCardFileInput = document.getElementById('new-card-file');
+    newCardFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        document.getElementById('file-chosen-name').textContent = file.name;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const compCanvas = document.createElement('canvas');
+            compCanvas.width = 512;
+            compCanvas.height = 700;
+            const cctx = compCanvas.getContext('2d');
+            cctx.drawImage(img, 0, 0, 512, 700);
+            customImageBase64 = compCanvas.toDataURL('image/jpeg', 0.82);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        customImageBase64 = null;
+        document.getElementById('file-chosen-name').textContent = 'Chưa chọn ảnh';
+      }
+    });
+
+    // Add New Card Form Submit
+    document.getElementById('btn-submit-add-card').addEventListener('click', () => {
+      const title = document.getElementById('new-card-title').value.trim();
+      const icon = document.getElementById('new-card-icon').value.trim() || '🎁';
+      const sub = document.getElementById('new-card-sub').value.trim();
+      const rarity = document.getElementById('new-card-rarity').value;
+
+      if (!title) {
+        alert('Vui lòng nhập tên đặc quyền!');
+        return;
+      }
+
+      sound.playClick();
+
+      const newCard = {
+        id: 'c_' + Date.now(),
+        title: title,
+        icon: icon,
+        rarity: rarity,
+        subtitle: sub || 'Đặc quyền khen thưởng lớp học',
+        active: true,
+        customImage: customImageBase64
+      };
+
+      cardsData.unshift(newCard);
+      saveCardsData();
+      renderModalCardsList();
+
+      // Reset input fields
+      document.getElementById('new-card-title').value = '';
+      document.getElementById('new-card-sub').value = '';
+      customImageBase64 = null;
+      newCardFileInput.value = '';
+      document.getElementById('file-chosen-name').textContent = 'Chưa chọn ảnh';
+    });
+
+    // Enable all cards
+    document.getElementById('btn-enable-all').addEventListener('click', () => {
+      sound.playClick();
+      cardsData.forEach(c => c.active = true);
+      saveCardsData();
+      renderModalCardsList();
+    });
+
+    // Reset default cards inside modal
+    document.getElementById('btn-reset-cards-modal').addEventListener('click', () => {
+      if (confirm('Khôi phục danh sách về 11 thẻ mặc định ban đầu?')) {
+        sound.playClick();
+        cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
+        saveCardsData();
+        renderModalCardsList();
+      }
+    });
+
+    // Render Modal Cards List
+    function renderModalCardsList() {
+      cardsManagerList.innerHTML = '';
+      cardsData.forEach((card, index) => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 hover:border-slate-600 transition-colors';
+
+        let badgeColor = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
+        if (card.rarity === 'SSR') badgeColor = 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40';
+        if (card.rarity === 'SR') badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+        if (card.rarity === 'PINK') badgeColor = 'bg-pink-500/20 text-pink-300 border-pink-500/40';
+        if (card.rarity === 'ORANGE') badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        if (card.rarity === 'RED') badgeColor = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
+        if (card.rarity === 'GREEN') badgeColor = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+
+        item.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">${card.icon || '🎴'}</span>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sm text-white">${card.title}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full border ${badgeColor} font-bold">${card.rarity}</span>
+              </div>
+              <p class="text-xs text-slate-400">${card.subtitle || 'Không có mô tả'}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="btn-toggle-active px-3 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer ${card.active ? 'bg-emerald-600/80 hover:bg-emerald-500 text-white' : 'bg-slate-700 hover:bg-slate-600 text-slate-400'}" data-index="${index}">
+              ${card.active ? '✓ Đang bật' : '✕ Đang ẩn'}
+            </button>
+            <button class="btn-delete-card w-7 h-7 rounded-lg bg-rose-900/40 hover:bg-rose-600 text-rose-300 hover:text-white text-xs flex items-center justify-center transition-colors cursor-pointer" data-index="${index}" title="Xóa thẻ">
+              🗑
+            </button>
+          </div>
+        `;
+
+        cardsManagerList.appendChild(item);
+      });
+
+      // Bind toggle active
+      document.querySelectorAll('.btn-toggle-active').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+          cardsData[idx].active = !cardsData[idx].active;
+          saveCardsData();
+          renderModalCardsList();
+        });
+      });
+
+      // Bind delete card
+      document.querySelectorAll('.btn-delete-card').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+          if (confirm(`Xóa thẻ "${cardsData[idx].title}"?`)) {
+            cardsData.splice(idx, 1);
+            saveCardsData();
+            renderModalCardsList();
+          }
+        });
+      });
+
+      updateCardCounters();
+    }
+
+    /* ==========================================================================
+       8. MAIN RENDER LOOP
+       ========================================================================== */
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsedTime = clock.getElapsedTime();
+
+      // Rotate Space Particles gently
+      if (particlesMesh) {
+        particlesMesh.rotation.y = elapsedTime * 0.035;
+        particlesMesh.rotation.x = Math.sin(elapsedTime * 0.02) * 0.05;
+      }
+
+      // Rotate Magic Portal Rings
+      if (portalGroup) {
+        portalGroup.children.forEach((child, idx) => {
+          if (idx === 1) child.rotation.z = -elapsedTime * 0.32;
+          if (idx === 2) child.rotation.z = elapsedTime * 0.22;
+        });
+      }
+
+      // Gentle floating sine motion in Idle state
+      if (currentState === STATE_IDLE) {
+        cardMeshes.forEach((item, i) => {
+          const mesh = item.mesh;
+          if (mesh !== hoveredCard) {
+            const floatOffset = Math.sin(elapsedTime * 1.8 + i * 0.6) * 0.07;
+            mesh.position.y = mesh.userData.originalPos.y + floatOffset;
+          }
+        });
+      }
+
+      // Render Scene
+      renderer.render(scene, camera);
+    }
+
+    /* ==========================================================================
+       9. APPLICATION STARTUP
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedData();
+      initThreeScene();
+      buildCards();
+      updateCardCounters();
+      animate();
+    });
+
+  </script>
+</body>
+</html>
