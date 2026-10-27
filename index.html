@@ -84,14 +84,14 @@
     }
     /* Glassmorphism Styles */
     .glass-panel {
-      background: rgba(13, 20, 44, 0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(13, 20, 44, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
     .glass-btn {
-      background: rgba(26, 35, 64, 0.8);
-      backdrop-filter: blur(12px);
+      background: rgba(26, 35, 64, 0.85);
+      backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.16);
       transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -116,6 +116,12 @@
       background: rgba(4, 7, 24, 0.88);
       backdrop-filter: blur(14px);
     }
+    .svg-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body class="bg-cosmic text-white select-none overflow-hidden relative w-full h-full">
@@ -133,32 +139,56 @@
       <div class="flex items-center space-x-3">
         <button id="btn-edit-classname" title="Bấm để đổi tên lớp / tên cô giáo"
           class="group flex items-center space-x-2.5 px-4 py-2 rounded-2xl glass-panel hover:border-cyan-400 transition-all cursor-pointer glow-cyan">
-          <span class="text-xl animate-bounce-subtle">✨</span>
+          <span class="svg-icon text-yellow-300">
+            <svg class="w-5 h-5 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+            </svg>
+          </span>
           <div class="text-left">
             <span class="text-[10px] tracking-wider uppercase text-cyan-300 font-semibold block leading-tight">Không Gian Lớp Học</span>
             <span id="classroom-name-display" class="text-sm md:text-base font-extrabold text-white group-hover:text-cyan-200 transition-colors">
               LỚP HỌC SÁNG TẠO 4.0
             </span>
           </div>
-          <span class="text-xs text-slate-400 group-hover:text-white ml-1">✏️</span>
+          <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-300 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+          </svg>
         </button>
       </div>
 
       <!-- Top Center: App Title & Sub-controls -->
       <div class="flex flex-col items-center text-center">
-        <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wider uppercase font-orbitron bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-lg">
-          🎴 CHỌN THẺ ĐẶC QUYỀN 🎴
+        <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wider uppercase font-orbitron bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-lg flex items-center gap-3">
+          <svg class="w-7 h-7 md:w-10 md:h-10 text-yellow-400 inline-block drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" opacity="0"/>
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>CHỌN THẺ ĐẶC QUYỀN</span>
+          <svg class="w-7 h-7 md:w-10 md:h-10 text-cyan-300 inline-block drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
         </h1>
         
         <div class="flex items-center gap-2.5 mt-1.5 text-xs md:text-sm text-slate-300">
-          <span id="deck-counter-badge" class="px-3 py-1 rounded-full bg-slate-900/80 border border-purple-500/50 font-bold text-yellow-300 shadow">
-            Bộ thẻ: <span id="card-count-active" class="text-cyan-300 text-base font-black">11</span> thẻ
+          <span id="deck-counter-badge" class="px-3 py-1 rounded-full bg-slate-900/80 border border-purple-500/50 font-bold text-yellow-300 shadow flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <line x1="7" y1="8" x2="17" y2="8" />
+              <line x1="7" y1="12" x2="17" y2="12" />
+            </svg>
+            <span>Bộ thẻ: <span id="card-count-active" class="text-cyan-300 text-base font-black">11</span> thẻ</span>
           </span>
           <button id="btn-quick-add" class="hover:text-cyan-300 transition-colors flex items-center gap-1 font-semibold bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/80 cursor-pointer">
-            <span>➕</span> Thêm thẻ
+            <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span>Thêm thẻ</span>
           </button>
           <button id="btn-reset-default" class="hover:text-pink-300 transition-colors flex items-center gap-1 font-semibold bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/80 cursor-pointer">
-            <span>↻</span> Mặc định
+            <svg class="w-3.5 h-3.5 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+            <span>Mặc định</span>
           </button>
         </div>
       </div>
@@ -166,15 +196,22 @@
       <!-- Top Right: Tool & Settings Quick Buttons -->
       <div class="flex items-center gap-2">
         <button id="btn-sound-toggle" class="glass-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow cursor-pointer">
-          <span id="sound-icon">🔊</span>
+          <span id="sound-icon-box" class="svg-icon w-4 h-4 text-cyan-300">
+            <!-- Audio icon inserted by JS -->
+          </span>
           <span id="sound-text">BẬT</span>
         </button>
         <button id="btn-fullscreen" title="Bật/Tắt Toàn Màn Hình TV" class="glass-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow cursor-pointer">
-          <span>⛶</span>
+          <svg class="w-4 h-4 text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+          </svg>
           <span class="hidden sm:inline">TOÀN MÀN HÌNH</span>
         </button>
         <button id="btn-manage-cards" class="glass-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold text-cyan-300 border-cyan-500/40 hover:border-cyan-400 flex items-center gap-1.5 glow-cyan shadow cursor-pointer">
-          <span>⚙</span>
+          <svg class="w-4 h-4 text-cyan-300 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
           <span>QUẢN LÝ THẺ</span>
         </button>
       </div>
@@ -184,8 +221,11 @@
     <!-- CENTER INSTRUCTION / STATUS TOAST -->
     <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 transform -translate-y-2 opacity-95 my-auto text-center">
       <div class="inline-block px-6 py-2.5 rounded-full bg-slate-900/85 border border-cyan-400/40 backdrop-blur-md shadow-2xl">
-        <span id="status-toast-text" class="text-sm md:text-lg font-bold text-cyan-200 tracking-wide">
-          ✨ Bấm nút <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> để vòng quay ma thuật bắt đầu xoay tròn! ✨
+        <span id="status-toast-text" class="text-sm md:text-lg font-bold text-cyan-200 tracking-wide flex items-center gap-2">
+          <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>Bấm nút <strong class="text-yellow-400">"BẮT ĐẦU"</strong> để vòng quay ma thuật bắt đầu xoay tròn!</span>
         </span>
       </div>
     </div>
@@ -199,7 +239,11 @@
         <!-- Big Start / Stop Shuffle Button -->
         <button id="btn-main-action" type="button" class="group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-xl hover:shadow-cyan-400/60 hover:scale-105 active:scale-95">
           <span class="relative z-10 flex items-center gap-3">
-            <span id="main-action-icon" class="text-2xl md:text-3xl">▶</span>
+            <span id="main-action-icon-box" class="svg-icon">
+              <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </span>
             <span id="main-action-label">BẮT ĐẦU</span>
           </span>
           <div class="absolute inset-0 bg-white/25 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -207,7 +251,9 @@
 
         <!-- Replay / Reset Layout Button -->
         <button id="btn-replay" type="button" class="glass-btn px-6 py-4 md:py-4.5 rounded-2xl font-bold text-sm md:text-lg flex items-center gap-2 hover:text-cyan-300 border-purple-500/40 hover:border-purple-400 cursor-pointer">
-          <span class="text-xl">↻</span>
+          <svg class="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
           <span>QUAY VỀ VỊ TRÍ</span>
         </button>
 
@@ -216,7 +262,7 @@
       <!-- Quick Classroom TV Hint -->
       <div class="text-[11px] md:text-xs text-slate-400 font-medium tracking-wide flex items-center gap-2">
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>Thẻ sẽ luôn được giữ nguyên trong vòng quay sau mỗi lượt bốc của học sinh</span>
+        <span>Bộ Vector SVG thiết kế chuẩn đồ họa cao cấp • Thẻ luôn được giữ nguyên sau mỗi lượt quay</span>
       </div>
 
     </footer>
@@ -224,7 +270,6 @@
   </div>
 
   <!-- REVEALED CARD HUD BANNER (Displays beneath the 3D card when flipped) -->
-  <!-- Crucial fix: Added 'hidden' by default so it never blocks clicks to bottom buttons -->
   <div id="reveal-banner" class="fixed inset-x-0 bottom-24 md:bottom-28 z-40 flex flex-col items-center pointer-events-none transition-all duration-500 opacity-0 transform translate-y-6 hidden">
     <div class="w-11/12 max-w-lg p-5 md:p-6 rounded-3xl glass-panel border border-yellow-400/50 shadow-2xl text-center pointer-events-auto relative overflow-hidden glow-gold">
       
@@ -233,7 +278,12 @@
         <span id="reveal-rarity-badge" class="px-3.5 py-1 rounded-full text-xs font-black tracking-widest uppercase bg-yellow-400 text-slate-950 shadow-md">
           SSR • HUYỀN THOẠI
         </span>
-        <span class="text-xs text-slate-300 font-bold">🎉 CHÚC MỪNG EM ĐÃ BỐC TRÚNG!</span>
+        <span class="text-xs text-slate-300 font-bold flex items-center gap-1">
+          <svg class="w-4 h-4 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>CHÚC MỪNG EM ĐÃ BỐC TRÚNG!</span>
+        </span>
       </div>
 
       <!-- Card Big Title & Description -->
@@ -246,8 +296,10 @@
 
       <!-- Next Turn Button (Card is preserved in deck) -->
       <div class="flex items-center justify-center gap-3">
-        <button id="btn-next-turn" class="w-full py-3 px-6 rounded-xl font-black text-sm md:text-base bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-xl transition-transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer font-orbitron">
-          <span class="text-xl">🎲</span>
+        <button id="btn-next-turn" class="w-full py-3.5 px-6 rounded-xl font-black text-sm md:text-base bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-xl transition-transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer font-orbitron">
+          <svg class="w-5 h-5 text-slate-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
           <span>QUAY TIẾP LƯỢT MỚI (GIỮ NGUYÊN BỘ THẺ)</span>
         </button>
       </div>
@@ -255,17 +307,22 @@
     </div>
   </div>
 
-  <!-- MODAL: CARD MANAGEMENT (Quản lý danh sách thẻ & Thêm thẻ mới) -->
+  <!-- MODAL: CARD MANAGEMENT -->
   <div id="modal-manage" class="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 modal-backdrop hidden transition-opacity duration-300">
     <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl glass-panel border border-cyan-400/40 shadow-2xl overflow-hidden pointer-events-auto">
       
       <!-- Modal Header -->
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-900/70">
         <div class="flex items-center gap-3">
-          <span class="text-2xl">⚙️</span>
+          <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </div>
           <div>
             <h3 class="text-lg md:text-xl font-black text-cyan-300 font-orbitron">QUẢN LÝ BỘ THẺ ĐẶC QUYỀN</h3>
-            <p class="text-xs text-slate-400">Thêm thẻ mới hoặc bật/tắt các đặc quyền tùy ý cho buổi học</p>
+            <p class="text-xs text-slate-400">Bộ Vector SVG cao cấp, dễ dàng thêm mới hoặc chỉnh sửa</p>
           </div>
         </div>
         <button id="btn-close-modal" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center font-bold text-lg transition-colors cursor-pointer">
@@ -279,7 +336,10 @@
         <!-- Section: Add New Card Form -->
         <div class="p-4 md:p-5 rounded-2xl bg-slate-900/75 border border-purple-500/35 space-y-4">
           <h4 class="text-sm font-extrabold uppercase tracking-wider text-purple-300 flex items-center gap-2">
-            <span>✨</span> THÊM THẺ ĐẶC QUYỀN MỚI
+            <svg class="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span>THÊM THẺ ĐẶC QUYỀN MỚI</span>
           </h4>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -289,8 +349,21 @@
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Biểu tượng / Emoji</label>
-              <input type="text" id="new-card-icon" placeholder="👑, 🎁, ⭐..." value="🎁" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm text-center">
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Biểu tượng mẫu SVG</label>
+              <select id="new-card-icon-select" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm cursor-pointer">
+                <option value="crown">Vương Miện (Crown)</option>
+                <option value="medal">Huy Chương (Medal)</option>
+                <option value="shield">Khiên Hộ Vệ (Shield)</option>
+                <option value="twoStars">Hai Ngôi Sao (Dual Stars)</option>
+                <option value="star">Ngôi Sao Lấp Lánh (Super Star)</option>
+                <option value="swap">Đổi Chỗ Ngồi (Seat Swap)</option>
+                <option value="clap">Tràng Pháo Tay (Applause)</option>
+                <option value="dice">Xúc Xắc May Mắn (Lucky Dice)</option>
+                <option value="board">Bảng Lớp Học (Chalkboard)</option>
+                <option value="fan">Quạt Tiết Kiệm Điện (Eco Fan)</option>
+                <option value="candy">Kẹo Mút Ngọt Ngào (Lollipop)</option>
+                <option value="gift">Hộp Quà Bất Ngờ (Gift Box)</option>
+              </select>
             </div>
           </div>
 
@@ -324,7 +397,9 @@
           </div>
 
           <button id="btn-submit-add-card" class="w-full py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white shadow-lg transition-transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer">
-            <span>➕</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
             <span>Thêm Thẻ Vào Bộ Sưu Tập</span>
           </button>
         </div>
@@ -333,16 +408,18 @@
         <div>
           <div class="flex items-center justify-between mb-3">
             <h4 class="text-sm font-extrabold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <span>📋</span> DANH SÁCH THẺ HIỆN CÓ (<span id="modal-cards-count" class="text-cyan-400">11</span>)
+              <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+              <span>DANH SÁCH THẺ HIỆN CÓ (<span id="modal-cards-count" class="text-cyan-400">11</span>)</span>
             </h4>
             <div class="flex gap-2">
-              <button id="btn-enable-all" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 cursor-pointer">Bật tất cả</button>
               <button id="btn-reset-cards-modal" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-rose-800 text-rose-300 border border-slate-700 cursor-pointer">Khôi phục 11 thẻ gốc</button>
             </div>
           </div>
 
           <div id="cards-manager-list" class="space-y-2 max-h-72 overflow-y-auto pr-1">
-            <!-- Rendered dynamically by JavaScript -->
+            <!-- Rendered dynamically by JavaScript with SVGs -->
           </div>
         </div>
 
@@ -362,29 +439,425 @@
   <!-- JAVASCRIPT APPLICATION LOGIC -->
   <script>
     /* ==========================================================================
-       0. KHỞI TẠO DỮ LIỆU & LOCAL STORAGE
+       0. VECTOR SVG ASSETS DICTIONARY (Handcrafted, modern & crisp)
+       ========================================================================== */
+    const SVG_ICONS = {
+      // 1. Vương miện Lớp Trưởng (Golden Regal Crown)
+      crown: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="goldCrown" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff2a3"/>
+              <stop offset="45%" stop-color="#f6d365"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </linearGradient>
+            <filter id="crownGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#f59e0b" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#crownGlow)">
+            <path d="M15 72 L20 32 L38 52 L50 20 L62 52 L80 32 L85 72 Z" fill="url(#goldCrown)" stroke="#b45309" stroke-width="2.5" stroke-linejoin="round"/>
+            <rect x="18" y="72" width="64" height="12" rx="4" fill="url(#goldCrown)" stroke="#b45309" stroke-width="2.5"/>
+            <!-- Jewels -->
+            <circle cx="50" cy="20" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="20" cy="32" r="3.5" fill="#06b6d4" stroke="#ffffff" stroke-width="1.2"/>
+            <circle cx="80" cy="32" r="3.5" fill="#06b6d4" stroke="#ffffff" stroke-width="1.2"/>
+            <circle cx="34" cy="78" r="3" fill="#ef4444"/>
+            <circle cx="50" cy="78" r="3" fill="#10b981"/>
+            <circle cx="66" cy="78" r="3" fill="#06b6d4"/>
+          </g>
+        </svg>
+      `,
+
+      // 2. Huy chương Lớp Phó (Distinguished Star Medal)
+      medal: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="ribbonBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#3b82f6"/>
+              <stop offset="50%" stop-color="#60a5fa"/>
+              <stop offset="100%" stop-color="#1d4ed8"/>
+            </linearGradient>
+            <linearGradient id="goldMedal" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="60%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#b45309"/>
+            </linearGradient>
+            <filter id="medalGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#fbbf24" flood-opacity="0.5"/>
+            </filter>
+          </defs>
+          <g filter="url(#medalGlow)">
+            <!-- Ribbons -->
+            <polygon points="32,15 44,15 38,45 26,45" fill="url(#ribbonBlue)" stroke="#1e3a8a" stroke-width="1.5"/>
+            <polygon points="68,15 56,15 62,45 74,45" fill="url(#ribbonBlue)" stroke="#1e3a8a" stroke-width="1.5"/>
+            <!-- Medal Circle -->
+            <circle cx="50" cy="62" r="26" fill="url(#goldMedal)" stroke="#78350f" stroke-width="2.5"/>
+            <circle cx="50" cy="62" r="21" fill="none" stroke="#fef3c7" stroke-width="2" stroke-dasharray="3 2"/>
+            <!-- Star in medal -->
+            <polygon points="50,47 54,57 65,58 57,65 60,76 50,70 40,76 43,65 35,58 46,57" fill="#fffbeb" stroke="#d97706" stroke-width="1"/>
+          </g>
+        </svg>
+      `,
+
+      // 3. Khiên Tổ Trưởng (Knight Protector Shield)
+      shield: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="purpleShield" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#c084fc"/>
+              <stop offset="50%" stop-color="#7e22ce"/>
+              <stop offset="100%" stop-color="#4c1d95"/>
+            </linearGradient>
+            <linearGradient id="cyanBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#67e8f9"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+            <filter id="shieldGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#a855f7" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#shieldGlow)">
+            <path d="M50 14 C75 14 84 24 84 45 C84 70 50 88 50 88 C50 88 16 70 16 45 C16 24 25 14 50 14 Z" fill="url(#purpleShield)" stroke="url(#cyanBorder)" stroke-width="3"/>
+            <path d="M50 22 C68 22 75 30 75 46 C75 66 50 79 50 79 C50 79 25 66 25 46 C25 30 32 22 50 22 Z" fill="none" stroke="#e9d5ff" stroke-width="1.5" opacity="0.6"/>
+            <!-- Lightning / Sword Emblem -->
+            <polygon points="53,28 38,52 48,52 45,72 63,46 51,46" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+          </g>
+        </svg>
+      `,
+
+      // 4. Hai Sticker (Dual Sparkling Reward Stars)
+      twoStars: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="starGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="100%" stop-color="#f59e0b"/>
+            </linearGradient>
+            <linearGradient id="starGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f472b6"/>
+              <stop offset="100%" stop-color="#db2777"/>
+            </linearGradient>
+            <filter id="starsGlow">
+              <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#ec4899" flood-opacity="0.5"/>
+            </filter>
+          </defs>
+          <g filter="url(#starsGlow)">
+            <!-- Left Star -->
+            <g transform="translate(32, 54) scale(0.9)">
+              <polygon points="0,-28 7,-8 28,-5 12,9 17,29 0,17 -17,29 -12,9 -28,-5 -7,-8" fill="url(#starGrad1)" stroke="#b45309" stroke-width="2"/>
+              <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.8"/>
+            </g>
+            <!-- Right Star -->
+            <g transform="translate(66, 38) scale(1.1)">
+              <polygon points="0,-28 7,-8 28,-5 12,9 17,29 0,17 -17,29 -12,9 -28,-5 -7,-8" fill="url(#starGrad2)" stroke="#9d174d" stroke-width="2"/>
+              <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.8"/>
+            </g>
+            <!-- Sparkles -->
+            <circle cx="16" cy="28" r="2.5" fill="#38bdf8"/>
+            <circle cx="82" cy="74" r="3" fill="#facc15"/>
+          </g>
+        </svg>
+      `,
+
+      // 5. Một Sticker (Brilliant Super Star)
+      star: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="starSingle" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="30%" stop-color="#67e8f9"/>
+              <stop offset="100%" stop-color="#0284c7"/>
+            </linearGradient>
+            <filter id="starGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0284c7" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#starGlow)">
+            <polygon points="50,12 61,36 88,38 67,56 74,82 50,68 26,82 33,56 12,38 39,36" fill="url(#starSingle)" stroke="#0369a1" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- Inner shine -->
+            <polygon points="50,22 57,38 74,40 60,52 64,69 50,60 36,69 40,52 26,40 43,38" fill="#ffffff" opacity="0.45"/>
+          </g>
+        </svg>
+      `,
+
+      // 6. Đổi chỗ ngồi (Classroom Seat Swap Arrows)
+      swap: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="pinkChair" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f472b6"/>
+              <stop offset="100%" stop-color="#db2777"/>
+            </linearGradient>
+            <filter id="chairGlow">
+              <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#f43f5e" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#chairGlow)">
+            <!-- Chair Outline -->
+            <path d="M38 32 L38 56 L62 56 L62 32 C62 26 38 26 38 32 Z" fill="url(#pinkChair)" stroke="#9f1239" stroke-width="2"/>
+            <path d="M34 56 L66 56 L66 64 L34 64 Z" fill="#fda4af" stroke="#9f1239" stroke-width="2" rx="2"/>
+            <!-- Legs -->
+            <line x1="38" y1="64" x2="32" y2="84" stroke="#e11d48" stroke-width="3" stroke-linecap="round"/>
+            <line x1="62" y1="64" x2="68" y2="84" stroke="#e11d48" stroke-width="3" stroke-linecap="round"/>
+            <!-- Cyclical Swap Arrows -->
+            <path d="M22 36 A 34 34 0 0 1 78 36" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+            <polygon points="78,28 86,38 74,42" fill="#38bdf8"/>
+            <path d="M78 68 A 34 34 0 0 1 22 68" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+            <polygon points="22,76 14,66 26,62" fill="#38bdf8"/>
+          </g>
+        </svg>
+      `,
+
+      // 7. Tràng pháo tay (Celebration Clapping Hands)
+      clap: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="clapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#059669"/>
+            </linearGradient>
+            <filter id="clapGlow">
+              <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#10b981" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#clapGlow)">
+            <!-- Left Hand -->
+            <path d="M26 62 C26 48 40 40 50 48 L46 68 L34 76 Z" fill="url(#clapGrad)" stroke="#064e3b" stroke-width="2"/>
+            <!-- Right Hand -->
+            <path d="M74 62 C74 48 60 40 50 48 L54 68 L66 76 Z" fill="url(#clapGrad)" stroke="#064e3b" stroke-width="2"/>
+            <!-- Center High-five Spark -->
+            <circle cx="50" cy="46" r="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+            <!-- Applause Sound Burst Rays -->
+            <line x1="50" y1="32" x2="50" y2="18" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+            <line x1="36" y1="36" x2="24" y2="24" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+            <line x1="64" y1="36" x2="76" y2="24" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+            <line x1="28" y1="50" x2="15" y2="50" stroke="#facc15" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="72" y1="50" x2="85" y2="50" stroke="#facc15" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+        </svg>
+      `,
+
+      // 8. Bốc lại lần nữa (Lucky Magic Dices)
+      dice: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="diceOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fbbf24"/>
+              <stop offset="60%" stop-color="#f97316"/>
+              <stop offset="100%" stop-color="#c2410c"/>
+            </linearGradient>
+            <filter id="diceGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#ea580c" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#diceGlow)">
+            <!-- Isometric Dice Cube -->
+            <!-- Top Face -->
+            <polygon points="50,20 76,34 50,48 24,34" fill="#fed7aa" stroke="#9a3412" stroke-width="2"/>
+            <!-- Left Face -->
+            <polygon points="24,34 50,48 50,78 24,64" fill="url(#diceOrange)" stroke="#9a3412" stroke-width="2"/>
+            <!-- Right Face -->
+            <polygon points="50,48 76,34 76,64 50,78" fill="#ea580c" stroke="#9a3412" stroke-width="2"/>
+            <!-- Dots -->
+            <circle cx="50" cy="34" r="3.5" fill="#7c2d12"/>
+            <circle cx="34" cy="50" r="3" fill="#fff7ed"/>
+            <circle cx="40" cy="64" r="3" fill="#fff7ed"/>
+            <circle cx="62" cy="50" r="3" fill="#fff7ed"/>
+            <circle cx="68" cy="64" r="3" fill="#fff7ed"/>
+            <circle cx="58" cy="68" r="3" fill="#fff7ed"/>
+            <!-- Sparkles -->
+            <polygon points="82,24 85,31 92,34 85,37 82,44 79,37 72,34 79,31" fill="#facc15"/>
+          </g>
+        </svg>
+      `,
+
+      // 9. Gọi bạn lên bảng (Classroom Blackboard & Pointer)
+      board: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="boardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#15803d"/>
+              <stop offset="100%" stop-color="#052e16"/>
+            </linearGradient>
+            <filter id="boardGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#ef4444" flood-opacity="0.5"/>
+            </filter>
+          </defs>
+          <g filter="url(#boardGlow)">
+            <!-- Board Wooden Frame -->
+            <rect x="15" y="20" width="70" height="50" rx="5" fill="#78350f" stroke="#451a03" stroke-width="2"/>
+            <!-- Blackboard -->
+            <rect x="20" y="25" width="60" height="40" rx="2" fill="url(#boardGrad)"/>
+            <!-- Chalk writings -->
+            <path d="M28 35 L38 35 M33 35 L33 55 M28 55 L38 55" stroke="#f8fafc" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="45" r="7" fill="none" stroke="#f8fafc" stroke-width="2"/>
+            <!-- Red Power Pointer -->
+            <polygon points="70,68 88,86 82,90 64,72" fill="#ef4444" stroke="#991b1b" stroke-width="1.5"/>
+            <line x1="60" y1="64" x2="72" y2="76" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        </svg>
+      `,
+
+      // 10. Tắt quạt cuối giờ (Eco Ceiling Fan)
+      fan: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="fanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#047857"/>
+            </linearGradient>
+            <filter id="fanGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#10b981" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#fanGlow)">
+            <!-- 3 Fan Blades -->
+            <g transform="translate(50,50)">
+              <!-- Blade 1 -->
+              <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="1.5"/>
+              <!-- Blade 2 -->
+              <g transform="rotate(120)">
+                <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="1.5"/>
+              </g>
+              <!-- Blade 3 -->
+              <g transform="rotate(240)">
+                <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="1.5"/>
+              </g>
+              <!-- Center Hub -->
+              <circle cx="0" cy="0" r="10" fill="#a7f3d0" stroke="#047857" stroke-width="2.5"/>
+              <circle cx="0" cy="0" r="4" fill="#047857"/>
+            </g>
+            <!-- Power Save Leaf -->
+            <path d="M68 62 C78 62 84 72 84 82 C74 82 64 76 68 62 Z" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+          </g>
+        </svg>
+      `,
+
+      // 11. Hai Cái kẹo mút (Sweet Swirl Lollipops)
+      candy: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="candyPink" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f472b6"/>
+              <stop offset="100%" stop-color="#e11d48"/>
+            </linearGradient>
+            <filter id="candyGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#ec4899" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <g filter="url(#candyGlow)">
+            <!-- Stick 1 -->
+            <line x1="38" y1="46" x2="22" y2="84" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+            <!-- Stick 2 -->
+            <line x1="62" y1="46" x2="78" y2="84" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+            <!-- Lollipop 1 (Left) -->
+            <circle cx="38" cy="40" r="18" fill="url(#candyPink)" stroke="#be123c" stroke-width="2"/>
+            <path d="M38 28 A 12 12 0 0 1 50 40 A 6 6 0 0 1 38 46" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Lollipop 2 (Right) -->
+            <circle cx="62" cy="40" r="18" fill="#38bdf8" stroke="#0369a1" stroke-width="2"/>
+            <path d="M62 28 A 12 12 0 0 1 74 40 A 6 6 0 0 1 62 46" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Sparkles -->
+            <circle cx="50" cy="22" r="3" fill="#facc15"/>
+          </g>
+        </svg>
+      `,
+
+      // 12. Hộp quà bất ngờ (Gift Box)
+      gift: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="giftBody" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ec4899"/>
+              <stop offset="100%" stop-color="#be185d"/>
+            </linearGradient>
+            <filter id="giftGlow">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#db2777" flood-opacity="0.5"/>
+            </filter>
+          </defs>
+          <g filter="url(#giftGlow)">
+            <!-- Box Body -->
+            <rect x="25" y="42" width="50" height="42" rx="4" fill="url(#giftBody)" stroke="#9d174d" stroke-width="2"/>
+            <!-- Box Lid -->
+            <rect x="21" y="32" width="58" height="13" rx="3" fill="#f43f5e" stroke="#9d174d" stroke-width="2"/>
+            <!-- Golden Ribbon Vertical -->
+            <rect x="44" y="32" width="12" height="52" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
+            <!-- Golden Ribbon Horizontal -->
+            <rect x="25" y="56" width="50" height="10" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
+            <!-- Ribbon Bow -->
+            <ellipse cx="42" cy="26" rx="8" ry="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+            <ellipse cx="58" cy="26" rx="8" ry="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+            <circle cx="50" cy="28" r="4" fill="#eab308"/>
+          </g>
+        </svg>
+      `,
+
+      // Mặt sau bí ẩn (Arcane Mystic Seal Crest)
+      magicBack: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+          <defs>
+            <linearGradient id="crestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#67e8f9"/>
+              <stop offset="50%" stop-color="#c084fc"/>
+              <stop offset="100%" stop-color="#f43f5e"/>
+            </linearGradient>
+            <filter id="crestGlow">
+              <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00f2fe" flood-opacity="0.8"/>
+            </filter>
+          </defs>
+          <g filter="url(#crestGlow)">
+            <!-- Outer Octagon Star -->
+            <polygon points="50,10 62,24 80,20 80,38 94,50 80,62 80,80 62,76 50,90 38,76 20,80 20,62 6,50 20,38 20,20 38,24" fill="none" stroke="url(#crestGrad)" stroke-width="2.5"/>
+            <!-- Inner Rings -->
+            <circle cx="50" cy="50" r="28" fill="none" stroke="#00f2fe" stroke-width="2" stroke-dasharray="4 2"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="#ff0844" stroke-width="1.5"/>
+            <!-- Arcane Mystic Eye & Diamond -->
+            <polygon points="50,34 62,50 50,66 38,50" fill="url(#crestGrad)" opacity="0.9"/>
+            <circle cx="50" cy="50" r="4" fill="#ffffff"/>
+          </g>
+        </svg>
+      `
+    };
+
+    /* ==========================================================================
+       1. KHỞI TẠO DỮ LIỆU & LOCAL STORAGE
        ========================================================================== */
     const DEFAULT_CARDS = [
-      { id: 'c1', title: 'Làm Lớp Trưởng', icon: '👑', rarity: 'SSR', subtitle: 'Chỉ huy lớp học trong 1 ngày', active: true },
-      { id: 'c2', title: 'Làm Lớp Phó', icon: '🎖️', rarity: 'SSR', subtitle: 'Trợ thủ đắc lực của lớp', active: true },
-      { id: 'c3', title: 'Làm Tổ Trưởng', icon: '🛡️', rarity: 'SR', subtitle: 'Dẫn dắt tổ thi đua giành điểm 10', active: true },
-      { id: 'c4', title: 'Được 2 Sticker', icon: '🌟🌟', rarity: 'SR', subtitle: 'Nhận ngay 2 sticker khen thưởng', active: true },
-      { id: 'c5', title: 'Được 1 Sticker', icon: '⭐', rarity: 'R', subtitle: 'Nhận ngay 1 sticker lấp lánh', active: true },
-      { id: 'c6', title: 'Đổi chỗ trong vòng 1 ngày', icon: '🔄🪑', rarity: 'PINK', subtitle: 'Chọn ngồi cạnh 1 người bạn bất kỳ', active: true },
-      { id: 'c7', title: '1 Tràng pháo tay', icon: '👏🎉', rarity: 'R', subtitle: 'Cả lớp vỗ tay tuyên dương thật to!', active: true },
-      { id: 'c8', title: 'Được bốc lại 1 lần nữa', icon: '🎲✨', rarity: 'ORANGE', subtitle: 'Thử vận may thêm 1 lượt nữa ngay!', active: true },
-      { id: 'c9', title: 'Gọi 1 bạn lên bảng làm bài tập', icon: '🫵📚', rarity: 'RED', subtitle: 'Quyền chỉ định 1 bạn bất kỳ lên bảng', active: true },
-      { id: 'c10', title: 'Tắt quạt cuối giờ', icon: '🌀🔌', rarity: 'GREEN', subtitle: 'Chiến sĩ tiết kiệm điện của lớp', active: true },
-      { id: 'c11', title: '2 Cái kẹo mút', icon: '🍭🍭', rarity: 'PINK', subtitle: 'Nhận 2 chiếc kẹo mút từ cô giáo', active: true },
+      { id: 'c1', title: 'Làm Lớp Trưởng', iconType: 'crown', rarity: 'SSR', subtitle: 'Chỉ huy lớp học trong 1 ngày', active: true },
+      { id: 'c2', title: 'Làm Lớp Phó', iconType: 'medal', rarity: 'SSR', subtitle: 'Trợ thủ đắc lực của lớp', active: true },
+      { id: 'c3', title: 'Làm Tổ Trưởng', iconType: 'shield', rarity: 'SR', subtitle: 'Dẫn dắt tổ thi đua giành điểm 10', active: true },
+      { id: 'c4', title: 'Được 2 Sticker', iconType: 'twoStars', rarity: 'SR', subtitle: 'Nhận ngay 2 sticker khen thưởng', active: true },
+      { id: 'c5', title: 'Được 1 Sticker', iconType: 'star', rarity: 'R', subtitle: 'Nhận ngay 1 sticker lấp lánh', active: true },
+      { id: 'c6', title: 'Đổi chỗ trong vòng 1 ngày', iconType: 'swap', rarity: 'PINK', subtitle: 'Chọn ngồi cạnh 1 người bạn bất kỳ', active: true },
+      { id: 'c7', title: '1 Tràng pháo tay', iconType: 'clap', rarity: 'R', subtitle: 'Cả lớp vỗ tay tuyên dương thật to!', active: true },
+      { id: 'c8', title: 'Được bốc lại 1 lần nữa', iconType: 'dice', rarity: 'ORANGE', subtitle: 'Thử vận may thêm 1 lượt nữa ngay!', active: true },
+      { id: 'c9', title: 'Gọi 1 bạn lên bảng làm bài tập', iconType: 'board', rarity: 'RED', subtitle: 'Quyền chỉ định 1 bạn bất kỳ lên bảng', active: true },
+      { id: 'c10', title: 'Tắt quạt cuối giờ', iconType: 'fan', rarity: 'GREEN', subtitle: 'Chiến sĩ tiết kiệm điện của lớp', active: true },
+      { id: 'c11', title: '2 Cái kẹo mút', iconType: 'candy', rarity: 'PINK', subtitle: 'Nhận 2 chiếc kẹo mút từ cô giáo', active: true },
     ];
 
     let cardsData = [];
     let customImageBase64 = null;
     let soundEnabled = true;
 
+    // Cache preloaded SVG Images for instant 2D Canvas rendering
+    const svgImgCache = {};
+
+    function getSvgImage(key) {
+      if (svgImgCache[key]) return svgImgCache[key];
+      const raw = SVG_ICONS[key] || SVG_ICONS.gift;
+      const img = new Image();
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(raw.trim());
+      svgImgCache[key] = img;
+      return img;
+    }
+
+    // Preload all SVG images immediately
+    Object.keys(SVG_ICONS).forEach(k => getSvgImage(k));
+
     function loadSavedData() {
       try {
-        const saved = localStorage.getItem('privilege_cards_carousel_v1');
+        const saved = localStorage.getItem('privilege_cards_svg_v1');
         if (saved) {
           cardsData = JSON.parse(saved);
         } else {
@@ -394,7 +867,6 @@
         cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
       }
 
-      // Luôn đảm bảo tất cả các thẻ đều active để không bao giờ bị mất thẻ
       cardsData.forEach(c => c.active = true);
 
       const savedName = localStorage.getItem('classroom_name');
@@ -404,7 +876,7 @@
     }
 
     function saveCardsData() {
-      localStorage.setItem('privilege_cards_carousel_v1', JSON.stringify(cardsData));
+      localStorage.setItem('privilege_cards_svg_v1', JSON.stringify(cardsData));
       updateCardCounters();
     }
 
@@ -413,7 +885,7 @@
     }
 
     /* ==========================================================================
-       1. WEB AUDIO API SYNTHESIZER (Không cần file mp3 ngoài)
+       2. WEB AUDIO API SYNTHESIZER
        ========================================================================== */
     class SoundEngine {
       constructor() {
@@ -502,7 +974,6 @@
           osc.stop(noteTime + 1.15);
         });
 
-        // Magical sparkle chimes
         for (let i = 0; i < 7; i++) {
           const sparkOsc = this.ctx.createOscillator();
           const sparkGain = this.ctx.createGain();
@@ -548,7 +1019,7 @@
     const sound = new SoundEngine();
 
     /* ==========================================================================
-       2. THREE.JS 3D CAROUSEL ARCHITECTURE
+       3. THREE.JS 3D CAROUSEL ARCHITECTURE
        ========================================================================== */
     const canvas = document.getElementById('three-canvas');
     let scene, camera, renderer;
@@ -558,31 +1029,26 @@
     let raycaster, mouse;
     let hoveredCard = null;
 
-    // States
     const STATE_IDLE = 'idle';
     const STATE_SPINNING = 'spinning';
     const STATE_REVEALED = 'revealed';
     let currentState = STATE_IDLE;
 
-    // Carousel parameters
-    const CAROUSEL_RADIUS = 5.6; // Bán kính vòng xoay 3D
+    const CAROUSEL_RADIUS = 5.6;
     let activeCardIndex = 0;
     let revealedCardMesh = null;
     let spinTween = null;
     let spinTickInterval = null;
 
     function initThreeScene() {
-      // Scene
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x06091e);
       scene.fog = new THREE.FogExp2(0x06091e, 0.024);
 
-      // Camera: đặt góc nhìn ngang hơi nghiêng nhẹ xuống tâm vòng quay
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
       camera.position.set(0, 0.6, 12.0);
       camera.lookAt(0, 0.2, 0);
 
-      // Renderer
       renderer = new THREE.WebGLRenderer({
         canvas: canvas,
         antialias: true,
@@ -597,42 +1063,34 @@
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2(-999, -999);
 
-      // Lighting Setup
       const ambientLight = new THREE.AmbientLight(0x2a1f4d, 1.6);
       scene.add(ambientLight);
 
-      // PointLight 1: Neon Cyan (Trái Trên)
       const lightCyan = new THREE.PointLight(0x00f2fe, 3.2, 28);
       lightCyan.position.set(-6.5, 5, 6);
       scene.add(lightCyan);
 
-      // PointLight 2: Neon Magenta / Pink (Phải Dưới)
       const lightPink = new THREE.PointLight(0xff0844, 3.2, 28);
       lightPink.position.set(6.5, -4.5, 6);
       scene.add(lightPink);
 
-      // PointLight 3: Center Gold Light (Soi sáng thẻ thắng ở tâm)
       const lightGold = new THREE.PointLight(0xf6d365, 3.0, 20);
       lightGold.position.set(0, 0.5, 7.5);
       scene.add(lightGold);
 
-      // Environment: 800 Hạt ma thuật & Bàn xoay ma pháp
       createSpaceParticles();
       createMagicPedestal();
 
-      // Carousel Root Group
       carouselGroup = new THREE.Group();
       carouselGroup.position.set(0, 0.2, 0);
       scene.add(carouselGroup);
 
-      // Events
       window.addEventListener('resize', onWindowResize);
       canvas.addEventListener('mousemove', onCanvasMouseMove);
       canvas.addEventListener('click', onCanvasClick);
       canvas.addEventListener('touchstart', onCanvasTouchStart, { passive: false });
     }
 
-    /* 2.1 Floating Neon Dust Particles (800 Points) */
     function createSpaceParticles() {
       const particleCount = 800;
       const geometry = new THREE.BufferGeometry();
@@ -688,13 +1146,11 @@
       scene.add(particlesMesh);
     }
 
-    /* 2.2 Magic Pedestal (Vòng tròn ma pháp dưới chân bàn xoay) */
     function createMagicPedestal() {
       const pedestal = new THREE.Group();
       pedestal.position.set(0, -1.7, 0);
       pedestal.rotation.x = Math.PI / 2;
 
-      // Vòng tròn phát sáng neon
       const ringGeo1 = new THREE.RingGeometry(CAROUSEL_RADIUS - 0.2, CAROUSEL_RADIUS + 0.1, 64);
       const ringMat1 = new THREE.MeshBasicMaterial({
         color: 0x00f2fe,
@@ -718,10 +1174,10 @@
     }
 
     /* ==========================================================================
-       3. TEXTURE GENERATORS (Canvas 2D High Resolution)
+       4. TEXTURE GENERATORS (Canvas 2D with Embedded SVG Vector Graphics)
        ========================================================================== */
 
-    /* 3.1 Back Face Texture: Mystery Clown & Cosmic Magic */
+    /* 4.1 Back Face Texture: Arcane Mystic Crest */
     function generateBackFaceTexture() {
       const c = document.createElement('canvas');
       c.width = 512;
@@ -756,28 +1212,20 @@
       ctx.lineWidth = 3;
       ctx.strokeRect(32, 32, 448, 636);
 
-      // Center Magic Circle
-      ctx.save();
-      ctx.translate(256, 335);
+      // Draw SVG Mystic Crest Center
+      const backSvgImg = getSvgImage('magicBack');
+      const drawCenterCrest = () => {
+        ctx.drawImage(backSvgImg, 156, 235, 200, 200);
+      };
 
-      ctx.beginPath();
-      ctx.arc(0, 0, 130, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(0, 242, 254, 0.7)';
-      ctx.lineWidth = 4;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(0, 0, 110, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 8, 68, 0.6)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      ctx.font = '95px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('🎭', 0, -10);
-
-      ctx.restore();
+      if (backSvgImg.complete) {
+        drawCenterCrest();
+      } else {
+        backSvgImg.onload = () => {
+          drawCenterCrest();
+          texture.needsUpdate = true;
+        };
+      }
 
       ctx.font = 'bold 24px "Orbitron", sans-serif';
       ctx.textAlign = 'center';
@@ -798,7 +1246,7 @@
       return texture;
     }
 
-    /* 3.2 Front Face Texture: Dynamic custom drawing per card */
+    /* 4.2 Front Face Texture: Crisp Vector SVG per Card */
     function generateFrontFaceTexture(card) {
       const c = document.createElement('canvas');
       c.width = 512;
@@ -888,7 +1336,7 @@
         ctx.fillStyle = primaryColor;
         ctx.fillText(rarityBadge, 256, 110);
 
-        // Center Icon Circle
+        // Center Icon Circle Box
         const iconBoxGrad = ctx.createRadialGradient(256, 255, 20, 256, 255, 120);
         iconBoxGrad.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
         iconBoxGrad.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
@@ -900,10 +1348,21 @@
         ctx.lineWidth = 3.5;
         ctx.stroke();
 
-        ctx.font = '100px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(card.icon || '🎁', 256, 255);
+        // Draw Vector SVG Icon
+        const iconKey = card.iconType || 'gift';
+        const svgImg = getSvgImage(iconKey);
+
+        const renderSvg = () => {
+          // Centered within circle
+          ctx.drawImage(svgImg, 166, 165, 180, 180);
+          texture.needsUpdate = true;
+        };
+
+        if (svgImg.complete) {
+          renderSvg();
+        } else {
+          svgImg.onload = renderSvg;
+        }
 
         // Title wrapped
         ctx.font = 'bold 36px "Be Vietnam Pro", sans-serif';
@@ -963,7 +1422,7 @@
     }
 
     /* ==========================================================================
-       4. BUILD 3D CAROUSEL MESHES
+       5. BUILD 3D CAROUSEL MESHES
        ========================================================================== */
     const CARD_WIDTH = 2.2;
     const CARD_HEIGHT = 3.2;
@@ -972,7 +1431,6 @@
     let sharedBackTexture = null;
 
     function buildCards() {
-      // Dọn dẹp thẻ cũ
       while (carouselGroup.children.length > 0) {
         const obj = carouselGroup.children[0];
         carouselGroup.remove(obj);
@@ -1032,13 +1490,11 @@
         mesh.castShadow = true;
         mesh.receiveShadow = true;
 
-        // Vị trí đều trên vòng tròn 3D
         const angle = (index / count) * Math.PI * 2;
         const posX = Math.sin(angle) * CAROUSEL_RADIUS;
         const posZ = Math.cos(angle) * CAROUSEL_RADIUS;
 
         mesh.position.set(posX, 0, posZ);
-        // Ban đầu úp mặt sau hướng ra ngoài màn hình
         mesh.rotation.y = angle + Math.PI;
 
         mesh.userData = {
@@ -1058,40 +1514,36 @@
 
       carouselGroup.rotation.y = 0;
       currentState = STATE_IDLE;
-      updateStatusToast('✨ Bấm nút <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> để vòng quay ma thuật bắt đầu xoay tròn! ✨');
+      updateStatusToast('✨ Bấm nút <strong class="text-yellow-400">"BẮT ĐẦU"</strong> để vòng quay ma thuật bắt đầu xoay tròn! ✨');
       updateHUDControlsForState(STATE_IDLE);
     }
 
     /* ==========================================================================
-       5. CAROUSEL SPIN & REVEAL LOGIC
+       6. CAROUSEL SPIN & REVEAL LOGIC
        ========================================================================== */
 
-    /* 5.1 Bắt đầu xoay vòng 3D */
     function startCarouselSpin() {
       if (cardMeshes.length === 0) return;
 
       currentState = STATE_SPINNING;
       hideRevealBanner();
-      updateStatusToast('🌀 Vòng quay ma thuật đang xoay tít... Bấm <span class="text-pink-400 font-black">"🛑 DỪNG LẠI"</span> để chọn thẻ may mắn!');
+      updateStatusToast('🌀 Vòng quay ma thuật đang xoay... Bấm <span class="text-pink-400 font-black">"DỪNG LẠI"</span> để chọn thẻ may mắn!');
       updateHUDControlsForState(STATE_SPINNING);
 
-      // Âm thanh nhịp quay liên tục
       if (spinTickInterval) clearInterval(spinTickInterval);
       spinTickInterval = setInterval(() => {
         sound.playTick();
       }, 95);
 
-      // GSAP quay carouselGroup liên tục quanh trục Y
       if (spinTween) spinTween.kill();
       spinTween = gsap.to(carouselGroup.rotation, {
-        y: '+=31.4159', // 5 vòng
+        y: '+=31.4159',
         duration: 3.5,
         ease: 'none',
         repeat: -1
       });
     }
 
-    /* 5.2 Dừng vòng quay và lật thẻ được chọn */
     function stopCarouselAndReveal(targetMesh = null) {
       if (currentState !== STATE_SPINNING && currentState !== STATE_IDLE) return;
 
@@ -1122,31 +1574,25 @@
       updateStatusToast('🌟 ĐẶC QUYỀN ĐÃ XUẤT HIỆN! 🌟');
       updateHUDControlsForState(STATE_REVEALED);
 
-      // Tính góc target để lá bài được chọn dừng đúng chính diện Camera (góc = 0)
       const targetAngle = -mesh.userData.baseAngle;
       const currentRotY = carouselGroup.rotation.y;
       const twoPi = Math.PI * 2;
       
-      // Thêm 2 vòng quay hãm phanh mượt mà
       let diff = (targetAngle - currentRotY) % twoPi;
       if (diff > 0) diff -= twoPi;
       const finalCarouselRotY = currentRotY + diff - twoPi * 2;
 
-      // Hiệu ứng hãm phanh vòng quay
       gsap.to(carouselGroup.rotation, {
         y: finalCarouselRotY,
         duration: 2.2,
         ease: 'power3.out',
         onComplete: () => {
-          // Khi đã dừng đúng chính diện, phóng to thẻ bài về phía trước camera và lật mặt
           revealWinningCard(mesh);
         }
       });
     }
 
-    /* 5.3 Phóng to và lật mặt trước lá bài chiến thắng */
     function revealWinningCard(mesh) {
-      // Đẩy lá bài tiến sát Camera (từ Z=5.6 tới Z=7.8) và xoay lật 180 độ
       gsap.to(mesh.position, {
         z: mesh.userData.basePos.z + 2.2,
         y: 0.45,
@@ -1162,7 +1608,6 @@
         ease: 'back.out(1.6)'
       });
 
-      // Lật mặt trước: quay rotation.y thêm 180 độ (Math.PI)
       gsap.to(mesh.rotation, {
         y: mesh.userData.baseRotY + Math.PI,
         duration: 1.2,
@@ -1175,7 +1620,6 @@
       });
     }
 
-    /* 5.4 Thu thẻ về lại vòng quay và sẵn sàng cho lượt mới (KHÔNG MẤT THẺ) */
     function resetCardBackToCarousel() {
       if (!revealedCardMesh) {
         hideRevealBanner();
@@ -1187,7 +1631,6 @@
       hideRevealBanner();
 
       const mesh = revealedCardMesh;
-      // Thu thẻ về lại đúng vị trí slot trên vòng tròn 3D
       gsap.to(mesh.position, {
         x: mesh.userData.basePos.x,
         y: 0,
@@ -1203,7 +1646,6 @@
         duration: 0.8
       });
 
-      // Úp mặt sau lại
       gsap.to(mesh.rotation, {
         y: mesh.userData.baseRotY,
         duration: 0.9,
@@ -1211,13 +1653,12 @@
         onComplete: () => {
           revealedCardMesh = null;
           currentState = STATE_IDLE;
-          updateStatusToast('✨ Bấm nút <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> để học sinh tiếp theo quay! ✨');
+          updateStatusToast('✨ Bấm nút <strong class="text-yellow-400">"BẮT ĐẦU"</strong> để học sinh tiếp theo quay! ✨');
           updateHUDControlsForState(STATE_IDLE);
         }
       });
     }
 
-    /* 5.5 Pháo giấy Confetti */
     function launchConfetti() {
       if (typeof confetti !== 'function') return;
 
@@ -1247,10 +1688,10 @@
     }
 
     /* ==========================================================================
-       6. UI STATE MANAGEMENT & HUD BUTTON EVENTS
+       7. UI HUD BUTTON EVENTS
        ========================================================================== */
     const mainActionBtn = document.getElementById('btn-main-action');
-    const mainActionIcon = document.getElementById('main-action-icon');
+    const mainActionIconBox = document.getElementById('main-action-icon-box');
     const mainActionLabel = document.getElementById('main-action-label');
     const statusToastText = document.getElementById('status-toast-text');
     const revealBanner = document.getElementById('reveal-banner');
@@ -1258,6 +1699,27 @@
     const revealSubtitle = document.getElementById('reveal-subtitle');
     const revealRarityBadge = document.getElementById('reveal-rarity-badge');
     const btnNextTurn = document.getElementById('btn-next-turn');
+    const soundIconBox = document.getElementById('sound-icon-box');
+
+    function updateSoundIcon() {
+      if (soundEnabled) {
+        soundIconBox.innerHTML = `
+          <svg class="w-4 h-4 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+        `;
+      } else {
+        soundIconBox.innerHTML = `
+          <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </svg>
+        `;
+      }
+    }
+    updateSoundIcon();
 
     function updateStatusToast(msg) {
       statusToastText.innerHTML = msg;
@@ -1265,22 +1727,34 @@
 
     function updateHUDControlsForState(state) {
       if (state === STATE_IDLE) {
-        mainActionIcon.textContent = '▶';
+        mainActionIconBox.innerHTML = `
+          <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        `;
         mainActionLabel.textContent = 'BẮT ĐẦU';
         mainActionBtn.className = 'group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-xl hover:shadow-cyan-400/60 hover:scale-105 active:scale-95';
       } else if (state === STATE_SPINNING) {
-        mainActionIcon.textContent = '🛑';
+        mainActionIconBox.innerHTML = `
+          <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+            <rect x="5" y="5" width="14" height="14" rx="2" />
+          </svg>
+        `;
         mainActionLabel.textContent = 'DỪNG LẠI';
         mainActionBtn.className = 'group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white font-orbitron shadow-xl hover:shadow-pink-500/60 hover:scale-105 active:scale-95 animate-pulse';
       } else if (state === STATE_REVEALED) {
-        mainActionIcon.textContent = '↻';
+        mainActionIconBox.innerHTML = `
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+        `;
         mainActionLabel.textContent = 'LƯỢT TIẾP THEO';
         mainActionBtn.className = 'group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 hover:from-purple-400 hover:to-cyan-400 text-white font-orbitron shadow-xl hover:shadow-purple-500/60 hover:scale-105 active:scale-95';
       }
     }
 
     function showRevealBanner(card) {
-      revealTitle.textContent = `${card.icon || ''} ${card.title}`;
+      revealTitle.textContent = card.title;
       revealSubtitle.textContent = card.subtitle || 'Chúc mừng em đã nhận được đặc quyền lớp học!';
 
       let badgeClass = 'px-3.5 py-1 rounded-full text-xs font-black tracking-widest uppercase shadow-md ';
@@ -1326,7 +1800,6 @@
       document.getElementById('modal-cards-count').textContent = active;
     }
 
-    // Nút BẮT ĐẦU / DỪNG LẠI / LƯỢT TIẾP THEO
     mainActionBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
@@ -1340,14 +1813,12 @@
       }
     });
 
-    // Nút Quay Tiếp Trên Banner
     btnNextTurn.addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
       resetCardBackToCarousel();
     });
 
-    // Nút Xếp Lại Bài / Reset Vị Trí
     document.getElementById('btn-replay').addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
@@ -1357,17 +1828,15 @@
       buildCards();
     });
 
-    // Nút Âm Thanh Bật / Tắt
     const btnSoundToggle = document.getElementById('btn-sound-toggle');
     btnSoundToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       soundEnabled = !soundEnabled;
-      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      updateSoundIcon();
       document.getElementById('sound-text').textContent = soundEnabled ? 'BẬT' : 'TẮT';
       if (soundEnabled) sound.playClick();
     });
 
-    // Nút Toàn Màn Hình
     const btnFullscreen = document.getElementById('btn-fullscreen');
     btnFullscreen.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1381,7 +1850,6 @@
       }
     });
 
-    // Nút Sửa Tên Lớp Học
     document.getElementById('btn-edit-classname').addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
@@ -1394,7 +1862,6 @@
       }
     });
 
-    // Nút Khôi Phục Mặc Định
     document.getElementById('btn-reset-default').addEventListener('click', (e) => {
       e.stopPropagation();
       if (confirm('Khôi phục danh sách về 11 thẻ đặc quyền mặc định?')) {
@@ -1405,7 +1872,6 @@
       }
     });
 
-    /* Mouse & Click Handling for 3D Cards */
     function onCanvasMouseMove(e) {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -1442,7 +1908,6 @@
 
     function onCanvasClick(e) {
       if (currentState === STATE_SPINNING) {
-        // Nhấp vào bất kỳ đâu trên không gian 3D lúc đang xoay thì dừng vòng quay
         stopCarouselAndReveal();
       } else if (currentState === STATE_IDLE) {
         raycaster.setFromCamera(mouse, camera);
@@ -1482,7 +1947,7 @@
     }
 
     /* ==========================================================================
-       7. MODAL: QUẢN LÝ THẺ & THÊM THẺ MỚI
+       8. MODAL: QUẢN LÝ THẺ VỚI SVG PREVIEW
        ========================================================================== */
     const modalManage = document.getElementById('modal-manage');
     const btnManageCards = document.getElementById('btn-manage-cards');
@@ -1535,7 +2000,7 @@
 
     document.getElementById('btn-submit-add-card').addEventListener('click', () => {
       const title = document.getElementById('new-card-title').value.trim();
-      const icon = document.getElementById('new-card-icon').value.trim() || '🎁';
+      const iconType = document.getElementById('new-card-icon-select').value;
       const sub = document.getElementById('new-card-sub').value.trim();
       const rarity = document.getElementById('new-card-rarity').value;
 
@@ -1549,7 +2014,7 @@
       const newCard = {
         id: 'c_' + Date.now(),
         title: title,
-        icon: icon,
+        iconType: iconType,
         rarity: rarity,
         subtitle: sub || 'Đặc quyền khen thưởng lớp học',
         active: true,
@@ -1565,13 +2030,6 @@
       customImageBase64 = null;
       newCardFileInput.value = '';
       document.getElementById('file-chosen-name').textContent = 'Chưa chọn ảnh';
-    });
-
-    document.getElementById('btn-enable-all').addEventListener('click', () => {
-      sound.playClick();
-      cardsData.forEach(c => c.active = true);
-      saveCardsData();
-      renderModalCardsList();
     });
 
     document.getElementById('btn-reset-cards-modal').addEventListener('click', () => {
@@ -1597,9 +2055,13 @@
         if (card.rarity === 'RED') badgeColor = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
         if (card.rarity === 'GREEN') badgeColor = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
 
+        const svgSnippet = SVG_ICONS[card.iconType] || SVG_ICONS.gift;
+
         item.innerHTML = `
           <div class="flex items-center gap-3">
-            <span class="text-2xl">${card.icon || '🎴'}</span>
+            <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-slate-700 flex items-center justify-center p-1.5 shadow">
+              <div class="w-full h-full">${svgSnippet}</div>
+            </div>
             <div>
               <div class="flex items-center gap-2">
                 <span class="font-bold text-sm text-white">${card.title}</span>
@@ -1610,7 +2072,9 @@
           </div>
           <div class="flex items-center gap-2">
             <button class="btn-delete-card w-8 h-8 rounded-lg bg-rose-900/40 hover:bg-rose-600 text-rose-300 hover:text-white text-xs flex items-center justify-center transition-colors cursor-pointer" data-index="${index}" title="Xóa thẻ">
-              🗑
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
             </button>
           </div>
         `;
@@ -1633,7 +2097,7 @@
     }
 
     /* ==========================================================================
-       8. MAIN RENDER LOOP
+       9. MAIN RENDER LOOP
        ========================================================================== */
     const clock = new THREE.Clock();
 
@@ -1642,18 +2106,15 @@
 
       const elapsedTime = clock.getElapsedTime();
 
-      // Hạt vũ trụ xoay nhẹ
       if (particlesMesh) {
         particlesMesh.rotation.y = elapsedTime * 0.03;
         particlesMesh.rotation.x = Math.sin(elapsedTime * 0.02) * 0.04;
       }
 
-      // Vòng tròn ma pháp dưới chân xoay ngược chiều
       if (portalDisc) {
         portalDisc.rotation.z = -elapsedTime * 0.4;
       }
 
-      // Hiệu ứng nhấp nhô nhẹ khi vòng quay đang dừng (Idle)
       if (currentState === STATE_IDLE) {
         cardMeshes.forEach((item, i) => {
           const mesh = item.mesh;
@@ -1668,7 +2129,7 @@
     }
 
     /* ==========================================================================
-       9. APPLICATION STARTUP
+       10. APPLICATION STARTUP
        ========================================================================== */
     window.addEventListener('DOMContentLoaded', () => {
       loadSavedData();
