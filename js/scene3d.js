@@ -48,8 +48,6 @@ const Scene3D = {
     this.scene.fog = new THREE.FogExp2(0xfef9c3, 0.015);
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    this.camera.position.set(0, 0.45, 12.2);
-    this.camera.lookAt(0, 0.2, 0);
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
@@ -57,8 +55,9 @@ const Scene3D = {
       alpha: false,
       powerPreference: 'high-performance'
     });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Căn chỉnh góc nhìn và kích thước tối ưu cho Mobile, Tablet, PC, TV
+    this.updateCameraForDevice();
 
     // Tone Mapping cân bằng - Tránh lóa sáng trên nền vàng pastel
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -83,6 +82,47 @@ const Scene3D = {
     this.scene.add(this.carouselGroup);
 
     this.bindEvents();
+  },
+
+  updateCameraForDevice() {
+    if (!this.camera || !this.renderer) return;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const aspect = width / height;
+
+    this.camera.aspect = aspect;
+
+    // Tự động tối ưu camera cho Mobile dọc/ngang, Tablet, PC và Màn hình TV lớp học
+    if (aspect < 0.6) {
+      // Mobile dọc hẹp (iPhone, Android portrait)
+      this.camera.fov = 54;
+      this.camera.position.set(0, 0.55, 16.8);
+      this.camera.lookAt(0, 0.35, 0);
+    } else if (aspect < 0.85) {
+      // Mobile to / Tablet dọc (iPad portrait)
+      this.camera.fov = 49;
+      this.camera.position.set(0, 0.5, 14.5);
+      this.camera.lookAt(0, 0.3, 0);
+    } else if (aspect < 1.3) {
+      // Tablet xoay ngang / Màn hình laptop vuông (iPad landscape, Surface)
+      this.camera.fov = 46;
+      this.camera.position.set(0, 0.45, 13.0);
+      this.camera.lookAt(0, 0.2, 0);
+    } else if (aspect > 2.2) {
+      // Màn hình siêu dài (Ultra-wide Monitor / TV 21:9)
+      this.camera.fov = 42;
+      this.camera.position.set(0, 0.4, 11.5);
+      this.camera.lookAt(0, 0.2, 0);
+    } else {
+      // Màn hình PC / Laptop 16:9 / TV Lớp học & Máy chiếu 1080p, 4K
+      this.camera.fov = 45;
+      this.camera.position.set(0, 0.45, 12.2);
+      this.camera.lookAt(0, 0.2, 0);
+    }
+
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(width, height);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   },
 
   createFloatingCuteStickers() {
@@ -552,22 +592,43 @@ const Scene3D = {
   },
 
   revealWinningCard(mesh) {
-    const targetRadius = this.CAROUSEL_RADIUS + 0.35;
+    const aspect = window.innerWidth / window.innerHeight;
+
+    let targetRadius = this.CAROUSEL_RADIUS + 0.35;
+    let targetY = 0.2;
+    let targetScale = 1.05;
+
+    if (aspect < 0.6) {
+      // Mobile màn hình dọc: đưa thẻ lên cao một chút và căn chỉnh vừa khít
+      targetRadius = this.CAROUSEL_RADIUS + 0.15;
+      targetY = 0.55;
+      targetScale = 0.90;
+    } else if (aspect < 0.85) {
+      // Tablet dọc
+      targetRadius = this.CAROUSEL_RADIUS + 0.25;
+      targetY = 0.38;
+      targetScale = 0.96;
+    } else if (aspect < 1.3) {
+      // Tablet ngang / Laptop
+      targetRadius = this.CAROUSEL_RADIUS + 0.3;
+      targetY = 0.25;
+      targetScale = 1.0;
+    }
+
     const angle = mesh.userData.baseAngle;
 
-    // Di chuyển đều cả X và Z để tọa độ trung tâm tuyệt đối X = 0, kích thước vừa vặn màn hình
     gsap.to(mesh.position, {
       x: Math.sin(angle) * targetRadius,
       z: Math.cos(angle) * targetRadius,
-      y: 0.2,
+      y: targetY,
       duration: 1.3,
       ease: 'power2.out'
     });
 
     gsap.to(mesh.scale, {
-      x: 1.05,
-      y: 1.05,
-      z: 1.05,
+      x: targetScale,
+      y: targetScale,
+      z: targetScale,
       duration: 1.3,
       ease: 'back.out(1.2)'
     });
@@ -648,14 +709,18 @@ const Scene3D = {
 
   bindEvents() {
     window.addEventListener('resize', () => this.onWindowResize());
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => this.onWindowResize(), 150);
+    });
     this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
     this.canvas.addEventListener('click', (e) => this.onClick(e));
     this.canvas.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: false });
   },
 
   onMouseMove(e) {
-    this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    const rect = this.canvas.getBoundingClientRect();
+    this.mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    this.mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
     if (this.currentState === STATE_IDLE) {
       this.raycaster.setFromCamera(this.mouse, this.camera);
@@ -702,8 +767,9 @@ const Scene3D = {
   onTouchStart(e) {
     if (e.touches.length > 0) {
       const touch = e.touches[0];
-      this.mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
-      this.mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+      const rect = this.canvas.getBoundingClientRect();
+      this.mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+      this.mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
 
       if (this.currentState === STATE_SPINNING) {
         e.preventDefault();
@@ -720,11 +786,7 @@ const Scene3D = {
   },
 
   onWindowResize() {
-    if (!this.camera || !this.renderer) return;
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.updateCameraForDevice();
   },
 
   animate() {

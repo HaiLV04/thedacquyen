@@ -54,86 +54,89 @@
   <canvas id="three-canvas"></canvas>
 
   <!-- 2D HUD UI Overlay (Z-Index: 10) -->
-  <div id="hud-overlay" class="relative z-10 w-full h-full pointer-events-none flex flex-col justify-between p-3 md:p-6">
+  <div id="hud-overlay" class="relative z-10 w-full h-full pointer-events-none flex flex-col justify-between p-2 sm:p-3 md:p-6 safe-pb safe-pt">
     
-    <!-- TOP HEADER BAR -->
-    <header class="flex flex-col md:flex-row items-center justify-between gap-3 w-full pointer-events-auto">
+    <!-- TOP HEADER BAR (Tối ưu đa thiết bị: Mobile, Tablet, PC, TV) -->
+    <header class="w-full pointer-events-auto flex flex-col gap-1.5 sm:gap-2">
       
-      <!-- Top Left: Huy hiệu Lớp 1B1 - Cô Nguyễn Thị Hoài Thanh -->
-      <div class="flex items-center space-x-2">
+      <!-- Top Row: Huy hiệu lớp (trái) và Nhóm nút tiện ích (phải) trên mobile / desktop -->
+      <div class="flex items-center justify-between gap-2 w-full">
+        
+        <!-- Top Left: Huy hiệu Lớp 1B1 - Cô Nguyễn Thị Hoài Thanh -->
         <button id="btn-edit-classname" title="Bấm để chỉnh sửa tên lớp / tên cô giáo"
-          class="group flex items-center space-x-3 px-4 py-2.5 rounded-2xl glass-sunny hover:border-amber-500 transition-all cursor-pointer glow-sun">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 flex items-center justify-center text-xl shadow-md animate-bounce-subtle border-2 border-white">
+          class="group flex items-center space-x-2 sm:space-x-3 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl glass-sunny hover:border-amber-500 transition-all cursor-pointer glow-sun">
+          <div class="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg sm:rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 flex items-center justify-center text-sm sm:text-lg md:text-xl shadow-md animate-bounce-subtle border-2 border-white shrink-0">
             🌻
           </div>
           <div class="text-left">
-            <div class="flex items-center gap-1.5">
-              <span id="classroom-grade-display" class="px-2 py-0.5 rounded-md bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-black text-xs uppercase tracking-wider shadow-sm">
+            <div class="flex items-center gap-1 sm:gap-1.5">
+              <span id="classroom-grade-display" class="px-1.5 py-0.5 rounded bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-black text-[10px] sm:text-xs uppercase tracking-wider shadow-sm">
                 LỚP 1B1
               </span>
-              <span class="text-xs text-amber-900 font-extrabold flex items-center gap-0.5">
+              <span class="text-[10px] sm:text-xs text-amber-900 font-extrabold hidden xs:inline-flex items-center gap-0.5">
                 <span>🌸</span>
                 <span>Tiểu Học</span>
               </span>
             </div>
-            <span id="classroom-teacher-display" class="text-sm md:text-base font-black text-slate-900 group-hover:text-amber-800 transition-colors block leading-tight mt-0.5">
+            <span id="classroom-teacher-display" class="text-xs sm:text-sm md:text-base font-black text-slate-900 group-hover:text-amber-800 transition-colors block leading-tight mt-0.5 truncate max-w-[120px] sm:max-w-none">
               Cô Nguyễn Thị Hoài Thanh
             </span>
           </div>
-          <span class="text-xs text-amber-700 group-hover:text-amber-900 ml-1">✏️</span>
+          <span class="text-xs text-amber-700 group-hover:text-amber-900 hidden sm:inline ml-1">✏️</span>
         </button>
+
+        <!-- Top Right: Nút Tiện Ích Trình Chiếu Nền Sáng Đậm Nét -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <button id="btn-sound-toggle" class="glass-btn-sunny px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black text-slate-900 flex items-center gap-1 cursor-pointer">
+            <span id="sound-icon-box" class="text-sm sm:text-base">🔊</span>
+            <span id="sound-text" class="hidden sm:inline">BẬT</span>
+          </button>
+          <button id="btn-fullscreen" title="Bật/Tắt Toàn Màn Hình TV Lớp Học" class="glass-btn-sunny px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black text-slate-900 flex items-center gap-1 cursor-pointer">
+            <span class="text-sm sm:text-base">⛶</span>
+            <span class="hidden md:inline">TOÀN MÀN HÌNH</span>
+          </button>
+          <button id="btn-manage-cards" class="glass-btn-sunny px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black text-rose-800 border-amber-400 hover:border-amber-500 flex items-center gap-1 cursor-pointer glow-sun">
+            <span class="text-sm sm:text-base animate-spin-slow">⚙️</span>
+            <span class="hidden sm:inline">QUẢN LÝ THẺ</span>
+          </button>
+        </div>
+
       </div>
 
-      <!-- Top Center: Tiêu đề Tươi Sáng & Đậm Đà, Sắc Nét -->
-      <div class="flex flex-col items-center text-center relative">
-        <span class="absolute -left-9 -top-3 text-2xl sticker-float">🎈</span>
-        <span class="absolute -right-9 -top-3 text-2xl sticker-float-delayed">🌈</span>
+      <!-- Center: Tiêu đề Tươi Sáng & Đậm Đà, Sắc Nét -->
+      <div class="flex flex-col items-center text-center relative mt-0 sm:mt-1">
+        <span class="absolute -left-7 sm:-left-9 -top-2 sm:-top-3 text-lg sm:text-2xl sticker-float hidden sm:block">🎈</span>
+        <span class="absolute -right-7 sm:-right-9 -top-2 sm:-top-3 text-lg sm:text-2xl sticker-float-delayed hidden sm:block">🌈</span>
 
-        <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wide uppercase font-vietnam drop-shadow-sm flex items-center gap-2">
-          <span>🌸</span>
+        <h1 class="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-wide uppercase font-vietnam drop-shadow-sm flex items-center gap-1.5 sm:gap-2">
+          <span class="text-base sm:text-2xl">🌸</span>
           <span class="bg-gradient-to-r from-amber-800 via-orange-700 to-rose-700 bg-clip-text text-transparent">
             CHỌN THẺ ĐẶC QUYỀN
           </span>
-          <span>🌻</span>
+          <span class="text-base sm:text-2xl">🌻</span>
         </h1>
         
-        <div class="flex items-center gap-2 mt-1 text-xs md:text-sm font-bold text-slate-900">
-          <span class="px-3.5 py-1 rounded-full bg-white/95 border-2 border-amber-400 text-amber-950 shadow-sm flex items-center gap-1.5 font-black">
+        <div class="flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1 text-[11px] sm:text-xs md:text-sm font-bold text-slate-900 flex-wrap justify-center">
+          <span class="px-2.5 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-white/95 border-2 border-amber-400 text-amber-950 shadow-sm flex items-center gap-1 font-black">
             <span>🎁</span>
-            <span>Bộ thẻ: <strong id="card-count-active" class="text-rose-700 text-sm md:text-base font-black">11</strong> thẻ may mắn</span>
+            <span>Bộ thẻ: <strong id="card-count-active" class="text-rose-700 font-black">11</strong> thẻ</span>
           </span>
-          <button id="btn-quick-add" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-400 text-amber-950 font-black shadow-sm cursor-pointer">
+          <button id="btn-quick-add" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg border-2 border-amber-400 text-amber-950 font-black shadow-sm cursor-pointer">
             <span>➕</span>
-            <span>Thêm thẻ</span>
+            <span class="hidden xs:inline">Thêm thẻ</span>
           </button>
-          <button id="btn-reset-default" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-400 text-amber-950 font-black shadow-sm cursor-pointer">
+          <button id="btn-reset-default" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg border-2 border-amber-400 text-amber-950 font-black shadow-sm cursor-pointer">
             <span>↻</span>
-            <span>Mặc định</span>
+            <span class="hidden xs:inline">Mặc định</span>
           </button>
         </div>
-      </div>
-
-      <!-- Top Right: Nút Tiện Ích Trình Chiếu Nền Sáng Đậm Nét -->
-      <div class="flex items-center gap-2">
-        <button id="btn-sound-toggle" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-slate-900 flex items-center gap-1.5 cursor-pointer">
-          <span id="sound-icon-box" class="text-base">🔊</span>
-          <span id="sound-text">BẬT</span>
-        </button>
-        <button id="btn-fullscreen" title="Bật/Tắt Toàn Màn Hình TV Lớp Học" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-slate-900 flex items-center gap-1.5 cursor-pointer">
-          <span class="text-base">⛶</span>
-          <span class="hidden sm:inline">TOÀN MÀN HÌNH</span>
-        </button>
-        <button id="btn-manage-cards" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-rose-800 border-amber-400 hover:border-amber-500 flex items-center gap-1.5 cursor-pointer glow-sun">
-          <span class="text-base animate-spin-slow">⚙️</span>
-          <span>QUẢN LÝ THẺ</span>
-        </button>
       </div>
 
     </header>
 
     <!-- CENTER INSTRUCTION TOAST -->
-    <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 opacity-95 text-center mt-2">
-      <div class="inline-block px-6 py-2.5 rounded-full bg-white/95 border-2 border-amber-500 shadow-md text-slate-900 font-black text-sm md:text-base flex items-center gap-2">
+    <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 opacity-95 text-center mt-1 sm:mt-2 max-w-[94%]">
+      <div class="inline-block px-3.5 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/95 border-2 border-amber-500 shadow-md text-slate-900 font-black text-xs sm:text-sm md:text-base flex items-center gap-1.5 sm:gap-2">
         <span>⭐</span>
         <span id="status-toast-text">Bấm nút <strong class="text-rose-700 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!</span>
         <span>⭐</span>
@@ -141,43 +144,43 @@
     </div>
 
     <!-- BOTTOM ACTION DOCK -->
-    <footer class="w-full flex flex-col items-center gap-2.5 pointer-events-auto pb-4 z-30">
+    <footer class="w-full flex flex-col items-center gap-1.5 sm:gap-2.5 pointer-events-auto pb-1 sm:pb-3 md:pb-4 z-30">
       
       <!-- Primary Control Buttons Dock -->
-      <div id="controls-dock" class="flex flex-wrap items-center justify-center gap-3 md:gap-4 p-2.5 rounded-3xl glass-sunny shadow-xl border-2 border-amber-400">
+      <div id="controls-dock" class="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 p-1.5 sm:p-2.5 rounded-2xl sm:rounded-3xl glass-sunny shadow-xl border-2 border-amber-400 max-w-full overflow-x-auto">
         
         <!-- Setting: Thời gian quay tự động -->
-        <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-amber-50 border-2 border-amber-400 shadow-sm text-slate-900 font-black">
-          <span class="text-lg">⏱️</span>
-          <span class="text-xs md:text-sm font-black text-slate-900 whitespace-nowrap">Thời gian quay:</span>
-          <select id="spin-duration-select" class="px-2.5 py-1 rounded-xl bg-white border-2 border-amber-400 text-slate-900 font-black text-sm cursor-pointer focus:outline-none focus:border-amber-600 shadow-sm">
-            <option value="3">3 giây</option>
-            <option value="4" selected>4 giây</option>
-            <option value="5">5 giây</option>
-            <option value="6">6 giây</option>
-            <option value="8">8 giây</option>
+        <div class="flex items-center gap-1 sm:gap-2 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl bg-amber-50 border-2 border-amber-400 shadow-sm text-slate-900 font-black shrink-0">
+          <span class="text-base sm:text-lg">⏱️</span>
+          <span class="text-xs md:text-sm font-black text-slate-900 whitespace-nowrap hidden sm:inline">Thời gian quay:</span>
+          <select id="spin-duration-select" class="px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-lg sm:rounded-xl bg-white border-2 border-amber-400 text-slate-900 font-black text-xs sm:text-sm cursor-pointer focus:outline-none focus:border-amber-600 shadow-sm">
+            <option value="3">3s</option>
+            <option value="4" selected>4s</option>
+            <option value="5">5s</option>
+            <option value="6">6s</option>
+            <option value="8">8s</option>
           </select>
         </div>
 
         <!-- Big Start Action Button -->
-        <button id="btn-main-action" type="button" class="group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3">
-          <span id="main-action-icon-box" class="text-2xl">▶</span>
+        <button id="btn-main-action" type="button" class="group relative px-5 sm:px-8 md:px-12 py-2 sm:py-3.5 md:py-4 rounded-xl sm:rounded-2xl font-black text-base sm:text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <span id="main-action-icon-box" class="text-lg sm:text-2xl">▶</span>
           <span id="main-action-label">BẮT ĐẦU QUAY</span>
           <div class="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </button>
 
         <!-- Replay / Reset Layout Button -->
-        <button id="btn-replay" type="button" class="glass-btn-sunny px-5 py-3.5 md:py-4 rounded-2xl font-black text-sm md:text-base text-slate-900 flex items-center gap-2 hover:text-orange-700 cursor-pointer">
-          <span class="text-xl">↻</span>
-          <span>XẾP LẠI BÀI</span>
+        <button id="btn-replay" type="button" class="glass-btn-sunny px-3 sm:px-4 md:px-5 py-2 sm:py-3.5 md:py-4 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm md:text-base text-slate-900 flex items-center gap-1.5 hover:text-orange-700 cursor-pointer shrink-0">
+          <span class="text-base sm:text-xl">↻</span>
+          <span class="hidden xs:inline">XẾP LẠI</span>
         </button>
 
       </div>
 
       <!-- Quick Classroom TV Hint -->
-      <div class="text-xs md:text-sm text-slate-900 font-black tracking-wide flex items-center gap-2 bg-white/95 px-4 py-1 rounded-full border-2 border-amber-400 shadow-sm">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
-        <span>Lớp 1B1 - Cô Hoài Thanh • Thẻ dừng chính giữa màn hình và giữ nguyên 100%</span>
+      <div class="text-[10px] sm:text-xs md:text-sm text-slate-900 font-black tracking-wide hidden sm:flex items-center gap-2 bg-white/95 px-3 sm:px-4 py-0.5 sm:py-1 rounded-full border-2 border-amber-400 shadow-sm">
+        <span class="inline-block w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
+        <span>Lớp 1B1 - Cô Hoài Thanh • Tối ưu hoàn hảo Mobile, Tablet, PC & Màn hình TV</span>
       </div>
 
     </footer>

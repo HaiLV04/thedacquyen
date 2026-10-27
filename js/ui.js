@@ -64,19 +64,19 @@ const UI = {
     if (state === STATE_IDLE) {
       this.mainActionIconBox.textContent = '▶';
       this.mainActionLabel.textContent = 'BẮT ĐẦU QUAY';
-      this.mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
+      this.mainActionBtn.className = 'group relative px-5 sm:px-8 md:px-12 py-2 sm:py-3.5 md:py-4 rounded-xl sm:rounded-2xl font-black text-base sm:text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-1.5 sm:gap-3 shrink-0';
       this.updateStatusToast('Bấm nút <strong class="text-rose-700 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!');
     } else if (state === STATE_SPINNING) {
       const timeLeft = extra || DataStore.getSpinDuration();
       this.mainActionIconBox.textContent = '⏳';
       this.mainActionLabel.textContent = `ĐANG QUAY... (${timeLeft}s)`;
-      this.mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-default overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-slate-950 shadow-lg border-2 border-white flex items-center gap-3 animate-pulse';
+      this.mainActionBtn.className = 'group relative px-5 sm:px-8 md:px-12 py-2 sm:py-3.5 md:py-4 rounded-xl sm:rounded-2xl font-black text-base sm:text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-default overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-slate-950 shadow-lg border-2 border-white flex items-center gap-1.5 sm:gap-3 animate-pulse shrink-0';
       this.updateStatusToast(`🌀 Đang quay trong <strong class="text-rose-700">${timeLeft} giây</strong>... Hãy cùng đếm ngược nào! 🌸`);
     } else if (state === STATE_REVEALED) {
       this.hideStatusToast();
       this.mainActionIconBox.textContent = '↻';
       this.mainActionLabel.textContent = 'QUAY TIẾP LƯỢT MỚI';
-      this.mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-orange-400 via-amber-400 to-pink-400 hover:from-orange-300 hover:to-pink-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
+      this.mainActionBtn.className = 'group relative px-5 sm:px-8 md:px-12 py-2 sm:py-3.5 md:py-4 rounded-xl sm:rounded-2xl font-black text-base sm:text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-orange-400 via-amber-400 to-pink-400 hover:from-orange-300 hover:to-pink-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-1.5 sm:gap-3 shrink-0';
     }
   },
 
@@ -135,16 +135,30 @@ const UI = {
       if (sound.enabled) sound.playClick();
     });
 
-    // Toàn màn hình
+    // Toàn màn hình (Tối ưu cho TV, Máy chiếu và Trình duyệt di động)
     document.getElementById('btn-fullscreen').addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-          alert(`Không thể bật toàn màn hình: ${err.message}`);
-        });
+
+      const doc = document;
+      const docEl = document.documentElement;
+
+      const requestFs = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.mozRequestFullScreen || docEl.msRequestFullscreen;
+      const exitFs = doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen || doc.msExitFullscreen;
+      const isFs = doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement || doc.msFullscreenElement;
+
+      if (!isFs) {
+        if (requestFs) {
+          requestFs.call(docEl).catch(err => {
+            console.warn('Không thể bật chế độ toàn màn hình:', err.message);
+          });
+        }
       } else {
-        document.exitFullscreen();
+        if (exitFs) {
+          exitFs.call(doc).catch(err => {
+            console.warn('Không thể thoát chế độ toàn màn hình:', err.message);
+          });
+        }
       }
     });
 
