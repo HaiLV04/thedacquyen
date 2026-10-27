@@ -23,7 +23,6 @@
           animation: {
             'bounce-subtle': 'bounce 2.2s infinite',
             'spin-slow': 'spin 16s linear infinite',
-            'float-wiggle': 'wiggle 3s ease-in-out infinite',
           }
         }
       }
@@ -53,29 +52,25 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: linear-gradient(135deg, #fef08a 0%, #fef9c3 40%, #ffedd5 75%, #fce7f3 100%);
+      background: linear-gradient(135deg, #fef08a 0%, #fef9c3 35%, #fed7aa 70%, #fce7f3 100%);
       font-family: 'Quicksand', sans-serif;
       color: #1e293b;
     }
-    /* Cute Sunny Glows */
     .glow-sun {
       box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.35), 0 8px 10px -6px rgba(245, 158, 11, 0.2);
     }
-    .glow-card {
-      box-shadow: 0 15px 35px -5px rgba(234, 88, 12, 0.25);
-    }
     /* Bright Glassmorphism for Grade 1 (Nền sáng Pastel ấm áp) */
     .glass-sunny {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 2px solid rgba(254, 240, 138, 0.9);
+      border: 2px solid rgba(254, 240, 138, 0.95);
       box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
     }
     .glass-btn-sunny {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
-      border: 2px solid rgba(253, 224, 71, 0.85);
+      border: 2px solid rgba(253, 224, 71, 0.9);
       transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
     }
@@ -98,13 +93,12 @@
       display: block;
     }
     .modal-backdrop-sunny {
-      background: rgba(254, 243, 199, 0.7);
+      background: rgba(254, 243, 199, 0.75);
       backdrop-filter: blur(14px);
     }
-    /* Floating Stickers in 2D UI */
     @keyframes floatUpDown {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(4deg); }
+      50% { transform: translateY(-7px) rotate(4deg); }
     }
     .sticker-float {
       animation: floatUpDown 3.5s ease-in-out infinite;
@@ -150,11 +144,10 @@
         </button>
       </div>
 
-      <!-- Top Center: Tiêu đề Ngọt Ngào & Tươi Sáng -->
+      <!-- Top Center: Tiêu đề Vui tươi & Bắt mắt -->
       <div class="flex flex-col items-center text-center relative">
-        <!-- Floating cute stickers around title -->
-        <span class="absolute -left-8 -top-3 text-2xl sticker-float">🎈</span>
-        <span class="absolute -right-8 -top-3 text-2xl sticker-float-delayed">🌈</span>
+        <span class="absolute -left-9 -top-3 text-2xl sticker-float">🎈</span>
+        <span class="absolute -right-9 -top-3 text-2xl sticker-float-delayed">🌈</span>
 
         <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wide uppercase font-vietnam text-amber-900 drop-shadow-sm flex items-center gap-2">
           <span>🌸</span>
@@ -165,22 +158,22 @@
         </h1>
         
         <div class="flex items-center gap-2 mt-1 text-xs md:text-sm font-bold text-amber-900">
-          <span class="px-3.5 py-1 rounded-full bg-white/90 border-2 border-amber-300 text-amber-800 shadow-sm flex items-center gap-1.5">
+          <span class="px-3.5 py-1 rounded-full bg-white/95 border-2 border-amber-300 text-amber-800 shadow-sm flex items-center gap-1.5">
             <span>🎁</span>
             <span>Bộ thẻ: <strong id="card-count-active" class="text-orange-600 text-sm md:text-base font-black">11</strong> thẻ may mắn</span>
           </span>
-          <button id="btn-quick-add" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/90 px-3 py-1 rounded-lg border-2 border-amber-300 text-amber-800 shadow-sm cursor-pointer">
+          <button id="btn-quick-add" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-300 text-amber-800 shadow-sm cursor-pointer">
             <span>➕</span>
             <span>Thêm thẻ</span>
           </button>
-          <button id="btn-reset-default" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/90 px-3 py-1 rounded-lg border-2 border-amber-300 text-amber-800 shadow-sm cursor-pointer">
+          <button id="btn-reset-default" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-300 text-amber-800 shadow-sm cursor-pointer">
             <span>↻</span>
             <span>Mặc định</span>
           </button>
         </div>
       </div>
 
-      <!-- Top Right: Nút Tiện Ích Trình Chiếu Nền Sáng -->
+      <!-- Top Right: Nút Tiện Ích Trình Chiếu -->
       <div class="flex items-center gap-2">
         <button id="btn-sound-toggle" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-amber-900 flex items-center gap-1.5 cursor-pointer">
           <span id="sound-icon-box" class="text-base">🔊</span>
@@ -198,47 +191,60 @@
 
     </header>
 
-    <!-- CENTER INSTRUCTION TOAST (Nhắc nhở nhẹ nhàng nền sáng, biến mất khi thẻ đã lật) -->
+    <!-- CENTER INSTRUCTION TOAST (Nhắc nhở nhẹ nhàng, tự ẩn khi thẻ đã hiện) -->
     <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 opacity-95 text-center mt-2">
       <div class="inline-block px-6 py-2 rounded-full bg-white/95 border-2 border-amber-400 shadow-lg text-amber-950 font-bold text-sm md:text-base flex items-center gap-2">
         <span>⭐</span>
-        <span id="status-toast-text">Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU"</strong> để vòng quay lớp 1B1 bắt đầu xoay tròn!</span>
+        <span id="status-toast-text">Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!</span>
         <span>⭐</span>
       </div>
     </div>
 
-    <!-- BOTTOM ACTION DOCK (Nút bấm rực rỡ, to, thân thiện, KHÔNG BỊ BANNER CHE) -->
+    <!-- BOTTOM ACTION DOCK (Có bộ chỉnh thời gian quay tự động ngay bên cạnh) -->
     <footer class="w-full flex flex-col items-center gap-2.5 pointer-events-auto pb-4 z-30">
       
       <!-- Primary Control Buttons Dock -->
       <div id="controls-dock" class="flex flex-wrap items-center justify-center gap-3 md:gap-4 p-2.5 rounded-3xl glass-sunny shadow-xl border-2 border-amber-300">
         
-        <!-- Big Start / Stop / Next Turn Action Button -->
-        <button id="btn-main-action" type="button" class="group relative px-10 md:px-14 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3">
+        <!-- Setting: Thời gian quay tự động (Giây) -->
+        <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-amber-50 border-2 border-amber-300 shadow-sm text-amber-900 font-bold">
+          <span class="text-lg">⏱️</span>
+          <span class="text-xs md:text-sm font-black text-amber-900 whitespace-nowrap">Thời gian quay:</span>
+          <select id="spin-duration-select" class="px-2.5 py-1 rounded-xl bg-white border-2 border-amber-300 text-amber-950 font-black text-sm cursor-pointer focus:outline-none focus:border-orange-400 shadow-sm">
+            <option value="3">3 giây</option>
+            <option value="4" selected>4 giây</option>
+            <option value="5">5 giây</option>
+            <option value="6">6 giây</option>
+            <option value="8">8 giây</option>
+          </select>
+        </div>
+
+        <!-- Big Start Action Button -->
+        <button id="btn-main-action" type="button" class="group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3">
           <span id="main-action-icon-box" class="text-2xl">▶</span>
-          <span id="main-action-label">BẮT ĐẦU</span>
+          <span id="main-action-label">BẮT ĐẦU QUAY</span>
           <div class="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </button>
 
         <!-- Replay / Reset Layout Button -->
-        <button id="btn-replay" type="button" class="glass-btn-sunny px-6 py-3.5 md:py-4 rounded-2xl font-black text-sm md:text-base text-amber-900 flex items-center gap-2 hover:text-orange-600 cursor-pointer">
+        <button id="btn-replay" type="button" class="glass-btn-sunny px-5 py-3.5 md:py-4 rounded-2xl font-black text-sm md:text-base text-amber-900 flex items-center gap-2 hover:text-orange-600 cursor-pointer">
           <span class="text-xl">↻</span>
-          <span>QUAY VỀ VỊ TRÍ</span>
+          <span>XẾP LẠI BÀI</span>
         </button>
 
       </div>
 
       <!-- Quick Classroom TV Hint -->
-      <div class="text-xs md:text-sm text-amber-800 font-extrabold tracking-wide flex items-center gap-2 bg-white/80 px-4 py-1 rounded-full border border-amber-300 shadow-sm">
+      <div class="text-xs md:text-sm text-amber-900 font-extrabold tracking-wide flex items-center gap-2 bg-white/90 px-4 py-1 rounded-full border border-amber-300 shadow-sm">
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-        <span>Lớp 1B1 - Cô Hoài Thanh • Thẻ luôn được giữ nguyên 100% cho các bạn nhỏ</span>
+        <span>Lớp 1B1 - Cô Hoài Thanh • Thẻ tự dừng chính giữa màn hình và giữ nguyên 100%</span>
       </div>
 
     </footer>
 
   </div>
 
-  <!-- MODAL: CARD MANAGEMENT (Giao diện Quản Lý Nền Sáng Pastel) -->
+  <!-- MODAL: CARD MANAGEMENT -->
   <div id="modal-manage" class="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 modal-backdrop-sunny hidden transition-opacity duration-300">
     <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl bg-white/95 border-3 border-amber-300 shadow-2xl overflow-hidden pointer-events-auto">
       
@@ -258,7 +264,7 @@
         </button>
       </div>
 
-      <!-- Modal Body (Scrollable) -->
+      <!-- Modal Body -->
       <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
         
         <!-- Section: Add New Card Form -->
@@ -340,7 +346,7 @@
           </div>
 
           <div id="cards-manager-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
-            <!-- Rendered dynamically by JavaScript -->
+            <!-- Rendered dynamically -->
           </div>
         </div>
 
@@ -360,7 +366,7 @@
   <!-- JAVASCRIPT APPLICATION LOGIC -->
   <script>
     /* ==========================================================================
-       0. VECTOR SVG ICONS FOR CARDS (Tươi sáng, đáng yêu, viền rõ nét)
+       0. VECTOR SVG ICONS FOR CARDS
        ========================================================================== */
     const SVG_ICONS = {
       crown: `
@@ -589,7 +595,6 @@
         </svg>
       `,
 
-      // Mặt sau: Hoa Hướng Dương & Hoa Mặt Trời Cực Đáng Yêu
       magicBack: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
@@ -598,7 +603,6 @@
               <stop offset="100%" stop-color="#f59e0b"/>
             </linearGradient>
           </defs>
-          <!-- 8 Cánh hoa cúc mặt trời -->
           <g transform="translate(50,50)">
             <ellipse cx="0" cy="-28" rx="8" ry="14" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
             <ellipse cx="20" cy="-20" rx="8" ry="14" transform="rotate(45 20 -20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
@@ -608,16 +612,12 @@
             <ellipse cx="-20" cy="20" rx="8" ry="14" transform="rotate(225 -20 20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
             <ellipse cx="-28" cy="0" rx="8" ry="14" transform="rotate(270 -28 0)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
             <ellipse cx="-20" cy="-20" rx="8" ry="14" transform="rotate(315 -20 -20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <!-- Nhụy hoa mặt cười -->
             <circle cx="0" cy="0" r="18" fill="#fbbf24" stroke="#b45309" stroke-width="2.5"/>
-            <!-- Hai mắt tròn xoe -->
             <circle cx="-6" cy="-4" r="2.5" fill="#451a03"/>
             <circle cx="6" cy="-4" r="2.5" fill="#451a03"/>
             <circle cx="-5" cy="-5" r="0.8" fill="#ffffff"/>
             <circle cx="7" cy="-5" r="0.8" fill="#ffffff"/>
-            <!-- Miệng cười tươi -->
             <path d="M-6 4 Q0 10 6 4" fill="none" stroke="#451a03" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- Má hồng -->
             <circle cx="-9" cy="2" r="2.5" fill="#f43f5e" opacity="0.6"/>
             <circle cx="9" cy="2" r="2.5" fill="#f43f5e" opacity="0.6"/>
           </g>
@@ -626,7 +626,7 @@
     };
 
     /* ==========================================================================
-       1. DỮ LIỆU THẺ CÁ NHÂN HÓA LỚP 1B1 - CÔ NGUYỄN THỊ HOÀI THANH
+       1. DỮ LIỆU THẺ LỚP 1B1 - CÔ NGUYỄN THỊ HOÀI THANH
        ========================================================================== */
     const DEFAULT_CARDS = [
       { id: 'c1', title: 'Làm Lớp Trưởng', iconType: 'crown', rarity: 'SSR', subtitle: 'Chỉ huy lớp 1B1 trong 1 ngày', active: true },
@@ -661,7 +661,7 @@
 
     function loadSavedData() {
       try {
-        const saved = localStorage.getItem('privilege_cards_sunny_v1');
+        const saved = localStorage.getItem('privilege_cards_sunny_v2');
         if (saved) {
           cardsData = JSON.parse(saved);
         } else {
@@ -681,10 +681,15 @@
       if (savedTeacher) {
         document.getElementById('classroom-teacher-display').textContent = savedTeacher;
       }
+
+      const savedDuration = localStorage.getItem('spin_duration_seconds');
+      if (savedDuration) {
+        document.getElementById('spin-duration-select').value = savedDuration;
+      }
     }
 
     function saveCardsData() {
-      localStorage.setItem('privilege_cards_sunny_v1', JSON.stringify(cardsData));
+      localStorage.setItem('privilege_cards_sunny_v2', JSON.stringify(cardsData));
       updateCardCounters();
     }
 
@@ -693,7 +698,7 @@
     }
 
     /* ==========================================================================
-       2. WEB AUDIO API SYNTHESIZER (Âm thanh vui tươi, trong trẻo)
+       2. WEB AUDIO API SYNTHESIZER
        ========================================================================== */
     class SoundEngine {
       constructor() {
@@ -782,7 +787,6 @@
           osc.stop(noteTime + 1.15);
         });
 
-        // Magical chimes
         for (let i = 0; i < 8; i++) {
           const sparkOsc = this.ctx.createOscillator();
           const sparkGain = this.ctx.createGain();
@@ -828,7 +832,7 @@
     const sound = new SoundEngine();
 
     /* ==========================================================================
-       3. THREE.JS 3D SCENE (PASTEL YELLOW SUNSHINE CLASSROOM)
+       3. THREE.JS 3D SCENE (PASTEL YELLOW SUNSHINE)
        ========================================================================== */
     const canvas = document.getElementById('three-canvas');
     let scene, camera, renderer;
@@ -849,10 +853,12 @@
     let revealedCardMesh = null;
     let spinTween = null;
     let spinTickInterval = null;
+    let autoStopTimer = null;
+    let countdownInterval = null;
 
     function initThreeScene() {
       scene = new THREE.Scene();
-      // NỀN HOÀN TOÀN MÀU PASTEL VÀNG NẮNG TƯƠI SÁNG (Không màu tối)
+      // Nền pastel vàng nắng tươi sáng 100%
       scene.background = new THREE.Color(0xfef9c3);
       scene.fog = new THREE.FogExp2(0xfef9c3, 0.016);
 
@@ -872,7 +878,6 @@
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2(-999, -999);
 
-      // Ánh sáng ban ngày ấm áp chan hòa
       const ambientLight = new THREE.AmbientLight(0xfffaed, 2.4);
       scene.add(ambientLight);
 
@@ -888,7 +893,6 @@
       lightPeach.position.set(6, -3, 6);
       scene.add(lightPeach);
 
-      // Thêm hoa, cầu vồng, mây và sticker bay lơ lửng trong không gian 3D
       createFloatingCuteStickers();
       createCutePedestal();
 
@@ -902,7 +906,6 @@
       canvas.addEventListener('touchstart', onCanvasTouchStart, { passive: false });
     }
 
-    /* 3.1 Bông hoa, cầu vồng, mây và sticker ngộ nghĩnh bay trong không gian 3D */
     function createFloatingCuteStickers() {
       const stickersList = [
         '🌸', '🌻', '🌼', '🌈', '☁️', '⭐', '🎈', '🍭', '🦋', '🎨', '💖'
@@ -920,7 +923,6 @@
         return new THREE.CanvasTexture(c);
       });
 
-      // Tạo 60 sticker bay nhẹ nhàng xung quanh vòng quay
       for (let i = 0; i < 60; i++) {
         const mat = new THREE.SpriteMaterial({
           map: stickerTextures[i % stickerTextures.length],
@@ -929,7 +931,6 @@
         });
         const sprite = new THREE.Sprite(mat);
 
-        // Vị trí phân bố tự nhiên xung quanh
         const angle = Math.random() * Math.PI * 2;
         const dist = 7.0 + Math.random() * 8.0;
         sprite.position.x = Math.cos(angle) * dist;
@@ -950,13 +951,11 @@
       }
     }
 
-    /* 3.2 Bàn xoay ma pháp hoa cúc vàng rực rỡ */
     function createCutePedestal() {
       const pedestal = new THREE.Group();
       pedestal.position.set(0, -1.75, 0);
       pedestal.rotation.x = Math.PI / 2;
 
-      // Vòng tròn vàng nắng
       const ringGeo1 = new THREE.RingGeometry(CAROUSEL_RADIUS - 0.25, CAROUSEL_RADIUS + 0.15, 64);
       const ringMat1 = new THREE.MeshBasicMaterial({
         color: 0xf59e0b,
@@ -966,7 +965,6 @@
       });
       pedestal.add(new THREE.Mesh(ringGeo1, ringMat1));
 
-      // Vòng tròn hoa cúc nở rộ
       const ringGeo2 = new THREE.RingGeometry(1.6, 2.2, 48);
       const ringMat2 = new THREE.MeshBasicMaterial({
         color: 0xf43f5e,
@@ -981,17 +979,15 @@
     }
 
     /* ==========================================================================
-       4. TEXTURE DRAWING (MẶT TRƯỚC SÁNG TRẮNG TINH KHÔI & MẶT SAU VÀNG NẮNG)
+       4. TEXTURE DRAWING (MẶT TRƯỚC TRẮNG NGÀ & MẶT SAU HOA HƯỚNG DƯƠNG)
        ========================================================================== */
 
-    /* 4.1 Mặt sau: Nền vàng nắng tươi, hoa hướng dương mặt cười, chấm bi trắng */
     function generateBackFaceTexture() {
       const c = document.createElement('canvas');
       c.width = 512;
       c.height = 700;
       const ctx = c.getContext('2d');
 
-      // Nền vàng nắng Pastel ấm áp
       const bgGrad = ctx.createLinearGradient(0, 0, 512, 700);
       bgGrad.addColorStop(0, '#fef08a');
       bgGrad.addColorStop(0.5, '#fde047');
@@ -999,7 +995,6 @@
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 512, 700);
 
-      // Họa tiết chấm bi trắng ngộ nghĩnh
       ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
       for (let x = 40; x < 512; x += 55) {
         for (let y = 40; y < 700; y += 55) {
@@ -1009,7 +1004,6 @@
         }
       }
 
-      // Viền kép màu Cam Hổ Phách & Trắng tinh khôi
       ctx.strokeStyle = '#f59e0b';
       ctx.lineWidth = 14;
       ctx.strokeRect(18, 18, 476, 664);
@@ -1018,7 +1012,6 @@
       ctx.lineWidth = 5;
       ctx.strokeRect(30, 30, 452, 640);
 
-      // Icon Hoa hướng dương mặt cười SVG
       const backSvgImg = getSvgImage('magicBack');
       const drawCenterCrest = () => {
         ctx.drawImage(backSvgImg, 146, 225, 220, 220);
@@ -1033,7 +1026,6 @@
         };
       }
 
-      // Tiêu đề mặt sau
       ctx.font = '900 26px "Quicksand", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = '#b45309';
@@ -1049,7 +1041,6 @@
       return texture;
     }
 
-    /* 4.2 Mặt trước: Nền sáng trắng ngà, màu sắc rực rỡ, chữ to đậm cực rõ */
     function generateFrontFaceTexture(card) {
       const c = document.createElement('canvas');
       c.width = 512;
@@ -1091,15 +1082,12 @@
       texture.minFilter = THREE.LinearMipmapLinearFilter;
 
       function drawCardFace() {
-        // Nền thẻ sáng trắng tinh khôi (#ffffff) viền kem nhẹ
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, 512, 700);
 
-        // Họa tiết hoa lá nhỏ góc thẻ
         ctx.fillStyle = '#fefce8';
         ctx.fillRect(25, 25, 462, 650);
 
-        // Viền thẻ bo dày, màu sắc ngọt ngào
         ctx.strokeStyle = themeColor;
         ctx.lineWidth = 14;
         ctx.strokeRect(18, 18, 476, 664);
@@ -1108,7 +1096,6 @@
         ctx.lineWidth = 4;
         ctx.strokeRect(28, 28, 456, 644);
 
-        // Băng rôn trên cùng: LỚP 1B1 - CÔ HOÀI THANH
         ctx.fillStyle = bannerColor;
         ctx.fillRect(40, 42, 432, 46);
         ctx.strokeStyle = themeColor;
@@ -1121,7 +1108,6 @@
         ctx.textBaseline = 'middle';
         ctx.fillText('🌸 LỚP 1B1 • CÔ HOÀI THANH 🌸', 256, 65);
 
-        // Huy hiệu thẻ
         ctx.fillStyle = themeColor;
         ctx.beginPath();
         ctx.roundRect(120, 100, 272, 32, 16);
@@ -1131,7 +1117,6 @@
         ctx.fillStyle = '#ffffff';
         ctx.fillText(rarityText, 256, 116);
 
-        // Vòng tròn chứa Icon SVG
         ctx.fillStyle = '#fffbeb';
         ctx.beginPath();
         ctx.arc(256, 255, 115, 0, Math.PI * 2);
@@ -1140,7 +1125,6 @@
         ctx.lineWidth = 4.5;
         ctx.stroke();
 
-        // Vẽ biểu tượng SVG sắc nét
         const iconKey = card.iconType || 'gift';
         const svgImg = getSvgImage(iconKey);
 
@@ -1155,7 +1139,6 @@
           svgImg.onload = renderSvg;
         }
 
-        // TÊN ĐẶC QUYỀN: Màu chữ Nâu Đậm (#1e293b), cực kỳ rõ nét và dễ đọc cho học sinh lớp 1
         ctx.font = '900 38px "Quicksand", sans-serif';
         ctx.fillStyle = '#1e293b';
 
@@ -1179,14 +1162,12 @@
           ctx.fillText(line, 256, titleStartY + index * 46);
         });
 
-        // Phụ đề vui nhộn
         if (card.subtitle) {
           ctx.font = '700 22px "Quicksand", sans-serif';
           ctx.fillStyle = '#ea580c';
           ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 46 + 24);
         }
 
-        // Chân thẻ
         ctx.fillStyle = '#fef3c7';
         ctx.fillRect(40, 615, 432, 40);
         ctx.font = '800 15px "Quicksand", sans-serif';
@@ -1240,7 +1221,6 @@
       const cardGeometry = new THREE.BoxGeometry(CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH);
 
       activeCards.forEach((card, index) => {
-        // Viền thẻ màu kem vàng dập nổi
         const edgeMaterial = new THREE.MeshStandardMaterial({
           color: 0xfef08a,
           metalness: 0.2,
@@ -1301,26 +1281,58 @@
 
       carouselGroup.rotation.y = 0;
       currentState = STATE_IDLE;
-      updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU"</strong> để vòng quay lớp 1B1 bắt đầu xoay tròn!');
+      updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!');
       updateHUDControlsForState(STATE_IDLE);
     }
 
     /* ==========================================================================
-       6. CAROUSEL SPIN & CHÍNH DIỆN MÀN HÌNH (THẺ KHÔNG BỊ MẤT)
+       6. TỰ ĐỘNG QUAY THEO THỜI GIAN CÀI ĐẶT & DỪNG CHUẨN XÁC CHÍNH GIỮA (X=0)
        ========================================================================== */
+
+    function getSpinDuration() {
+      const select = document.getElementById('spin-duration-select');
+      const val = parseInt(select.value, 10);
+      return isNaN(val) ? 4 : val;
+    }
+
+    // Lưu cài đặt thời gian
+    document.getElementById('spin-duration-select').addEventListener('change', (e) => {
+      localStorage.setItem('spin_duration_seconds', e.target.value);
+    });
 
     function startCarouselSpin() {
       if (cardMeshes.length === 0) return;
 
       currentState = STATE_SPINNING;
-      updateStatusToast('🌀 Vòng quay đang xoay tít... Bấm <span class="text-rose-600 font-black">"DỪNG LẠI"</span> để chọn thẻ nhé!');
-      updateHUDControlsForState(STATE_SPINNING);
+      const durationSeconds = getSpinDuration();
 
+      // Cập nhật giao diện đếm ngược
+      let timeLeft = durationSeconds;
+      mainActionIconBox.textContent = '⏳';
+      mainActionLabel.textContent = `ĐANG QUAY... (${timeLeft}s)`;
+      mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-default overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-amber-950 shadow-lg border-2 border-white flex items-center gap-3 animate-pulse';
+
+      updateStatusToast(`🌀 Đang quay trong <strong class="text-orange-600">${timeLeft} giây</strong>... Hãy cùng đếm ngược nào! 🌸`);
+
+      // Âm thanh nhịp quay
       if (spinTickInterval) clearInterval(spinTickInterval);
       spinTickInterval = setInterval(() => {
         sound.playTick();
       }, 95);
 
+      // Đồng hồ đếm ngược giao diện
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+          mainActionLabel.textContent = `ĐANG QUAY... (${timeLeft}s)`;
+        } else {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
+      }, 1000);
+
+      // Quay tốc độ cao liên tục
       if (spinTween) spinTween.kill();
       spinTween = gsap.to(carouselGroup.rotation, {
         y: '+=31.4159',
@@ -1328,11 +1340,26 @@
         ease: 'none',
         repeat: -1
       });
+
+      // TỰ ĐỘNG DỪNG KHI HẾT THỜI GIAN ĐÃ CÀI ĐẶT
+      if (autoStopTimer) clearTimeout(autoStopTimer);
+      autoStopTimer = setTimeout(() => {
+        stopCarouselAndReveal();
+      }, durationSeconds * 1000);
     }
 
+    /* Dừng vòng quay và đưa lá bài may mắn ra đúng CHÍNH GIỮA (x=0) */
     function stopCarouselAndReveal(targetMesh = null) {
       if (currentState !== STATE_SPINNING && currentState !== STATE_IDLE) return;
 
+      if (autoStopTimer) {
+        clearTimeout(autoStopTimer);
+        autoStopTimer = null;
+      }
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+      }
       if (spinTickInterval) {
         clearInterval(spinTickInterval);
         spinTickInterval = null;
@@ -1360,13 +1387,15 @@
       hideStatusToast();
       updateHUDControlsForState(STATE_REVEALED);
 
+      // TÍNH TOÁN GÓC DỪNG CHUẨN XÁC ĐỐI DIỆN TRỰC TIẾP CAMERA
+      // Khi carouselGroup.rotation.y = -baseAngle, lá bài chosenIndex sẽ nằm ngay tại X = 0 thế giới!
       const targetAngle = -mesh.userData.baseAngle;
       const currentRotY = carouselGroup.rotation.y;
       const twoPi = Math.PI * 2;
       
       let diff = (targetAngle - currentRotY) % twoPi;
       if (diff > 0) diff -= twoPi;
-      const finalCarouselRotY = currentRotY + diff - twoPi * 2;
+      const finalCarouselRotY = currentRotY + diff - twoPi * 2; // Thêm 2 vòng quay hãm phanh
 
       gsap.to(carouselGroup.rotation, {
         y: finalCarouselRotY,
@@ -1378,15 +1407,22 @@
       });
     }
 
-    /* Đưa lá bài ra chính giữa màn hình, to rõ, thông thoáng tuyệt đối */
+    /* ĐƯA THẺ BÀI RA CHÍNH GIỮA MÀN HÌNH (CHUẨN TÂM X=0, KHÔNG BỊ LỆCH) */
     function revealWinningCard(mesh) {
+      // Đẩy thẻ bài tịnh tiến hướng tâm ra phía trước sát camera (R + 2.5)
+      // Nhân tỷ lệ (CAROUSEL_RADIUS + 2.5) với cả sin và cos để giữ nguyên X thế giới = 0!
+      const targetRadius = CAROUSEL_RADIUS + 2.5;
+      const angle = mesh.userData.baseAngle;
+
       gsap.to(mesh.position, {
-        z: mesh.userData.basePos.z + 2.5,
+        x: Math.sin(angle) * targetRadius,
+        z: Math.cos(angle) * targetRadius,
         y: 0.25,
         duration: 1.3,
         ease: 'power2.out'
       });
 
+      // Phóng to to rõ để cả lớp nhìn thấy
       gsap.to(mesh.scale, {
         x: 1.38,
         y: 1.38,
@@ -1395,6 +1431,7 @@
         ease: 'back.out(1.5)'
       });
 
+      // Lật mặt trước hoàn hảo
       gsap.to(mesh.rotation, {
         y: mesh.userData.baseRotY + Math.PI,
         duration: 1.3,
@@ -1406,10 +1443,11 @@
       });
     }
 
+    /* Thu thẻ về lại đúng vị trí slot trên vòng tròn 3D khi bấm "QUAY TIẾP LƯỢT MỚI" */
     function resetCardBackToCarousel() {
       if (!revealedCardMesh) {
         currentState = STATE_IDLE;
-        updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU"</strong> để bạn tiếp theo quay nhé!');
+        updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> để bạn tiếp theo quay nhé!');
         updateHUDControlsForState(STATE_IDLE);
         return;
       }
@@ -1437,7 +1475,7 @@
         onComplete: () => {
           revealedCardMesh = null;
           currentState = STATE_IDLE;
-          updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU"</strong> để bạn tiếp theo quay nhé!');
+          updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> để bạn tiếp theo quay nhé!');
           updateHUDControlsForState(STATE_IDLE);
         }
       });
@@ -1498,16 +1536,14 @@
     function updateHUDControlsForState(state) {
       if (state === STATE_IDLE) {
         mainActionIconBox.textContent = '▶';
-        mainActionLabel.textContent = 'BẮT ĐẦU';
-        mainActionBtn.className = 'group relative px-10 md:px-14 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
+        mainActionLabel.textContent = 'BẮT ĐẦU QUAY';
+        mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
       } else if (state === STATE_SPINNING) {
-        mainActionIconBox.textContent = '🛑';
-        mainActionLabel.textContent = 'DỪNG LẠI';
-        mainActionBtn.className = 'group relative px-10 md:px-14 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3 animate-pulse';
+        // Tự động quay, hiển thị nhịp quay
       } else if (state === STATE_REVEALED) {
         mainActionIconBox.textContent = '↻';
         mainActionLabel.textContent = 'QUAY TIẾP LƯỢT MỚI';
-        mainActionBtn.className = 'group relative px-10 md:px-14 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-orange-400 via-amber-400 to-pink-400 hover:from-orange-300 hover:to-pink-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
+        mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-orange-400 via-amber-400 to-pink-400 hover:from-orange-300 hover:to-pink-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
       }
     }
 
@@ -1524,6 +1560,7 @@
       if (currentState === STATE_IDLE) {
         startCarouselSpin();
       } else if (currentState === STATE_SPINNING) {
+        // Nếu cô giáo muốn dừng sớm trước khi hết giờ thì dừng ngay
         stopCarouselAndReveal();
       } else if (currentState === STATE_REVEALED) {
         resetCardBackToCarousel();
@@ -1533,6 +1570,8 @@
     document.getElementById('btn-replay').addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
+      if (autoStopTimer) clearTimeout(autoStopTimer);
+      if (countdownInterval) clearInterval(countdownInterval);
       if (spinTickInterval) clearInterval(spinTickInterval);
       if (spinTween) spinTween.kill();
       buildCards();
@@ -1560,7 +1599,6 @@
       }
     });
 
-    // Chỉnh sửa tên Lớp và Tên Giáo Viên
     document.getElementById('btn-edit-classname').addEventListener('click', (e) => {
       e.stopPropagation();
       sound.playClick();
@@ -1813,7 +1851,7 @@
     }
 
     /* ==========================================================================
-       9. MAIN RENDER LOOP (CÁC STICKER VÀ HOA BAY LƠ LỬNG)
+       9. MAIN RENDER LOOP (STICKER HOA VÀ MÂY BAY ĐUNG ĐƯA)
        ========================================================================== */
     const clock = new THREE.Clock();
 
@@ -1822,7 +1860,6 @@
 
       const elapsedTime = clock.getElapsedTime();
 
-      // Các sticker ngộ nghĩnh (hoa, mây, cầu vồng, kẹo) đung đưa nhẹ nhàng
       floatingElements.forEach(sprite => {
         sprite.position.y = sprite.userData.baseY + Math.sin(elapsedTime * sprite.userData.speed + sprite.userData.phase) * 0.45;
       });
