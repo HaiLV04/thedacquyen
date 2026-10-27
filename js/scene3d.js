@@ -78,7 +78,7 @@ const Scene3D = {
     this.createCutePedestal();
 
     this.carouselGroup = new THREE.Group();
-    this.carouselGroup.position.set(0, 0.2, 0);
+    this.carouselGroup.position.set(0, 0.08, 0);
     this.scene.add(this.carouselGroup);
 
     this.bindEvents();
@@ -595,23 +595,23 @@ const Scene3D = {
     const aspect = window.innerWidth / window.innerHeight;
 
     let targetRadius = this.CAROUSEL_RADIUS + 0.35;
-    let targetY = 0.2;
+    let targetY = 0.08;
     let targetScale = 1.05;
 
     if (aspect < 0.6) {
-      // Mobile màn hình dọc: đưa thẻ lên cao một chút và căn chỉnh vừa khít
+      // Mobile màn hình dọc: đưa thẻ lên vừa vặn, không chạm thanh điều khiển
       targetRadius = this.CAROUSEL_RADIUS + 0.15;
-      targetY = 0.55;
+      targetY = 0.45;
       targetScale = 0.90;
     } else if (aspect < 0.85) {
       // Tablet dọc
       targetRadius = this.CAROUSEL_RADIUS + 0.25;
-      targetY = 0.38;
+      targetY = 0.28;
       targetScale = 0.96;
     } else if (aspect < 1.3) {
       // Tablet ngang / Laptop
       targetRadius = this.CAROUSEL_RADIUS + 0.3;
-      targetY = 0.25;
+      targetY = 0.16;
       targetScale = 1.0;
     }
 
