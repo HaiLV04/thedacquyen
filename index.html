@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>CHỌN THẺ ĐẶC QUYỀN 3D - Magic Privilege Cards</title>
+  <title>CHỌN THẺ ĐẶC QUYỀN 3D - Vòng Quay Ma Thuật</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -82,24 +82,21 @@
       background: rgba(121, 40, 202, 0.6);
       border-radius: 4px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 242, 254, 0.8);
-    }
     /* Glassmorphism Styles */
     .glass-panel {
-      background: rgba(13, 20, 44, 0.78);
+      background: rgba(13, 20, 44, 0.82);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     .glass-btn {
-      background: rgba(26, 35, 64, 0.75);
+      background: rgba(26, 35, 64, 0.8);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .glass-btn:hover {
-      background: rgba(45, 59, 102, 0.9);
+      background: rgba(45, 59, 102, 0.95);
       border-color: rgba(0, 242, 254, 0.65);
       transform: translateY(-2px);
     }
@@ -113,19 +110,11 @@
       width: 100%;
       height: 100%;
       z-index: 1;
+      display: block;
     }
-    /* Modal Backdrop */
     .modal-backdrop {
       background: rgba(4, 7, 24, 0.88);
       backdrop-filter: blur(14px);
-    }
-    /* Animated Gradient Borders */
-    @keyframes borderRotate {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
-    }
-    .rainbow-glow {
-      animation: borderRotate 10s linear infinite;
     }
   </style>
 </head>
@@ -163,10 +152,10 @@
         
         <div class="flex items-center gap-2.5 mt-1.5 text-xs md:text-sm text-slate-300">
           <span id="deck-counter-badge" class="px-3 py-1 rounded-full bg-slate-900/80 border border-purple-500/50 font-bold text-yellow-300 shadow">
-            Đang có: <span id="card-count-active" class="text-cyan-300 text-base">11</span> / <span id="card-count-total">11</span> thẻ
+            Bộ thẻ: <span id="card-count-active" class="text-cyan-300 text-base font-black">11</span> thẻ
           </span>
           <button id="btn-quick-add" class="hover:text-cyan-300 transition-colors flex items-center gap-1 font-semibold bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/80 cursor-pointer">
-            <span>➕</span> Thêm thẻ mới
+            <span>➕</span> Thêm thẻ
           </button>
           <button id="btn-reset-default" class="hover:text-pink-300 transition-colors flex items-center gap-1 font-semibold bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700/80 cursor-pointer">
             <span>↻</span> Mặc định
@@ -196,30 +185,30 @@
     <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 transform -translate-y-2 opacity-95 my-auto text-center">
       <div class="inline-block px-6 py-2.5 rounded-full bg-slate-900/85 border border-cyan-400/40 backdrop-blur-md shadow-2xl">
         <span id="status-toast-text" class="text-sm md:text-lg font-bold text-cyan-200 tracking-wide">
-          ✨ Bấm <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> hoặc nhấp trực tiếp vào bất kỳ thẻ nào để bốc thẻ ma thuật! ✨
+          ✨ Bấm nút <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> để vòng quay ma thuật bắt đầu xoay tròn! ✨
         </span>
       </div>
     </div>
 
     <!-- BOTTOM ACTION DOCK -->
-    <footer class="w-full flex flex-col items-center gap-3.5 pointer-events-auto pb-2">
+    <footer class="w-full flex flex-col items-center gap-3 pointer-events-auto pb-3 z-30">
       
       <!-- Primary Control Buttons Dock -->
       <div id="controls-dock" class="flex flex-wrap items-center justify-center gap-3.5 md:gap-5 p-2 rounded-3xl glass-panel shadow-2xl border border-white/20">
         
         <!-- Big Start / Stop Shuffle Button -->
-        <button id="btn-main-action" class="group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-lg hover:shadow-cyan-400/50 hover:scale-105 active:scale-95">
+        <button id="btn-main-action" type="button" class="group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-xl hover:shadow-cyan-400/60 hover:scale-105 active:scale-95">
           <span class="relative z-10 flex items-center gap-3">
-            <span id="main-action-icon" class="text-2xl">▶</span>
+            <span id="main-action-icon" class="text-2xl md:text-3xl">▶</span>
             <span id="main-action-label">BẮT ĐẦU</span>
           </span>
-          <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+          <div class="absolute inset-0 bg-white/25 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </button>
 
         <!-- Replay / Reset Layout Button -->
-        <button id="btn-replay" class="glass-btn px-6 py-3.5 md:py-4 rounded-2xl font-bold text-sm md:text-lg flex items-center gap-2 hover:text-cyan-300 border-purple-500/40 hover:border-purple-400 cursor-pointer">
+        <button id="btn-replay" type="button" class="glass-btn px-6 py-4 md:py-4.5 rounded-2xl font-bold text-sm md:text-lg flex items-center gap-2 hover:text-cyan-300 border-purple-500/40 hover:border-purple-400 cursor-pointer">
           <span class="text-xl">↻</span>
-          <span>XẾP LẠI BÀI</span>
+          <span>QUAY VỀ VỊ TRÍ</span>
         </button>
 
       </div>
@@ -227,7 +216,7 @@
       <!-- Quick Classroom TV Hint -->
       <div class="text-[11px] md:text-xs text-slate-400 font-medium tracking-wide flex items-center gap-2">
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>Phù hợp trình chiếu màn hình lớn, Smart TV lớp học & tương tác cảm ứng chạm</span>
+        <span>Thẻ sẽ luôn được giữ nguyên trong vòng quay sau mỗi lượt bốc của học sinh</span>
       </div>
 
     </footer>
@@ -235,8 +224,9 @@
   </div>
 
   <!-- REVEALED CARD HUD BANNER (Displays beneath the 3D card when flipped) -->
-  <div id="reveal-banner" class="fixed inset-x-0 bottom-6 md:bottom-8 z-20 flex flex-col items-center pointer-events-none transition-all duration-500 opacity-0 transform translate-y-8">
-    <div class="w-11/12 max-w-xl p-5 md:p-6 rounded-3xl glass-panel border border-yellow-400/50 shadow-2xl text-center pointer-events-auto relative overflow-hidden glow-gold">
+  <!-- Crucial fix: Added 'hidden' by default so it never blocks clicks to bottom buttons -->
+  <div id="reveal-banner" class="fixed inset-x-0 bottom-24 md:bottom-28 z-40 flex flex-col items-center pointer-events-none transition-all duration-500 opacity-0 transform translate-y-6 hidden">
+    <div class="w-11/12 max-w-lg p-5 md:p-6 rounded-3xl glass-panel border border-yellow-400/50 shadow-2xl text-center pointer-events-auto relative overflow-hidden glow-gold">
       
       <!-- Top Rarity & Badge Ribbon -->
       <div class="flex items-center justify-between mb-2">
@@ -247,40 +237,27 @@
       </div>
 
       <!-- Card Big Title & Description -->
-      <h2 id="reveal-title" class="text-2xl md:text-4xl font-black text-yellow-300 mb-1.5 text-glow-gold tracking-wide">
+      <h2 id="reveal-title" class="text-2xl md:text-3xl lg:text-4xl font-black text-yellow-300 mb-1.5 text-glow-gold tracking-wide">
         Làm Lớp Trưởng
       </h2>
       <p id="reveal-subtitle" class="text-sm md:text-base text-slate-200 font-medium mb-4">
         Chỉ huy lớp học trong 1 ngày
       </p>
 
-      <!-- Action Buttons Row -->
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        <!-- Keep in deck -->
-        <button id="btn-card-keep" class="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer">
-          <span>✅</span>
-          <span>Giữ lại trong bộ</span>
-        </button>
-
-        <!-- Remove from active deck -->
-        <button id="btn-card-remove" class="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer" title="Ẩn thẻ này để học sinh tiếp theo không bốc trùng">
-          <span>🗑️</span>
-          <span>Đã trao (Bỏ khỏi vòng quay)</span>
+      <!-- Next Turn Button (Card is preserved in deck) -->
+      <div class="flex items-center justify-center gap-3">
+        <button id="btn-next-turn" class="w-full py-3 px-6 rounded-xl font-black text-sm md:text-base bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-xl transition-transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer font-orbitron">
+          <span class="text-xl">🎲</span>
+          <span>QUAY TIẾP LƯỢT MỚI (GIỮ NGUYÊN BỘ THẺ)</span>
         </button>
       </div>
-
-      <!-- Special "Bốc Lại Ngay" Button (shown only if reroll card) -->
-      <button id="btn-card-reroll" class="hidden w-full mt-3 px-5 py-3 rounded-xl font-extrabold text-sm md:text-base bg-gradient-to-r from-amber-400 via-orange-500 to-pink-500 text-slate-950 shadow-xl animate-pulse hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
-        <span class="text-xl">🎲</span>
-        <span>KÍCH HOẠT BỐC LẠI NGAY LẬP TỨC!</span>
-      </button>
 
     </div>
   </div>
 
   <!-- MODAL: CARD MANAGEMENT (Quản lý danh sách thẻ & Thêm thẻ mới) -->
   <div id="modal-manage" class="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 modal-backdrop hidden transition-opacity duration-300">
-    <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl glass-panel border border-cyan-400/40 shadow-2xl overflow-hidden">
+    <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl glass-panel border border-cyan-400/40 shadow-2xl overflow-hidden pointer-events-auto">
       
       <!-- Modal Header -->
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-900/70">
@@ -288,7 +265,7 @@
           <span class="text-2xl">⚙️</span>
           <div>
             <h3 class="text-lg md:text-xl font-black text-cyan-300 font-orbitron">QUẢN LÝ BỘ THẺ ĐẶC QUYỀN</h3>
-            <p class="text-xs text-slate-400">Tùy chỉnh nội dung, bật/tắt hoặc thêm đặc quyền mới theo nhu cầu lớp học</p>
+            <p class="text-xs text-slate-400">Thêm thẻ mới hoặc bật/tắt các đặc quyền tùy ý cho buổi học</p>
           </div>
         </div>
         <button id="btn-close-modal" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center font-bold text-lg transition-colors cursor-pointer">
@@ -339,7 +316,7 @@
 
           <!-- Optional Custom Image Upload -->
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Hoặc tải ảnh mặt trước lá bài (Tự động nén tối ưu):</label>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Hoặc tải ảnh mặt trước lá bài (Tùy chọn):</label>
             <div class="flex items-center gap-3">
               <input type="file" id="new-card-file" accept="image/*" class="text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-500 cursor-pointer">
               <span id="file-chosen-name" class="text-xs text-slate-400 truncate max-w-xs">Chưa chọn ảnh</span>
@@ -375,7 +352,7 @@
       <div class="px-6 py-3.5 border-t border-white/10 bg-slate-900/80 flex items-center justify-between">
         <span class="text-xs text-slate-400">Dữ liệu được lưu an toàn trong trình duyệt của bạn</span>
         <button id="btn-save-modal" class="px-5 py-2 rounded-xl font-bold text-xs md:text-sm bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors cursor-pointer">
-          Đóng & Cập nhật bàn chơi 3D
+          Đóng & Cập nhật vòng quay 3D
         </button>
       </div>
 
@@ -395,7 +372,7 @@
       { id: 'c5', title: 'Được 1 Sticker', icon: '⭐', rarity: 'R', subtitle: 'Nhận ngay 1 sticker lấp lánh', active: true },
       { id: 'c6', title: 'Đổi chỗ trong vòng 1 ngày', icon: '🔄🪑', rarity: 'PINK', subtitle: 'Chọn ngồi cạnh 1 người bạn bất kỳ', active: true },
       { id: 'c7', title: '1 Tràng pháo tay', icon: '👏🎉', rarity: 'R', subtitle: 'Cả lớp vỗ tay tuyên dương thật to!', active: true },
-      { id: 'c8', title: 'Được bốc lại 1 lần nữa', icon: '🎲✨', rarity: 'ORANGE', subtitle: 'Thử vận may thêm 1 lượt nữa ngay!', active: true, isReroll: true },
+      { id: 'c8', title: 'Được bốc lại 1 lần nữa', icon: '🎲✨', rarity: 'ORANGE', subtitle: 'Thử vận may thêm 1 lượt nữa ngay!', active: true },
       { id: 'c9', title: 'Gọi 1 bạn lên bảng làm bài tập', icon: '🫵📚', rarity: 'RED', subtitle: 'Quyền chỉ định 1 bạn bất kỳ lên bảng', active: true },
       { id: 'c10', title: 'Tắt quạt cuối giờ', icon: '🌀🔌', rarity: 'GREEN', subtitle: 'Chiến sĩ tiết kiệm điện của lớp', active: true },
       { id: 'c11', title: '2 Cái kẹo mút', icon: '🍭🍭', rarity: 'PINK', subtitle: 'Nhận 2 chiếc kẹo mút từ cô giáo', active: true },
@@ -407,7 +384,7 @@
 
     function loadSavedData() {
       try {
-        const saved = localStorage.getItem('privilege_cards_data_v3');
+        const saved = localStorage.getItem('privilege_cards_carousel_v1');
         if (saved) {
           cardsData = JSON.parse(saved);
         } else {
@@ -417,6 +394,9 @@
         cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
       }
 
+      // Luôn đảm bảo tất cả các thẻ đều active để không bao giờ bị mất thẻ
+      cardsData.forEach(c => c.active = true);
+
       const savedName = localStorage.getItem('classroom_name');
       if (savedName) {
         document.getElementById('classroom-name-display').textContent = savedName;
@@ -424,7 +404,7 @@
     }
 
     function saveCardsData() {
-      localStorage.setItem('privilege_cards_data_v3', JSON.stringify(cardsData));
+      localStorage.setItem('privilege_cards_carousel_v1', JSON.stringify(cardsData));
       updateCardCounters();
     }
 
@@ -464,7 +444,7 @@
         osc.frequency.setValueAtTime(560, now);
         osc.frequency.exponentialRampToValueAtTime(920, now + 0.08);
 
-        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.setValueAtTime(0.05, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
 
         osc.connect(gain);
@@ -483,52 +463,17 @@
         const gain = this.ctx.createGain();
 
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(650 + Math.random() * 250, now);
-        osc.frequency.exponentialRampToValueAtTime(140, now + 0.045);
+        osc.frequency.setValueAtTime(700 + Math.random() * 200, now);
+        osc.frequency.exponentialRampToValueAtTime(160, now + 0.035);
 
         gain.gain.setValueAtTime(0.12, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
 
         osc.connect(gain);
         gain.connect(this.ctx.destination);
 
         osc.start(now);
-        osc.stop(now + 0.045);
-      }
-
-      playWhoosh() {
-        if (!soundEnabled) return;
-        this.init();
-        if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const bufferSize = this.ctx.sampleRate * 0.45;
-        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = Math.random() * 2 - 1;
-        }
-
-        const noise = this.ctx.createBufferSource();
-        noise.buffer = buffer;
-
-        const filter = this.ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(350, now);
-        filter.frequency.exponentialRampToValueAtTime(1600, now + 0.22);
-        filter.frequency.exponentialRampToValueAtTime(250, now + 0.45);
-        filter.Q.value = 2.2;
-
-        const gain = this.ctx.createGain();
-        gain.gain.setValueAtTime(0.01, now);
-        gain.gain.linearRampToValueAtTime(0.2, now + 0.22);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-
-        noise.connect(filter);
-        filter.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        noise.start(now);
-        noise.stop(now + 0.45);
+        osc.stop(now + 0.035);
       }
 
       playFanfare() {
@@ -537,7 +482,6 @@
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
 
-        // Fanfare chord arpeggio: C5 (523Hz), E5 (659Hz), G5 (784Hz), C6 (1046Hz)
         const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((freq, idx) => {
           const osc = this.ctx.createOscillator();
@@ -548,7 +492,7 @@
           osc.frequency.setValueAtTime(freq, noteTime);
 
           gain.gain.setValueAtTime(0.001, noteTime);
-          gain.gain.linearRampToValueAtTime(0.22, noteTime + 0.04);
+          gain.gain.linearRampToValueAtTime(0.2, noteTime + 0.04);
           gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 1.1);
 
           osc.connect(gain);
@@ -567,7 +511,7 @@
           sparkOsc.type = 'sine';
           sparkOsc.frequency.setValueAtTime(1400 + Math.random() * 850, sparkTime);
 
-          sparkGain.gain.setValueAtTime(0.06, sparkTime);
+          sparkGain.gain.setValueAtTime(0.05, sparkTime);
           sparkGain.gain.exponentialRampToValueAtTime(0.001, sparkTime + 0.25);
 
           sparkOsc.connect(sparkGain);
@@ -603,26 +547,29 @@
 
     const sound = new SoundEngine();
 
-    // Auto unlock audio on any user interaction
-    window.addEventListener('pointerdown', () => sound.init(), { once: true });
-
     /* ==========================================================================
-       2. THREE.JS SCENE, CAMERA, LIGHTS & PORTAL SETUP
+       2. THREE.JS 3D CAROUSEL ARCHITECTURE
        ========================================================================== */
     const canvas = document.getElementById('three-canvas');
     let scene, camera, renderer;
+    let carouselGroup;
     let cardMeshes = [];
-    let portalGroup, particlesMesh;
+    let particlesMesh, portalDisc;
     let raycaster, mouse;
     let hoveredCard = null;
 
-    // Animation state variables
+    // States
     const STATE_IDLE = 'idle';
-    const STATE_SHUFFLING = 'shuffling';
+    const STATE_SPINNING = 'spinning';
     const STATE_REVEALED = 'revealed';
     let currentState = STATE_IDLE;
-    let activeRevealedCard = null;
-    let shuffleTickTimer = null;
+
+    // Carousel parameters
+    const CAROUSEL_RADIUS = 5.6; // Bán kính vòng xoay 3D
+    let activeCardIndex = 0;
+    let revealedCardMesh = null;
+    let spinTween = null;
+    let spinTickInterval = null;
 
     function initThreeScene() {
       // Scene
@@ -630,9 +577,10 @@
       scene.background = new THREE.Color(0x06091e);
       scene.fog = new THREE.FogExp2(0x06091e, 0.024);
 
-      // Camera
+      // Camera: đặt góc nhìn ngang hơi nghiêng nhẹ xuống tâm vòng quay
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.set(0, 0, 11.5);
+      camera.position.set(0, 0.6, 12.0);
+      camera.lookAt(0, 0.2, 0);
 
       // Renderer
       renderer = new THREE.WebGLRenderer({
@@ -643,42 +591,45 @@
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.shadowMap.enabled = true;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.15;
 
-      // Raycaster & Mouse
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2(-999, -999);
 
       // Lighting Setup
-      const ambientLight = new THREE.AmbientLight(0x2a1f4d, 1.5);
+      const ambientLight = new THREE.AmbientLight(0x2a1f4d, 1.6);
       scene.add(ambientLight);
 
-      // PointLight 1: Neon Cyan (Left Top)
+      // PointLight 1: Neon Cyan (Trái Trên)
       const lightCyan = new THREE.PointLight(0x00f2fe, 3.2, 28);
       lightCyan.position.set(-6.5, 5, 6);
       scene.add(lightCyan);
 
-      // PointLight 2: Neon Magenta / Pink (Right Bottom)
+      // PointLight 2: Neon Magenta / Pink (Phải Dưới)
       const lightPink = new THREE.PointLight(0xff0844, 3.2, 28);
       lightPink.position.set(6.5, -4.5, 6);
       scene.add(lightPink);
 
-      // PointLight 3: Center Gold Light (Portal focal illumination)
-      const lightGold = new THREE.PointLight(0xf6d365, 2.5, 20);
-      lightGold.position.set(0, 0.5, 4.5);
+      // PointLight 3: Center Gold Light (Soi sáng thẻ thắng ở tâm)
+      const lightGold = new THREE.PointLight(0xf6d365, 3.0, 20);
+      lightGold.position.set(0, 0.5, 7.5);
       scene.add(lightGold);
 
-      // Create Environment: 800 Particles & Central Summon Portal
+      // Environment: 800 Hạt ma thuật & Bàn xoay ma pháp
       createSpaceParticles();
-      createSummonPortal();
+      createMagicPedestal();
 
-      // Window events
+      // Carousel Root Group
+      carouselGroup = new THREE.Group();
+      carouselGroup.position.set(0, 0.2, 0);
+      scene.add(carouselGroup);
+
+      // Events
       window.addEventListener('resize', onWindowResize);
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('click', onCanvasClick);
-      window.addEventListener('touchstart', onTouchStart, { passive: false });
+      canvas.addEventListener('mousemove', onCanvasMouseMove);
+      canvas.addEventListener('click', onCanvasClick);
+      canvas.addEventListener('touchstart', onCanvasTouchStart, { passive: false });
     }
 
     /* 2.1 Floating Neon Dust Particles (800 Points) */
@@ -689,10 +640,10 @@
       const colors = new Float32Array(particleCount * 3);
 
       const colorPalette = [
-        new THREE.Color(0x00f2fe), // Cyan
-        new THREE.Color(0xff0844), // Pink
-        new THREE.Color(0x7928ca), // Purple
-        new THREE.Color(0xf6d365), // Gold
+        new THREE.Color(0x00f2fe),
+        new THREE.Color(0xff0844),
+        new THREE.Color(0x7928ca),
+        new THREE.Color(0xf6d365),
       ];
 
       for (let i = 0; i < particleCount; i++) {
@@ -709,7 +660,6 @@
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-      // Particle Texture via 2D Canvas
       const particleCanvas = document.createElement('canvas');
       particleCanvas.width = 64;
       particleCanvas.height = 64;
@@ -738,64 +688,33 @@
       scene.add(particlesMesh);
     }
 
-    /* 2.2 Central Summon Portal (Khung Triệu Hồi Trung Tâm) */
-    function createSummonPortal() {
-      portalGroup = new THREE.Group();
-      portalGroup.position.set(0, 0.2, 0);
+    /* 2.2 Magic Pedestal (Vòng tròn ma pháp dưới chân bàn xoay) */
+    function createMagicPedestal() {
+      const pedestal = new THREE.Group();
+      pedestal.position.set(0, -1.7, 0);
+      pedestal.rotation.x = Math.PI / 2;
 
-      // Outer Glowing Frame (Neon Rectangle)
-      const framePoints = [
-        new THREE.Vector3(-1.65, -2.2, 0),
-        new THREE.Vector3(1.65, -2.2, 0),
-        new THREE.Vector3(1.65, 2.2, 0),
-        new THREE.Vector3(-1.65, 2.2, 0)
-      ];
-      const frameGeo = new THREE.BufferGeometry().setFromPoints([...framePoints, framePoints[0]]);
-      const frameMat = new THREE.LineBasicMaterial({
-        color: 0x00f2fe,
-        linewidth: 2,
-        transparent: true,
-        opacity: 0.75
-      });
-      const frameLine = new THREE.Line(frameGeo, frameMat);
-      portalGroup.add(frameLine);
-
-      // Rotating Magic Circle Rings
-      const ringGeo1 = new THREE.RingGeometry(2.35, 2.44, 64);
+      // Vòng tròn phát sáng neon
+      const ringGeo1 = new THREE.RingGeometry(CAROUSEL_RADIUS - 0.2, CAROUSEL_RADIUS + 0.1, 64);
       const ringMat1 = new THREE.MeshBasicMaterial({
+        color: 0x00f2fe,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.4
+      });
+      pedestal.add(new THREE.Mesh(ringGeo1, ringMat1));
+
+      const ringGeo2 = new THREE.RingGeometry(1.8, 2.0, 48);
+      const ringMat2 = new THREE.MeshBasicMaterial({
         color: 0x7928ca,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.5
+        opacity: 0.6
       });
-      const ringMesh1 = new THREE.Mesh(ringGeo1, ringMat1);
-      ringMesh1.position.z = -0.15;
-      portalGroup.add(ringMesh1);
+      portalDisc = new THREE.Mesh(ringGeo2, ringMat2);
+      pedestal.add(portalDisc);
 
-      const ringGeo2 = new THREE.RingGeometry(2.85, 2.92, 48);
-      const ringMat2 = new THREE.MeshBasicMaterial({
-        color: 0x00f2fe,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.35
-      });
-      const ringMesh2 = new THREE.Mesh(ringGeo2, ringMat2);
-      ringMesh2.position.z = -0.2;
-      portalGroup.add(ringMesh2);
-
-      // Subtle Center Portal Background Disc
-      const discGeo = new THREE.CircleGeometry(2.25, 36);
-      const discMat = new THREE.MeshBasicMaterial({
-        color: 0x0f1638,
-        transparent: true,
-        opacity: 0.45,
-        side: THREE.DoubleSide
-      });
-      const discMesh = new THREE.Mesh(discGeo, discMat);
-      discMesh.position.z = -0.25;
-      portalGroup.add(discMesh);
-
-      scene.add(portalGroup);
+      scene.add(pedestal);
     }
 
     /* ==========================================================================
@@ -809,7 +728,6 @@
       c.height = 700;
       const ctx = c.getContext('2d');
 
-      // Cosmic Deep Blue Gradient
       const bgGrad = ctx.createLinearGradient(0, 0, 512, 700);
       bgGrad.addColorStop(0, '#0a0d2a');
       bgGrad.addColorStop(0.5, '#13194a');
@@ -817,7 +735,7 @@
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 512, 700);
 
-      // Geometric Cosmic Grid Lines
+      // Geometric Grid
       ctx.strokeStyle = 'rgba(121, 40, 202, 0.35)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
@@ -829,27 +747,14 @@
       }
       ctx.stroke();
 
-      // Outer Neon Cyber Border
+      // Neon Borders
       ctx.strokeStyle = '#00f2fe';
       ctx.lineWidth = 8;
       ctx.strokeRect(20, 20, 472, 660);
 
-      // Inner Neon Pink Border
       ctx.strokeStyle = '#ff0844';
       ctx.lineWidth = 3;
       ctx.strokeRect(32, 32, 448, 636);
-
-      // Corner Ornaments
-      const drawCorner = (x, y) => {
-        ctx.fillStyle = '#f6d365';
-        ctx.beginPath();
-        ctx.arc(x, y, 7, 0, Math.PI * 2);
-        ctx.fill();
-      };
-      drawCorner(32, 32);
-      drawCorner(480, 32);
-      drawCorner(32, 668);
-      drawCorner(480, 668);
 
       // Center Magic Circle
       ctx.save();
@@ -867,7 +772,6 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Mystery Central Icon (Clown / Jester / Gift)
       ctx.font = '95px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -875,7 +779,6 @@
 
       ctx.restore();
 
-      // Top & Bottom Magic Inscriptions
       ctx.font = 'bold 24px "Orbitron", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = '#00f2fe';
@@ -902,7 +805,6 @@
       c.height = 700;
       const ctx = c.getContext('2d');
 
-      // Theme Colors based on Rarity & Style
       let primaryColor = '#00f2fe';
       let secondaryColor = '#4facfe';
       let rarityBadge = 'R • PHỔ THÔNG';
@@ -944,9 +846,7 @@
       texture.generateMipmaps = true;
       texture.minFilter = THREE.LinearMipmapLinearFilter;
 
-      // Render standard graphics onto canvas
       function drawStandardCard() {
-        // Base background
         const bgGrad = ctx.createLinearGradient(0, 0, 0, 700);
         bgGrad.addColorStop(0, bgDark);
         bgGrad.addColorStop(0.5, '#0d1330');
@@ -954,22 +854,19 @@
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, 512, 700);
 
-        // Card Header Banner
         const headerGrad = ctx.createLinearGradient(0, 0, 512, 0);
         headerGrad.addColorStop(0, primaryColor);
         headerGrad.addColorStop(1, secondaryColor);
 
-        // Outer Thick Border
         ctx.strokeStyle = primaryColor;
         ctx.lineWidth = 10;
         ctx.strokeRect(18, 18, 476, 664);
 
-        // Inner Border
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
         ctx.lineWidth = 2;
         ctx.strokeRect(28, 28, 456, 644);
 
-        // Top Tag: "THẺ ĐẶC QUYỀN"
+        // Header
         ctx.fillStyle = headerGrad;
         ctx.fillRect(40, 42, 432, 42);
         ctx.font = 'bold 20px "Orbitron", sans-serif';
@@ -978,7 +875,7 @@
         ctx.textBaseline = 'middle';
         ctx.fillText('★ THẺ ĐẶC QUYỀN ★', 256, 63);
 
-        // Rarity Badge Pill
+        // Badge
         ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
         ctx.beginPath();
         ctx.roundRect(140, 96, 232, 28, 14);
@@ -991,7 +888,7 @@
         ctx.fillStyle = primaryColor;
         ctx.fillText(rarityBadge, 256, 110);
 
-        // Center Icon Artwork Circle
+        // Center Icon Circle
         const iconBoxGrad = ctx.createRadialGradient(256, 255, 20, 256, 255, 120);
         iconBoxGrad.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
         iconBoxGrad.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
@@ -1003,13 +900,12 @@
         ctx.lineWidth = 3.5;
         ctx.stroke();
 
-        // Big Emoji / Icon
         ctx.font = '100px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(card.icon || '🎁', 256, 255);
 
-        // Card Title: Large, multi-line auto-wrapped
+        // Title wrapped
         ctx.font = 'bold 36px "Be Vietnam Pro", sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.shadowColor = primaryColor;
@@ -1030,21 +926,18 @@
         }
         lines.push(currentLine);
 
-        // Draw title lines
         const titleStartY = lines.length > 1 ? 430 : 445;
         lines.forEach((line, index) => {
           ctx.fillText(line, 256, titleStartY + index * 44);
         });
-        ctx.shadowBlur = 0; // reset
+        ctx.shadowBlur = 0;
 
-        // Subtitle / Description text
         if (card.subtitle) {
           ctx.font = '500 19px "Be Vietnam Pro", sans-serif';
           ctx.fillStyle = '#cbd5e1';
           ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 44 + 25);
         }
 
-        // Bottom Footer Bar
         ctx.fillStyle = 'rgba(255,255,255,0.06)';
         ctx.fillRect(40, 615, 432, 40);
         ctx.font = 'bold 13px "Be Vietnam Pro", sans-serif';
@@ -1054,10 +947,8 @@
         texture.needsUpdate = true;
       }
 
-      // Draw initial standard face
       drawStandardCard();
 
-      // If card has custom uploaded image
       if (card.customImage) {
         const img = new Image();
         img.onload = () => {
@@ -1072,23 +963,22 @@
     }
 
     /* ==========================================================================
-       4. BUILD & POSITION 3D CARD MESHES
+       4. BUILD 3D CAROUSEL MESHES
        ========================================================================== */
-    const CARD_WIDTH = 2.4;
-    const CARD_HEIGHT = 3.3;
+    const CARD_WIDTH = 2.2;
+    const CARD_HEIGHT = 3.2;
     const CARD_DEPTH = 0.06;
 
     let sharedBackTexture = null;
 
     function buildCards() {
-      // Clean up previous meshes
-      cardMeshes.forEach(item => {
-        scene.remove(item.mesh);
-        if (item.mesh.geometry) item.mesh.geometry.dispose();
-        if (Array.isArray(item.mesh.material)) {
-          item.mesh.material.forEach(m => m.dispose());
-        }
-      });
+      // Dọn dẹp thẻ cũ
+      while (carouselGroup.children.length > 0) {
+        const obj = carouselGroup.children[0];
+        carouselGroup.remove(obj);
+        if (obj.geometry) obj.geometry.dispose();
+        if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+      }
       cardMeshes = [];
 
       if (!sharedBackTexture) {
@@ -1102,7 +992,6 @@
       const cardGeometry = new THREE.BoxGeometry(CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH);
 
       activeCards.forEach((card, index) => {
-        // Edge Material (sides)
         const edgeMaterial = new THREE.MeshStandardMaterial({
           color: 0x182038,
           metalness: 0.8,
@@ -1111,7 +1000,7 @@
           opacity: 1.0
         });
 
-        // Back Face Material: at index 5 (-Z normal)
+        // Mặt sau (Back Face) ở index 5 (-Z normal)
         const backMaterial = new THREE.MeshStandardMaterial({
           map: sharedBackTexture,
           metalness: 0.35,
@@ -1120,7 +1009,7 @@
           opacity: 1.0
         });
 
-        // Front Face Material: at index 4 (+Z normal)
+        // Mặt trước (Front Face) ở index 4 (+Z normal)
         const frontTexture = generateFrontFaceTexture(card);
         const frontMaterial = new THREE.MeshStandardMaterial({
           map: frontTexture,
@@ -1130,7 +1019,6 @@
           opacity: 1.0
         });
 
-        // BoxGeometry face order: [+X, -X, +Y, -Y, +Z (Front), -Z (Back)]
         const materials = [
           edgeMaterial,
           edgeMaterial.clone(),
@@ -1144,298 +1032,195 @@
         mesh.castShadow = true;
         mesh.receiveShadow = true;
 
+        // Vị trí đều trên vòng tròn 3D
+        const angle = (index / count) * Math.PI * 2;
+        const posX = Math.sin(angle) * CAROUSEL_RADIUS;
+        const posZ = Math.cos(angle) * CAROUSEL_RADIUS;
+
+        mesh.position.set(posX, 0, posZ);
+        // Ban đầu úp mặt sau hướng ra ngoài màn hình
+        mesh.rotation.y = angle + Math.PI;
+
         mesh.userData = {
           cardData: card,
           index: index,
-          originalPos: new THREE.Vector3(),
-          originalRot: new THREE.Euler(),
-          isHovered: false
+          baseAngle: angle,
+          basePos: new THREE.Vector3(posX, 0, posZ),
+          baseRotY: angle + Math.PI,
         };
 
-        scene.add(mesh);
+        carouselGroup.add(mesh);
         cardMeshes.push({
           mesh: mesh,
           cardData: card
         });
       });
 
-      positionCardsInIdleArc();
-    }
-
-    /* 4.1 Arrange Cards in 3D Arc (Idle State) */
-    function positionCardsInIdleArc() {
-      const count = cardMeshes.length;
-      if (count === 0) return;
-
-      const radius = 6.2;
-      const totalAngle = Math.min(Math.PI * 0.96, count * 0.24);
-      const angleStep = count > 1 ? totalAngle / (count - 1) : 0;
-      const startAngle = -totalAngle / 2;
-
-      cardMeshes.forEach((item, i) => {
-        const mesh = item.mesh;
-        const angle = startAngle + i * angleStep;
-
-        const targetX = Math.sin(angle) * radius;
-        const targetZ = Math.cos(angle) * radius - radius * 0.88;
-        const targetY = -Math.cos(angle * 1.5) * 0.45;
-
-        // In Idle: Show BACK face to camera (-Z normal).
-        // When rotation.y = Math.PI, -Z face points towards camera (+Z direction in world space).
-        const targetRotY = Math.PI - angle * 0.65;
-        const targetRotZ = -angle * 0.18;
-
-        mesh.userData.originalPos.set(targetX, targetY, targetZ);
-        mesh.userData.originalRot.set(0, targetRotY, targetRotZ);
-
-        // Reset materials opacity
-        mesh.material.forEach(mat => {
-          gsap.to(mat, { opacity: 1.0, duration: 0.5 });
-        });
-
-        // Smooth entry animation with GSAP
-        gsap.to(mesh.position, {
-          x: targetX,
-          y: targetY,
-          z: targetZ,
-          duration: 1.2,
-          delay: i * 0.04,
-          ease: 'power3.out'
-        });
-
-        gsap.to(mesh.rotation, {
-          x: 0,
-          y: targetRotY,
-          z: targetRotZ,
-          duration: 1.2,
-          delay: i * 0.04,
-          ease: 'power3.out'
-        });
-
-        gsap.to(mesh.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.6
-        });
-      });
-
+      carouselGroup.rotation.y = 0;
       currentState = STATE_IDLE;
-      updateStatusToast('✨ Bấm <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> hoặc nhấp trực tiếp vào bất kỳ thẻ nào để triệu hồi! ✨');
+      updateStatusToast('✨ Bấm nút <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> để vòng quay ma thuật bắt đầu xoay tròn! ✨');
       updateHUDControlsForState(STATE_IDLE);
     }
 
     /* ==========================================================================
-       5. INTERACTION & ANIMATION FLOW (GSAP + THREE.JS)
+       5. CAROUSEL SPIN & REVEAL LOGIC
        ========================================================================== */
 
-    /* 5.1 Hover Detection with Raycaster */
-    function checkRaycastHover() {
-      if (currentState !== STATE_IDLE && currentState !== STATE_SHUFFLING) {
-        if (hoveredCard) resetHover(hoveredCard);
-        hoveredCard = null;
-        return;
-      }
+    /* 5.1 Bắt đầu xoay vòng 3D */
+    function startCarouselSpin() {
+      if (cardMeshes.length === 0) return;
 
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
-
-      if (intersects.length > 0) {
-        const hit = intersects[0].object;
-        if (hoveredCard !== hit) {
-          if (hoveredCard) resetHover(hoveredCard);
-          hoveredCard = hit;
-          applyHover(hit);
-          sound.playHover();
-        }
-      } else {
-        if (hoveredCard) {
-          resetHover(hoveredCard);
-          hoveredCard = null;
-        }
-      }
-    }
-
-    function applyHover(mesh) {
-      document.body.style.cursor = 'pointer';
-      if (currentState === STATE_IDLE) {
-        gsap.to(mesh.scale, { x: 1.12, y: 1.12, z: 1.12, duration: 0.3, ease: 'back.out(2)' });
-        gsap.to(mesh.position, {
-          z: mesh.userData.originalPos.z + 0.65,
-          y: mesh.userData.originalPos.y + 0.35,
-          duration: 0.3
-        });
-      }
-    }
-
-    function resetHover(mesh) {
-      document.body.style.cursor = 'default';
-      if (currentState === STATE_IDLE) {
-        gsap.to(mesh.scale, { x: 1, y: 1, z: 1, duration: 0.3, ease: 'power2.out' });
-        gsap.to(mesh.position, {
-          x: mesh.userData.originalPos.x,
-          y: mesh.userData.originalPos.y,
-          z: mesh.userData.originalPos.z,
-          duration: 0.3
-        });
-      }
-    }
-
-    /* 5.2 Start 3D Shuffling Vortex Orbit */
-    function startShuffle() {
-      if (cardMeshes.length === 0) {
-        alert('Không có thẻ nào đang kích hoạt! Vui lòng vào "QUẢN LÝ THẺ" để bật lại.');
-        return;
-      }
-
-      currentState = STATE_SHUFFLING;
+      currentState = STATE_SPINNING;
       hideRevealBanner();
-      updateStatusToast('🌀 Đang trộn bài ma thuật... Nhấp vào thẻ đang bay hoặc bấm "DỪNG" để chọn!');
-      updateHUDControlsForState(STATE_SHUFFLING);
+      updateStatusToast('🌀 Vòng quay ma thuật đang xoay tít... Bấm <span class="text-pink-400 font-black">"🛑 DỪNG LẠI"</span> để chọn thẻ may mắn!');
+      updateHUDControlsForState(STATE_SPINNING);
 
-      sound.playWhoosh();
-
-      // Continuous ticking sound
-      if (shuffleTickTimer) clearInterval(shuffleTickTimer);
-      shuffleTickTimer = setInterval(() => {
+      // Âm thanh nhịp quay liên tục
+      if (spinTickInterval) clearInterval(spinTickInterval);
+      spinTickInterval = setInterval(() => {
         sound.playTick();
-      }, 105);
+      }, 95);
 
-      // Kill any running tweens
-      cardMeshes.forEach(item => gsap.killTweensOf(item.mesh.position));
-      cardMeshes.forEach(item => gsap.killTweensOf(item.mesh.rotation));
-
-      // Step 1: Convergence to center portal
-      cardMeshes.forEach((item, i) => {
-        const mesh = item.mesh;
-        gsap.to(mesh.position, {
-          x: 0,
-          y: 0,
-          z: 0.5 + i * 0.03,
-          duration: 0.6,
-          ease: 'power2.inOut',
-          onComplete: () => {
-            if (currentState === STATE_SHUFFLING) {
-              // Step 2: Continuous 3D Vortex Orbit
-              const orbitRadiusX = 4.2 + (i % 3) * 0.5;
-              const orbitRadiusY = 2.8 + (i % 2) * 0.4;
-              const offsetPhase = (i / cardMeshes.length) * Math.PI * 2;
-
-              const proxy = { angle: offsetPhase };
-              gsap.to(proxy, {
-                angle: offsetPhase + Math.PI * 16,
-                duration: 5.5,
-                ease: 'none',
-                repeat: -1,
-                onUpdate: () => {
-                  if (currentState === STATE_SHUFFLING) {
-                    mesh.position.x = Math.cos(proxy.angle) * orbitRadiusX;
-                    mesh.position.y = Math.sin(proxy.angle * 1.5) * orbitRadiusY * 0.75;
-                    mesh.position.z = Math.sin(proxy.angle) * 2.2;
-                    mesh.rotation.y = proxy.angle + Math.PI / 2;
-                    mesh.rotation.z = Math.cos(proxy.angle) * 0.35;
-                  }
-                }
-              });
-            }
-          }
-        });
+      // GSAP quay carouselGroup liên tục quanh trục Y
+      if (spinTween) spinTween.kill();
+      spinTween = gsap.to(carouselGroup.rotation, {
+        y: '+=31.4159', // 5 vòng
+        duration: 3.5,
+        ease: 'none',
+        repeat: -1
       });
     }
 
-    /* 5.3 Stop Shuffle & Reveal Picked Card */
-    function stopShuffleAndPick(selectedMesh = null) {
-      if (currentState !== STATE_SHUFFLING && currentState !== STATE_IDLE) return;
+    /* 5.2 Dừng vòng quay và lật thẻ được chọn */
+    function stopCarouselAndReveal(targetMesh = null) {
+      if (currentState !== STATE_SPINNING && currentState !== STATE_IDLE) return;
 
-      if (shuffleTickTimer) {
-        clearInterval(shuffleTickTimer);
-        shuffleTickTimer = null;
+      if (spinTickInterval) {
+        clearInterval(spinTickInterval);
+        spinTickInterval = null;
+      }
+      if (spinTween) {
+        spinTween.kill();
+        spinTween = null;
       }
 
-      // If no mesh passed (user clicked Stop button), pick random active card
-      if (!selectedMesh) {
-        const randIndex = Math.floor(Math.random() * cardMeshes.length);
-        selectedMesh = cardMeshes[randIndex].mesh;
+      const count = cardMeshes.length;
+      let chosenIndex = 0;
+
+      if (targetMesh && targetMesh.userData) {
+        chosenIndex = targetMesh.userData.index;
+      } else {
+        chosenIndex = Math.floor(Math.random() * count);
       }
 
-      revealCard(selectedMesh);
-    }
+      activeCardIndex = chosenIndex;
+      const chosenItem = cardMeshes[chosenIndex];
+      const mesh = chosenItem.mesh;
+      revealedCardMesh = mesh;
 
-    /* 5.4 Reveal Card Animation & Celebration */
-    function revealCard(mesh) {
       currentState = STATE_REVEALED;
-      activeRevealedCard = mesh.userData.cardData;
-
       updateStatusToast('🌟 ĐẶC QUYỀN ĐÃ XUẤT HIỆN! 🌟');
       updateHUDControlsForState(STATE_REVEALED);
 
-      sound.playWhoosh();
+      // Tính góc target để lá bài được chọn dừng đúng chính diện Camera (góc = 0)
+      const targetAngle = -mesh.userData.baseAngle;
+      const currentRotY = carouselGroup.rotation.y;
+      const twoPi = Math.PI * 2;
+      
+      // Thêm 2 vòng quay hãm phanh mượt mà
+      let diff = (targetAngle - currentRotY) % twoPi;
+      if (diff > 0) diff -= twoPi;
+      const finalCarouselRotY = currentRotY + diff - twoPi * 2;
 
-      // Scatter and fade all other cards
-      cardMeshes.forEach(item => {
-        gsap.killTweensOf(item.mesh.position);
-        gsap.killTweensOf(item.mesh.rotation);
-
-        if (item.mesh !== mesh) {
-          gsap.to(item.mesh.position, {
-            x: item.mesh.position.x * 2.4,
-            y: item.mesh.position.y * 2.4 - 2.5,
-            z: -7.0,
-            duration: 1.1,
-            ease: 'power3.out'
-          });
-          gsap.to(item.mesh.scale, {
-            x: 0.3,
-            y: 0.3,
-            z: 0.3,
-            duration: 0.9
-          });
-          item.mesh.material.forEach(mat => {
-            gsap.to(mat, { opacity: 0.12, duration: 0.9 });
-          });
+      // Hiệu ứng hãm phanh vòng quay
+      gsap.to(carouselGroup.rotation, {
+        y: finalCarouselRotY,
+        duration: 2.2,
+        ease: 'power3.out',
+        onComplete: () => {
+          // Khi đã dừng đúng chính diện, phóng to thẻ bài về phía trước camera và lật mặt
+          revealWinningCard(mesh);
         }
       });
+    }
 
-      // Selected card flies to Center Portal (0, 0.45, 3.6) close to Camera
-      // Executes 2 full 360-degree rotations and finishes with rotation.y = Math.PI * 4
-      // This displays the Front Face (+Z normal) perfectly unmirrored!
-      const tl = gsap.timeline();
-
-      tl.to(mesh.position, {
-        x: 0,
+    /* 5.3 Phóng to và lật mặt trước lá bài chiến thắng */
+    function revealWinningCard(mesh) {
+      // Đẩy lá bài tiến sát Camera (từ Z=5.6 tới Z=7.8) và xoay lật 180 độ
+      gsap.to(mesh.position, {
+        z: mesh.userData.basePos.z + 2.2,
         y: 0.45,
-        z: 3.6,
-        duration: 1.45,
-        ease: 'power3.out'
-      }, 0);
+        duration: 1.2,
+        ease: 'power2.out'
+      });
 
-      tl.to(mesh.scale, {
-        x: 1.25,
-        y: 1.25,
-        z: 1.25,
-        duration: 1.45,
-        ease: 'back.out(1.5)'
-      }, 0);
+      gsap.to(mesh.scale, {
+        x: 1.28,
+        y: 1.28,
+        z: 1.28,
+        duration: 1.2,
+        ease: 'back.out(1.6)'
+      });
 
-      tl.to(mesh.rotation, {
-        x: 0,
-        y: Math.PI * 4,
-        z: 0,
-        duration: 1.45,
-        ease: 'power3.inOut',
+      // Lật mặt trước: quay rotation.y thêm 180 độ (Math.PI)
+      gsap.to(mesh.rotation, {
+        y: mesh.userData.baseRotY + Math.PI,
+        duration: 1.2,
+        ease: 'power2.inOut',
         onComplete: () => {
           sound.playFanfare();
           launchConfetti();
-          showRevealBanner(activeRevealedCard);
+          showRevealBanner(mesh.userData.cardData);
         }
-      }, 0);
+      });
     }
 
-    /* 5.5 Confetti Fireworks Celebration */
+    /* 5.4 Thu thẻ về lại vòng quay và sẵn sàng cho lượt mới (KHÔNG MẤT THẺ) */
+    function resetCardBackToCarousel() {
+      if (!revealedCardMesh) {
+        hideRevealBanner();
+        currentState = STATE_IDLE;
+        updateHUDControlsForState(STATE_IDLE);
+        return;
+      }
+
+      hideRevealBanner();
+
+      const mesh = revealedCardMesh;
+      // Thu thẻ về lại đúng vị trí slot trên vòng tròn 3D
+      gsap.to(mesh.position, {
+        x: mesh.userData.basePos.x,
+        y: 0,
+        z: mesh.userData.basePos.z,
+        duration: 0.9,
+        ease: 'power2.inOut'
+      });
+
+      gsap.to(mesh.scale, {
+        x: 1.0,
+        y: 1.0,
+        z: 1.0,
+        duration: 0.8
+      });
+
+      // Úp mặt sau lại
+      gsap.to(mesh.rotation, {
+        y: mesh.userData.baseRotY,
+        duration: 0.9,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          revealedCardMesh = null;
+          currentState = STATE_IDLE;
+          updateStatusToast('✨ Bấm nút <span class="text-yellow-400 font-extrabold">"▶ BẮT ĐẦU"</span> để học sinh tiếp theo quay! ✨');
+          updateHUDControlsForState(STATE_IDLE);
+        }
+      });
+    }
+
+    /* 5.5 Pháo giấy Confetti */
     function launchConfetti() {
       if (typeof confetti !== 'function') return;
 
-      // Center blast
       confetti({
         particleCount: 130,
         spread: 100,
@@ -1443,7 +1228,6 @@
         colors: ['#00f2fe', '#ff0844', '#f6d365', '#7928ca', '#ffffff']
       });
 
-      // Left & Right Cannons
       setTimeout(() => {
         confetti({
           particleCount: 90,
@@ -1463,7 +1247,7 @@
     }
 
     /* ==========================================================================
-       6. UI STATE MANAGEMENT & HUD EVENT LISTENERS
+       6. UI STATE MANAGEMENT & HUD BUTTON EVENTS
        ========================================================================== */
     const mainActionBtn = document.getElementById('btn-main-action');
     const mainActionIcon = document.getElementById('main-action-icon');
@@ -1473,7 +1257,7 @@
     const revealTitle = document.getElementById('reveal-title');
     const revealSubtitle = document.getElementById('reveal-subtitle');
     const revealRarityBadge = document.getElementById('reveal-rarity-badge');
-    const btnCardReroll = document.getElementById('btn-card-reroll');
+    const btnNextTurn = document.getElementById('btn-next-turn');
 
     function updateStatusToast(msg) {
       statusToastText.innerHTML = msg;
@@ -1483,15 +1267,15 @@
       if (state === STATE_IDLE) {
         mainActionIcon.textContent = '▶';
         mainActionLabel.textContent = 'BẮT ĐẦU';
-        mainActionBtn.className = 'group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-lg hover:shadow-cyan-400/50 hover:scale-105 active:scale-95';
-      } else if (state === STATE_SHUFFLING) {
+        mainActionBtn.className = 'group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-orbitron shadow-xl hover:shadow-cyan-400/60 hover:scale-105 active:scale-95';
+      } else if (state === STATE_SPINNING) {
         mainActionIcon.textContent = '🛑';
-        mainActionLabel.textContent = 'DỪNG & RÚT NGẪU NHIÊN';
-        mainActionBtn.className = 'group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white font-orbitron shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 animate-pulse';
+        mainActionLabel.textContent = 'DỪNG LẠI';
+        mainActionBtn.className = 'group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white font-orbitron shadow-xl hover:shadow-pink-500/60 hover:scale-105 active:scale-95 animate-pulse';
       } else if (state === STATE_REVEALED) {
         mainActionIcon.textContent = '↻';
         mainActionLabel.textContent = 'LƯỢT TIẾP THEO';
-        mainActionBtn.className = 'group relative px-8 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-lg md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 hover:from-purple-400 hover:to-cyan-400 text-white font-orbitron shadow-lg hover:shadow-purple-500/50 hover:scale-105 active:scale-95';
+        mainActionBtn.className = 'group relative px-10 md:px-14 py-4 md:py-4.5 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 hover:from-purple-400 hover:to-cyan-400 text-white font-orbitron shadow-xl hover:shadow-purple-500/60 hover:scale-105 active:scale-95';
       }
     }
 
@@ -1523,62 +1307,70 @@
         revealRarityBadge.textContent = 'R • XANH CYAN PHỔ THÔNG';
       }
 
-      // Check if this card allows a reroll
-      if (card.isReroll || card.title.toLowerCase().includes('bốc lại')) {
-        btnCardReroll.classList.remove('hidden');
-      } else {
-        btnCardReroll.classList.add('hidden');
-      }
-
-      revealBanner.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+      revealBanner.classList.remove('hidden');
+      setTimeout(() => {
+        revealBanner.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+      }, 10);
     }
 
     function hideRevealBanner() {
-      revealBanner.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
-      btnCardReroll.classList.add('hidden');
+      revealBanner.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+      setTimeout(() => {
+        revealBanner.classList.add('hidden');
+      }, 400);
     }
 
     function updateCardCounters() {
       const active = getActiveCards().length;
-      const total = cardsData.length;
       document.getElementById('card-count-active').textContent = active;
-      document.getElementById('card-count-total').textContent = total;
-      document.getElementById('modal-cards-count').textContent = total;
+      document.getElementById('modal-cards-count').textContent = active;
     }
 
-    // Main Start/Stop Action Button Click
-    mainActionBtn.addEventListener('click', () => {
+    // Nút BẮT ĐẦU / DỪNG LẠI / LƯỢT TIẾP THEO
+    mainActionBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       sound.playClick();
+
       if (currentState === STATE_IDLE) {
-        startShuffle();
-      } else if (currentState === STATE_SHUFFLING) {
-        stopShuffleAndPick();
+        startCarouselSpin();
+      } else if (currentState === STATE_SPINNING) {
+        stopCarouselAndReveal();
       } else if (currentState === STATE_REVEALED) {
-        hideRevealBanner();
-        positionCardsInIdleArc();
+        resetCardBackToCarousel();
       }
     });
 
-    // Replay / Reset Layout Button Click
-    document.getElementById('btn-replay').addEventListener('click', () => {
+    // Nút Quay Tiếp Trên Banner
+    btnNextTurn.addEventListener('click', (e) => {
+      e.stopPropagation();
       sound.playClick();
-      if (shuffleTickTimer) clearInterval(shuffleTickTimer);
-      hideRevealBanner();
-      positionCardsInIdleArc();
+      resetCardBackToCarousel();
     });
 
-    // Sound Toggle Button
+    // Nút Xếp Lại Bài / Reset Vị Trí
+    document.getElementById('btn-replay').addEventListener('click', (e) => {
+      e.stopPropagation();
+      sound.playClick();
+      if (spinTickInterval) clearInterval(spinTickInterval);
+      if (spinTween) spinTween.kill();
+      hideRevealBanner();
+      buildCards();
+    });
+
+    // Nút Âm Thanh Bật / Tắt
     const btnSoundToggle = document.getElementById('btn-sound-toggle');
-    btnSoundToggle.addEventListener('click', () => {
+    btnSoundToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       soundEnabled = !soundEnabled;
       document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
       document.getElementById('sound-text').textContent = soundEnabled ? 'BẬT' : 'TẮT';
       if (soundEnabled) sound.playClick();
     });
 
-    // Fullscreen Toggle (Projector / Smart TV)
+    // Nút Toàn Màn Hình
     const btnFullscreen = document.getElementById('btn-fullscreen');
-    btnFullscreen.addEventListener('click', () => {
+    btnFullscreen.addEventListener('click', (e) => {
+      e.stopPropagation();
       sound.playClick();
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => {
@@ -1589,8 +1381,9 @@
       }
     });
 
-    // Editable Classroom Name Badge
-    document.getElementById('btn-edit-classname').addEventListener('click', () => {
+    // Nút Sửa Tên Lớp Học
+    document.getElementById('btn-edit-classname').addEventListener('click', (e) => {
+      e.stopPropagation();
       sound.playClick();
       const currentName = document.getElementById('classroom-name-display').textContent.trim();
       const newName = prompt('Nhập tên lớp học hoặc tên thầy/cô:', currentName);
@@ -1601,37 +1394,10 @@
       }
     });
 
-    // Keep Card in Deck Button
-    document.getElementById('btn-card-keep').addEventListener('click', () => {
-      sound.playClick();
-      hideRevealBanner();
-      positionCardsInIdleArc();
-    });
-
-    // Remove Card from Deck Button (Marked as Awarded)
-    document.getElementById('btn-card-remove').addEventListener('click', () => {
-      sound.playClick();
-      if (activeRevealedCard) {
-        const target = cardsData.find(c => c.id === activeRevealedCard.id);
-        if (target) {
-          target.active = false;
-          saveCardsData();
-        }
-      }
-      hideRevealBanner();
-      buildCards();
-    });
-
-    // Immediate Reroll Action Button
-    btnCardReroll.addEventListener('click', () => {
-      sound.playClick();
-      hideRevealBanner();
-      startShuffle();
-    });
-
-    // Quick Reset Default Cards
-    document.getElementById('btn-reset-default').addEventListener('click', () => {
-      if (confirm('Khôi phục danh sách về 11 thẻ đặc quyền mặc định ban đầu?')) {
+    // Nút Khôi Phục Mặc Định
+    document.getElementById('btn-reset-default').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (confirm('Khôi phục danh sách về 11 thẻ đặc quyền mặc định?')) {
         sound.playClick();
         cardsData = JSON.parse(JSON.stringify(DEFAULT_CARDS));
         saveCardsData();
@@ -1640,35 +1406,68 @@
     });
 
     /* Mouse & Click Handling for 3D Cards */
-    function onMouseMove(e) {
+    function onCanvasMouseMove(e) {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      checkRaycastHover();
-    }
 
-    function onCanvasClick(e) {
-      if (currentState === STATE_IDLE || currentState === STATE_SHUFFLING) {
+      if (currentState === STATE_IDLE) {
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
         if (intersects.length > 0) {
           const hit = intersects[0].object;
-          stopShuffleAndPick(hit);
+          if (hoveredCard !== hit) {
+            if (hoveredCard) resetHover(hoveredCard);
+            hoveredCard = hit;
+            applyHover(hit);
+            sound.playHover();
+          }
+        } else {
+          if (hoveredCard) {
+            resetHover(hoveredCard);
+            hoveredCard = null;
+          }
         }
       }
     }
 
-    function onTouchStart(e) {
+    function applyHover(mesh) {
+      document.body.style.cursor = 'pointer';
+      gsap.to(mesh.scale, { x: 1.1, y: 1.1, z: 1.1, duration: 0.25 });
+    }
+
+    function resetHover(mesh) {
+      document.body.style.cursor = 'default';
+      gsap.to(mesh.scale, { x: 1.0, y: 1.0, z: 1.0, duration: 0.25 });
+    }
+
+    function onCanvasClick(e) {
+      if (currentState === STATE_SPINNING) {
+        // Nhấp vào bất kỳ đâu trên không gian 3D lúc đang xoay thì dừng vòng quay
+        stopCarouselAndReveal();
+      } else if (currentState === STATE_IDLE) {
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
+        if (intersects.length > 0) {
+          stopCarouselAndReveal(intersects[0].object);
+        }
+      }
+    }
+
+    function onCanvasTouchStart(e) {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
         mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
 
-        if (currentState === STATE_IDLE || currentState === STATE_SHUFFLING) {
+        if (currentState === STATE_SPINNING) {
+          e.preventDefault();
+          stopCarouselAndReveal();
+        } else if (currentState === STATE_IDLE) {
           raycaster.setFromCamera(mouse, camera);
           const intersects = raycaster.intersectObjects(cardMeshes.map(c => c.mesh));
           if (intersects.length > 0) {
             e.preventDefault();
-            stopShuffleAndPick(intersects[0].object);
+            stopCarouselAndReveal(intersects[0].object);
           }
         }
       }
@@ -1709,7 +1508,6 @@
     btnCloseModal.addEventListener('click', closeModal);
     btnSaveModal.addEventListener('click', closeModal);
 
-    // Optimized Image File Picker: Scales & Compresses to save localStorage space
     const newCardFileInput = document.getElementById('new-card-file');
     newCardFileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -1735,7 +1533,6 @@
       }
     });
 
-    // Add New Card Form Submit
     document.getElementById('btn-submit-add-card').addEventListener('click', () => {
       const title = document.getElementById('new-card-title').value.trim();
       const icon = document.getElementById('new-card-icon').value.trim() || '🎁';
@@ -1759,11 +1556,10 @@
         customImage: customImageBase64
       };
 
-      cardsData.unshift(newCard);
+      cardsData.push(newCard);
       saveCardsData();
       renderModalCardsList();
 
-      // Reset input fields
       document.getElementById('new-card-title').value = '';
       document.getElementById('new-card-sub').value = '';
       customImageBase64 = null;
@@ -1771,7 +1567,6 @@
       document.getElementById('file-chosen-name').textContent = 'Chưa chọn ảnh';
     });
 
-    // Enable all cards
     document.getElementById('btn-enable-all').addEventListener('click', () => {
       sound.playClick();
       cardsData.forEach(c => c.active = true);
@@ -1779,7 +1574,6 @@
       renderModalCardsList();
     });
 
-    // Reset default cards inside modal
     document.getElementById('btn-reset-cards-modal').addEventListener('click', () => {
       if (confirm('Khôi phục danh sách về 11 thẻ mặc định ban đầu?')) {
         sound.playClick();
@@ -1789,7 +1583,6 @@
       }
     });
 
-    // Render Modal Cards List
     function renderModalCardsList() {
       cardsManagerList.innerHTML = '';
       cardsData.forEach((card, index) => {
@@ -1816,10 +1609,7 @@
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <button class="btn-toggle-active px-3 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer ${card.active ? 'bg-emerald-600/80 hover:bg-emerald-500 text-white' : 'bg-slate-700 hover:bg-slate-600 text-slate-400'}" data-index="${index}">
-              ${card.active ? '✓ Đang bật' : '✕ Đang ẩn'}
-            </button>
-            <button class="btn-delete-card w-7 h-7 rounded-lg bg-rose-900/40 hover:bg-rose-600 text-rose-300 hover:text-white text-xs flex items-center justify-center transition-colors cursor-pointer" data-index="${index}" title="Xóa thẻ">
+            <button class="btn-delete-card w-8 h-8 rounded-lg bg-rose-900/40 hover:bg-rose-600 text-rose-300 hover:text-white text-xs flex items-center justify-center transition-colors cursor-pointer" data-index="${index}" title="Xóa thẻ">
               🗑
             </button>
           </div>
@@ -1828,17 +1618,6 @@
         cardsManagerList.appendChild(item);
       });
 
-      // Bind toggle active
-      document.querySelectorAll('.btn-toggle-active').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const idx = parseInt(e.currentTarget.getAttribute('data-index'));
-          cardsData[idx].active = !cardsData[idx].active;
-          saveCardsData();
-          renderModalCardsList();
-        });
-      });
-
-      // Bind delete card
       document.querySelectorAll('.btn-delete-card').forEach(btn => {
         btn.addEventListener('click', (e) => {
           const idx = parseInt(e.currentTarget.getAttribute('data-index'));
@@ -1863,32 +1642,28 @@
 
       const elapsedTime = clock.getElapsedTime();
 
-      // Rotate Space Particles gently
+      // Hạt vũ trụ xoay nhẹ
       if (particlesMesh) {
-        particlesMesh.rotation.y = elapsedTime * 0.035;
-        particlesMesh.rotation.x = Math.sin(elapsedTime * 0.02) * 0.05;
+        particlesMesh.rotation.y = elapsedTime * 0.03;
+        particlesMesh.rotation.x = Math.sin(elapsedTime * 0.02) * 0.04;
       }
 
-      // Rotate Magic Portal Rings
-      if (portalGroup) {
-        portalGroup.children.forEach((child, idx) => {
-          if (idx === 1) child.rotation.z = -elapsedTime * 0.32;
-          if (idx === 2) child.rotation.z = elapsedTime * 0.22;
-        });
+      // Vòng tròn ma pháp dưới chân xoay ngược chiều
+      if (portalDisc) {
+        portalDisc.rotation.z = -elapsedTime * 0.4;
       }
 
-      // Gentle floating sine motion in Idle state
+      // Hiệu ứng nhấp nhô nhẹ khi vòng quay đang dừng (Idle)
       if (currentState === STATE_IDLE) {
         cardMeshes.forEach((item, i) => {
           const mesh = item.mesh;
           if (mesh !== hoveredCard) {
-            const floatOffset = Math.sin(elapsedTime * 1.8 + i * 0.6) * 0.07;
-            mesh.position.y = mesh.userData.originalPos.y + floatOffset;
+            const floatOffset = Math.sin(elapsedTime * 2.0 + i * 0.55) * 0.05;
+            mesh.position.y = floatOffset;
           }
         });
       }
 
-      // Render Scene
       renderer.render(scene, camera);
     }
 
