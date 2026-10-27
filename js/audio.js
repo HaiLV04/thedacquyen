@@ -1,11 +1,37 @@
 /**
- * AUDIO.JS - Bộ tạo âm thanh tự động bằng Web Audio API (Synthesizer không cần file mp3 ngoài)
+ * AUDIO.JS - Bộ phát âm thanh chuyên nghiệp cho lớp học
+ * Hỗ trợ các file MP3 trong thư mục assets/audio/ kết hợp Web Audio API dự phòng
  */
 
 class SoundEngine {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+
+    // Đường dẫn các file âm thanh trong assets/audio/
+    // (Cô giáo hoặc bạn có thể thay thế các file mp3 này trong thư mục assets/audio/)
+    this.audioPaths = {
+      click: 'assets/audio/click.mp3',
+      fanfare: 'assets/audio/fanfare.mp3',
+      applause: 'assets/audio/applause.mp3',
+      pop: 'assets/audio/pop.mp3',
+      bell: 'assets/audio/bell.mp3'
+    };
+
+    this.audioPool = {};
+    this.initAudioElements();
+  }
+
+  initAudioElements() {
+    Object.entries(this.audioPaths).forEach(([key, src]) => {
+      try {
+        const audio = new Audio(src);
+        audio.preload = 'auto';
+        this.audioPool[key] = audio;
+      } catch (e) {
+        console.warn('Không thể nạp audio:', key, e);
+      }
+    });
   }
 
   init() {
@@ -29,9 +55,73 @@ class SoundEngine {
     this.enabled = !!val;
   }
 
+  playAudioFile(key, volume = 1.0) {
+    if (!this.enabled) return false;
+    const baseAudio = this.audioPool[key];
+    if (baseAudio) {
+      try {
+        const soundClone = baseAudio.cloneNode();
+        soundClone.volume = Math.max(0, Math.min(1, volume));
+        const playPromise = soundClone.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Trình duyệt chặn autoplay thì fallback sang synth
+          });
+        }
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  playClick() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.playAudioFile('click', 0.85)) {
+      this.synthClick();
+    }
+  }
+
   playHover() {
     if (!this.enabled) return;
     this.init();
+    if (!this.playAudioFile('pop', 0.45)) {
+      this.synthHover();
+    }
+  }
+
+  playTick() {
+    if (!this.enabled) return;
+    this.init();
+    // Vòng quay xoay: dùng synth tick triangle chuẩn xác nhịp điệu
+    this.synthTick();
+  }
+
+  playFanfare() {
+    if (!this.enabled) return;
+    this.init();
+
+    // 1. Kèn chiến thắng tưng bừng từ fanfare.mp3
+    this.playAudioFile('fanfare', 1.0);
+
+    // 2. Tiếng vỗ tay hoan hô rộn rã của cả lớp từ applause.mp3 sau 380ms
+    setTimeout(() => {
+      this.playAudioFile('applause', 0.85);
+    }, 380);
+
+    // 3. Chuông ngân vang may mắn từ bell.mp3 sau 850ms
+    setTimeout(() => {
+      this.playAudioFile('bell', 0.6);
+    }, 850);
+
+    // 4. Synth lấp lánh dự phòng
+    this.synthFanfare();
+  }
+
+  // --- BỘ TỔNG HỢP ÂM THANH DỰ PHÒNG (SYNTHESIZER) ---
+  synthHover() {
     if (!this.ctx) return;
     const now = this.ctx.currentTime;
     const osc = this.ctx.createOscillator();
@@ -51,9 +141,27 @@ class SoundEngine {
     osc.stop(now + 0.08);
   }
 
-  playTick() {
-    if (!this.enabled) return;
-    this.init();
+  synthClick() {
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(850, now);
+    osc.frequency.exponentialRampToValueAtTime(450, now + 0.05);
+
+    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.05);
+  }
+
+  synthTick() {
     if (!this.ctx) return;
     const now = this.ctx.currentTime;
     const osc = this.ctx.createOscillator();
@@ -73,9 +181,7 @@ class SoundEngine {
     osc.stop(now + 0.035);
   }
 
-  playFanfare() {
-    if (!this.enabled) return;
-    this.init();
+  synthFanfare() {
     if (!this.ctx) return;
     const now = this.ctx.currentTime;
 
@@ -89,7 +195,7 @@ class SoundEngine {
       osc.frequency.setValueAtTime(freq, noteTime);
 
       gain.gain.setValueAtTime(0.001, noteTime);
-      gain.gain.linearRampToValueAtTime(0.25, noteTime + 0.04);
+      gain.gain.linearRampToValueAtTime(0.2, noteTime + 0.04);
       gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 1.1);
 
       osc.connect(gain);
@@ -98,46 +204,6 @@ class SoundEngine {
       osc.start(noteTime);
       osc.stop(noteTime + 1.15);
     });
-
-    for (let i = 0; i < 8; i++) {
-      const sparkOsc = this.ctx.createOscillator();
-      const sparkGain = this.ctx.createGain();
-      const sparkTime = now + 0.45 + i * 0.08;
-
-      sparkOsc.type = 'sine';
-      sparkOsc.frequency.setValueAtTime(1300 + Math.random() * 900, sparkTime);
-
-      sparkGain.gain.setValueAtTime(0.06, sparkTime);
-      sparkGain.gain.exponentialRampToValueAtTime(0.001, sparkTime + 0.25);
-
-      sparkOsc.connect(sparkGain);
-      sparkGain.connect(this.ctx.destination);
-
-      sparkOsc.start(sparkTime);
-      sparkOsc.stop(sparkTime + 0.25);
-    }
-  }
-
-  playClick() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    const now = this.ctx.currentTime;
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(850, now);
-    osc.frequency.exponentialRampToValueAtTime(450, now + 0.05);
-
-    gain.gain.setValueAtTime(0.12, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-
-    osc.start(now);
-    osc.stop(now + 0.05);
   }
 }
 
