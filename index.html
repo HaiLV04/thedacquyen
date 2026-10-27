@@ -13,12 +13,12 @@
         extend: {
           colors: {
             sunYellow: '#fef08a',
-            butterCream: '#fefce8',
+            butterCream: '#fffbeb',
             pastelOrange: '#fed7aa',
             pastelPink: '#fbcfe8',
             pastelSky: '#bae6fd',
             pastelMint: '#bbf7d0',
-            textDark: '#1e293b',
+            textDark: '#0f172a',
           },
           animation: {
             'bounce-subtle': 'bounce 2.2s infinite',
@@ -29,7 +29,7 @@
     }
   </script>
 
-  <!-- Google Fonts: Quicksand & Be Vietnam Pro (Tròn trịa, đáng yêu, chuẩn tiểu học) -->
+  <!-- Google Fonts: Quicksand & Be Vietnam Pro (Tròn trịa, đậm đà, chuẩn tiểu học) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800;900&family=Be+Vietnam+Pro:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -54,31 +54,31 @@
       overflow: hidden;
       background: linear-gradient(135deg, #fef08a 0%, #fef9c3 35%, #fed7aa 70%, #fce7f3 100%);
       font-family: 'Quicksand', sans-serif;
-      color: #1e293b;
+      color: #0f172a;
     }
     .glow-sun {
-      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.35), 0 8px 10px -6px rgba(245, 158, 11, 0.2);
+      box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.25), 0 8px 10px -6px rgba(217, 119, 6, 0.15);
     }
-    /* Bright Glassmorphism for Grade 1 (Nền sáng Pastel ấm áp) */
+    /* Bright Glassmorphism - Tương phản cao, êm mắt */
     .glass-sunny {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 2px solid rgba(254, 240, 138, 0.95);
-      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
+      border: 2px solid rgba(245, 158, 11, 0.5);
+      box-shadow: 0 8px 24px rgba(217, 119, 6, 0.12);
     }
     .glass-btn-sunny {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
-      border: 2px solid rgba(253, 224, 71, 0.9);
+      border: 2px solid rgba(245, 158, 11, 0.45);
       transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.1);
     }
     .glass-btn-sunny:hover {
       background: #ffffff;
-      border-color: #f59e0b;
+      border-color: #d97706;
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.25);
+      box-shadow: 0 6px 18px rgba(217, 119, 6, 0.2);
     }
     .glass-btn-sunny:active {
       transform: translateY(1px);
@@ -93,7 +93,7 @@
       display: block;
     }
     .modal-backdrop-sunny {
-      background: rgba(254, 243, 199, 0.75);
+      background: rgba(254, 243, 199, 0.8);
       backdrop-filter: blur(14px);
     }
     @keyframes floatUpDown {
@@ -122,68 +122,68 @@
       <!-- Top Left: Huy hiệu Lớp 1B1 - Cô Nguyễn Thị Hoài Thanh -->
       <div class="flex items-center space-x-2">
         <button id="btn-edit-classname" title="Bấm để chỉnh sửa tên lớp / tên cô giáo"
-          class="group flex items-center space-x-3 px-4 py-2.5 rounded-2xl glass-sunny hover:border-amber-400 transition-all cursor-pointer glow-sun">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 flex items-center justify-center text-xl shadow-md animate-bounce-subtle border-2 border-white">
+          class="group flex items-center space-x-3 px-4 py-2.5 rounded-2xl glass-sunny hover:border-amber-500 transition-all cursor-pointer glow-sun">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 flex items-center justify-center text-xl shadow-md animate-bounce-subtle border-2 border-white">
             🌻
           </div>
           <div class="text-left">
             <div class="flex items-center gap-1.5">
-              <span id="classroom-grade-display" class="px-2 py-0.5 rounded-md bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-black text-xs uppercase tracking-wider shadow-sm">
+              <span id="classroom-grade-display" class="px-2 py-0.5 rounded-md bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-black text-xs uppercase tracking-wider shadow-sm">
                 LỚP 1B1
               </span>
-              <span class="text-xs text-amber-700 font-extrabold flex items-center gap-0.5">
+              <span class="text-xs text-amber-900 font-extrabold flex items-center gap-0.5">
                 <span>🌸</span>
                 <span>Tiểu Học</span>
               </span>
             </div>
-            <span id="classroom-teacher-display" class="text-sm md:text-base font-black text-amber-950 group-hover:text-amber-700 transition-colors block leading-tight mt-0.5">
+            <span id="classroom-teacher-display" class="text-sm md:text-base font-black text-slate-900 group-hover:text-amber-800 transition-colors block leading-tight mt-0.5">
               Cô Nguyễn Thị Hoài Thanh
             </span>
           </div>
-          <span class="text-xs text-amber-600 group-hover:text-amber-800 ml-1">✏️</span>
+          <span class="text-xs text-amber-700 group-hover:text-amber-900 ml-1">✏️</span>
         </button>
       </div>
 
-      <!-- Top Center: Tiêu đề Vui tươi & Bắt mắt -->
+      <!-- Top Center: Tiêu đề Tươi Sáng & Đậm Đà, Sắc Nét Tuyệt Đối -->
       <div class="flex flex-col items-center text-center relative">
         <span class="absolute -left-9 -top-3 text-2xl sticker-float">🎈</span>
         <span class="absolute -right-9 -top-3 text-2xl sticker-float-delayed">🌈</span>
 
-        <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wide uppercase font-vietnam text-amber-900 drop-shadow-sm flex items-center gap-2">
+        <h1 class="text-2xl md:text-4xl lg:text-5xl font-black tracking-wide uppercase font-vietnam drop-shadow-sm flex items-center gap-2">
           <span>🌸</span>
-          <span class="bg-gradient-to-r from-amber-600 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-r from-amber-800 via-orange-700 to-rose-700 bg-clip-text text-transparent">
             CHỌN THẺ ĐẶC QUYỀN
           </span>
           <span>🌻</span>
         </h1>
         
-        <div class="flex items-center gap-2 mt-1 text-xs md:text-sm font-bold text-amber-900">
-          <span class="px-3.5 py-1 rounded-full bg-white/95 border-2 border-amber-300 text-amber-800 shadow-sm flex items-center gap-1.5">
+        <div class="flex items-center gap-2 mt-1 text-xs md:text-sm font-bold text-slate-900">
+          <span class="px-3.5 py-1 rounded-full bg-white/95 border-2 border-amber-400 text-amber-950 shadow-sm flex items-center gap-1.5 font-black">
             <span>🎁</span>
-            <span>Bộ thẻ: <strong id="card-count-active" class="text-orange-600 text-sm md:text-base font-black">11</strong> thẻ may mắn</span>
+            <span>Bộ thẻ: <strong id="card-count-active" class="text-rose-700 text-sm md:text-base font-black">11</strong> thẻ may mắn</span>
           </span>
-          <button id="btn-quick-add" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-300 text-amber-800 shadow-sm cursor-pointer">
+          <button id="btn-quick-add" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-400 text-amber-950 font-black shadow-sm cursor-pointer">
             <span>➕</span>
             <span>Thêm thẻ</span>
           </button>
-          <button id="btn-reset-default" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-300 text-amber-800 shadow-sm cursor-pointer">
+          <button id="btn-reset-default" class="hover:bg-amber-100 transition-colors flex items-center gap-1 bg-white/95 px-3 py-1 rounded-lg border-2 border-amber-400 text-amber-950 font-black shadow-sm cursor-pointer">
             <span>↻</span>
             <span>Mặc định</span>
           </button>
         </div>
       </div>
 
-      <!-- Top Right: Nút Tiện Ích Trình Chiếu -->
+      <!-- Top Right: Nút Tiện Ích Trình Chiếu Nền Sáng Đậm Nét -->
       <div class="flex items-center gap-2">
-        <button id="btn-sound-toggle" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-amber-900 flex items-center gap-1.5 cursor-pointer">
+        <button id="btn-sound-toggle" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-slate-900 flex items-center gap-1.5 cursor-pointer">
           <span id="sound-icon-box" class="text-base">🔊</span>
           <span id="sound-text">BẬT</span>
         </button>
-        <button id="btn-fullscreen" title="Bật/Tắt Toàn Màn Hình TV Lớp Học" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-amber-900 flex items-center gap-1.5 cursor-pointer">
+        <button id="btn-fullscreen" title="Bật/Tắt Toàn Màn Hình TV Lớp Học" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-slate-900 flex items-center gap-1.5 cursor-pointer">
           <span class="text-base">⛶</span>
           <span class="hidden sm:inline">TOÀN MÀN HÌNH</span>
         </button>
-        <button id="btn-manage-cards" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-orange-700 border-orange-300 hover:border-orange-400 flex items-center gap-1.5 cursor-pointer glow-sun">
+        <button id="btn-manage-cards" class="glass-btn-sunny px-3.5 py-2.5 rounded-xl text-xs md:text-sm font-black text-rose-800 border-amber-400 hover:border-amber-500 flex items-center gap-1.5 cursor-pointer glow-sun">
           <span class="text-base animate-spin-slow">⚙️</span>
           <span>QUẢN LÝ THẺ</span>
         </button>
@@ -191,26 +191,26 @@
 
     </header>
 
-    <!-- CENTER INSTRUCTION TOAST (Nhắc nhở nhẹ nhàng, tự ẩn khi thẻ đã hiện) -->
+    <!-- CENTER INSTRUCTION TOAST (Màu chữ đen đậm, nền trắng ngà viền vàng hổ phách) -->
     <div id="status-toast" class="self-center pointer-events-none transition-all duration-300 opacity-95 text-center mt-2">
-      <div class="inline-block px-6 py-2 rounded-full bg-white/95 border-2 border-amber-400 shadow-lg text-amber-950 font-bold text-sm md:text-base flex items-center gap-2">
+      <div class="inline-block px-6 py-2.5 rounded-full bg-white/95 border-2 border-amber-500 shadow-md text-slate-900 font-black text-sm md:text-base flex items-center gap-2">
         <span>⭐</span>
-        <span id="status-toast-text">Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!</span>
+        <span id="status-toast-text">Bấm nút <strong class="text-rose-700 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!</span>
         <span>⭐</span>
       </div>
     </div>
 
-    <!-- BOTTOM ACTION DOCK (Có bộ chỉnh thời gian quay tự động ngay bên cạnh) -->
+    <!-- BOTTOM ACTION DOCK -->
     <footer class="w-full flex flex-col items-center gap-2.5 pointer-events-auto pb-4 z-30">
       
       <!-- Primary Control Buttons Dock -->
-      <div id="controls-dock" class="flex flex-wrap items-center justify-center gap-3 md:gap-4 p-2.5 rounded-3xl glass-sunny shadow-xl border-2 border-amber-300">
+      <div id="controls-dock" class="flex flex-wrap items-center justify-center gap-3 md:gap-4 p-2.5 rounded-3xl glass-sunny shadow-xl border-2 border-amber-400">
         
-        <!-- Setting: Thời gian quay tự động (Giây) -->
-        <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-amber-50 border-2 border-amber-300 shadow-sm text-amber-900 font-bold">
+        <!-- Setting: Thời gian quay tự động -->
+        <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-amber-50 border-2 border-amber-400 shadow-sm text-slate-900 font-black">
           <span class="text-lg">⏱️</span>
-          <span class="text-xs md:text-sm font-black text-amber-900 whitespace-nowrap">Thời gian quay:</span>
-          <select id="spin-duration-select" class="px-2.5 py-1 rounded-xl bg-white border-2 border-amber-300 text-amber-950 font-black text-sm cursor-pointer focus:outline-none focus:border-orange-400 shadow-sm">
+          <span class="text-xs md:text-sm font-black text-slate-900 whitespace-nowrap">Thời gian quay:</span>
+          <select id="spin-duration-select" class="px-2.5 py-1 rounded-xl bg-white border-2 border-amber-400 text-slate-900 font-black text-sm cursor-pointer focus:outline-none focus:border-amber-600 shadow-sm">
             <option value="3">3 giây</option>
             <option value="4" selected>4 giây</option>
             <option value="5">5 giây</option>
@@ -219,15 +219,15 @@
           </select>
         </div>
 
-        <!-- Big Start Action Button -->
-        <button id="btn-main-action" type="button" class="group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3">
+        <!-- Big Start Action Button: Màu Cam Vàng Rực Rỡ, Chữ Đen Đậm Nổi Bật -->
+        <button id="btn-main-action" type="button" class="group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3">
           <span id="main-action-icon-box" class="text-2xl">▶</span>
           <span id="main-action-label">BẮT ĐẦU QUAY</span>
           <div class="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </button>
 
         <!-- Replay / Reset Layout Button -->
-        <button id="btn-replay" type="button" class="glass-btn-sunny px-5 py-3.5 md:py-4 rounded-2xl font-black text-sm md:text-base text-amber-900 flex items-center gap-2 hover:text-orange-600 cursor-pointer">
+        <button id="btn-replay" type="button" class="glass-btn-sunny px-5 py-3.5 md:py-4 rounded-2xl font-black text-sm md:text-base text-slate-900 flex items-center gap-2 hover:text-orange-700 cursor-pointer">
           <span class="text-xl">↻</span>
           <span>XẾP LẠI BÀI</span>
         </button>
@@ -235,9 +235,9 @@
       </div>
 
       <!-- Quick Classroom TV Hint -->
-      <div class="text-xs md:text-sm text-amber-900 font-extrabold tracking-wide flex items-center gap-2 bg-white/90 px-4 py-1 rounded-full border border-amber-300 shadow-sm">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-        <span>Lớp 1B1 - Cô Hoài Thanh • Thẻ tự dừng chính giữa màn hình và giữ nguyên 100%</span>
+      <div class="text-xs md:text-sm text-slate-900 font-black tracking-wide flex items-center gap-2 bg-white/95 px-4 py-1 rounded-full border-2 border-amber-400 shadow-sm">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
+        <span>Lớp 1B1 - Cô Hoài Thanh • Thẻ dừng chính giữa màn hình và giữ nguyên 100%</span>
       </div>
 
     </footer>
@@ -246,20 +246,20 @@
 
   <!-- MODAL: CARD MANAGEMENT -->
   <div id="modal-manage" class="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 modal-backdrop-sunny hidden transition-opacity duration-300">
-    <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl bg-white/95 border-3 border-amber-300 shadow-2xl overflow-hidden pointer-events-auto">
+    <div class="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-3xl bg-white border-3 border-amber-400 shadow-2xl overflow-hidden pointer-events-auto">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between px-6 py-4 border-b-2 border-amber-200 bg-amber-50">
+      <div class="flex items-center justify-between px-6 py-4 border-b-2 border-amber-300 bg-amber-50">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-200 text-amber-800 flex items-center justify-center font-black text-xl shadow-inner">
+          <div class="w-10 h-10 rounded-xl bg-amber-300 text-amber-950 flex items-center justify-center font-black text-xl shadow-sm">
             🌻
           </div>
           <div>
-            <h3 class="text-lg md:text-xl font-black text-amber-900">QUẢN LÝ BỘ THẺ ĐẶC QUYỀN LỚP 1B1</h3>
-            <p class="text-xs text-amber-700 font-bold">Cô Nguyễn Thị Hoài Thanh dễ dàng thêm hoặc chỉnh sửa các đặc quyền cho học sinh</p>
+            <h3 class="text-lg md:text-xl font-black text-slate-900">QUẢN LÝ BỘ THẺ ĐẶC QUYỀN LỚP 1B1</h3>
+            <p class="text-xs text-amber-950 font-bold">Cô Nguyễn Thị Hoài Thanh dễ dàng thêm hoặc chỉnh sửa các đặc quyền cho học sinh</p>
           </div>
         </div>
-        <button id="btn-close-modal" class="w-9 h-9 rounded-full bg-amber-200 hover:bg-rose-500 text-amber-900 hover:text-white flex items-center justify-center font-black text-lg transition-colors cursor-pointer">
+        <button id="btn-close-modal" class="w-9 h-9 rounded-full bg-amber-200 hover:bg-rose-500 text-slate-900 hover:text-white flex items-center justify-center font-black text-lg transition-colors cursor-pointer">
           ✕
         </button>
       </div>
@@ -268,21 +268,21 @@
       <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
         
         <!-- Section: Add New Card Form -->
-        <div class="p-4 md:p-5 rounded-2xl bg-amber-50/80 border-2 border-amber-200 space-y-4">
-          <h4 class="text-sm font-black uppercase tracking-wider text-amber-900 flex items-center gap-2">
+        <div class="p-4 md:p-5 rounded-2xl bg-amber-50/90 border-2 border-amber-300 space-y-4">
+          <h4 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
             <span>✨</span>
             <span>THÊM ĐẶC QUYỀN MỚI CHO BÉ</span>
           </h4>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div class="md:col-span-2">
-              <label class="block text-xs font-black text-amber-900 mb-1">Tên đặc quyền <span class="text-rose-500">*</span></label>
-              <input type="text" id="new-card-title" placeholder="VD: Được cô khen trước cả lớp..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-200 focus:border-amber-400 focus:outline-none text-slate-800 text-sm font-bold shadow-sm">
+              <label class="block text-xs font-black text-slate-900 mb-1">Tên đặc quyền <span class="text-rose-600">*</span></label>
+              <input type="text" id="new-card-title" placeholder="VD: Được cô khen trước cả lớp..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-300 focus:border-amber-500 focus:outline-none text-slate-900 text-sm font-bold shadow-sm">
             </div>
 
             <div>
-              <label class="block text-xs font-black text-amber-900 mb-1">Biểu tượng ngộ nghĩnh</label>
-              <select id="new-card-icon-select" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-200 focus:border-amber-400 focus:outline-none text-slate-800 text-sm font-bold cursor-pointer shadow-sm">
+              <label class="block text-xs font-black text-slate-900 mb-1">Biểu tượng ngộ nghĩnh</label>
+              <select id="new-card-icon-select" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-300 focus:border-amber-500 focus:outline-none text-slate-900 text-sm font-bold cursor-pointer shadow-sm">
                 <option value="crown">👑 Vương Miện Lớp Trưởng</option>
                 <option value="medal">🎖️ Huy Chương Lớp Phó</option>
                 <option value="shield">🛡️ Khiên Tổ Trưởng</option>
@@ -301,13 +301,13 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-black text-amber-900 mb-1">Lời chúc vui tươi từ cô Hoài Thanh</label>
-              <input type="text" id="new-card-sub" placeholder="VD: Nhận phần thưởng từ cô Thanh nhé!" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-200 focus:border-amber-400 focus:outline-none text-slate-800 text-sm font-bold shadow-sm">
+              <label class="block text-xs font-black text-slate-900 mb-1">Lời chúc vui tươi từ cô Hoài Thanh</label>
+              <input type="text" id="new-card-sub" placeholder="VD: Nhận phần thưởng từ cô Thanh nhé!" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-300 focus:border-amber-500 focus:outline-none text-slate-900 text-sm font-bold shadow-sm">
             </div>
 
             <div>
-              <label class="block text-xs font-black text-amber-900 mb-1">Màu sắc thẻ tươi sáng</label>
-              <select id="new-card-rarity" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-200 focus:border-amber-400 focus:outline-none text-slate-800 text-sm font-bold cursor-pointer shadow-sm">
+              <label class="block text-xs font-black text-slate-900 mb-1">Màu sắc thẻ tươi sáng</label>
+              <select id="new-card-rarity" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-amber-300 focus:border-amber-500 focus:outline-none text-slate-900 text-sm font-bold cursor-pointer shadow-sm">
                 <option value="SSR">Vàng Nắng Rực Rỡ (SSR)</option>
                 <option value="PINK" selected>Hồng Dâu Kẹo Ngọt (SSR)</option>
                 <option value="SR">Tím Pastel Mộng Mơ (SR)</option>
@@ -320,14 +320,14 @@
 
           <!-- Tải ảnh tùy chọn -->
           <div>
-            <label class="block text-xs font-black text-amber-900 mb-1">Hoặc tải ảnh mặt trước lá bài (Tùy chọn):</label>
+            <label class="block text-xs font-black text-slate-900 mb-1">Hoặc tải ảnh mặt trước lá bài (Tùy chọn):</label>
             <div class="flex items-center gap-3">
-              <input type="file" id="new-card-file" accept="image/*" class="text-xs text-slate-600 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-amber-400 file:text-amber-950 hover:file:bg-amber-500 cursor-pointer">
-              <span id="file-chosen-name" class="text-xs text-amber-800 font-bold truncate max-w-xs">Chưa chọn ảnh</span>
+              <input type="file" id="new-card-file" accept="image/*" class="text-xs text-slate-700 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-amber-400 file:text-amber-950 hover:file:bg-amber-500 cursor-pointer">
+              <span id="file-chosen-name" class="text-xs text-amber-950 font-bold truncate max-w-xs">Chưa chọn ảnh</span>
             </div>
           </div>
 
-          <button id="btn-submit-add-card" class="w-full py-3 rounded-xl font-black text-sm bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-md transition-transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer border-2 border-white">
+          <button id="btn-submit-add-card" class="w-full py-3 rounded-xl font-black text-sm bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-md transition-transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer border-2 border-white">
             <span>➕</span>
             <span>Thêm Thẻ Vào Bộ Quay Lớp 1B1</span>
           </button>
@@ -336,12 +336,12 @@
         <!-- Section: Danh Sách Thẻ -->
         <div>
           <div class="flex items-center justify-between mb-3">
-            <h4 class="text-sm font-black uppercase tracking-wider text-amber-900 flex items-center gap-2">
+            <h4 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
               <span>📋</span>
-              <span>DANH SÁCH 11 THẺ HIỆN CÓ (<span id="modal-cards-count" class="text-orange-600 font-black">11</span>)</span>
+              <span>DANH SÁCH 11 THẺ HIỆN CÓ (<span id="modal-cards-count" class="text-rose-700 font-black">11</span>)</span>
             </h4>
             <div class="flex gap-2">
-              <button id="btn-reset-cards-modal" class="text-xs px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-rose-100 text-rose-700 font-bold border border-amber-300 cursor-pointer">Khôi phục 11 thẻ gốc</button>
+              <button id="btn-reset-cards-modal" class="text-xs px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-rose-100 text-rose-800 font-black border border-amber-300 cursor-pointer">Khôi phục 11 thẻ gốc</button>
             </div>
           </div>
 
@@ -353,9 +353,9 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="px-6 py-4 border-t-2 border-amber-200 bg-amber-50 flex items-center justify-between">
-        <span class="text-xs text-amber-800 font-bold">Dữ liệu được lưu an toàn trong trình duyệt của lớp học</span>
-        <button id="btn-save-modal" class="px-6 py-2.5 rounded-xl font-black text-xs md:text-sm bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 transition-colors cursor-pointer border-2 border-white shadow-sm">
+      <div class="px-6 py-4 border-t-2 border-amber-300 bg-amber-50 flex items-center justify-between">
+        <span class="text-xs text-amber-950 font-bold">Dữ liệu được lưu an toàn trong trình duyệt của lớp học</span>
+        <button id="btn-save-modal" class="px-6 py-2.5 rounded-xl font-black text-xs md:text-sm bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 transition-colors cursor-pointer border-2 border-white shadow-sm">
           Đóng & Cập nhật vòng quay 3D
         </button>
       </div>
@@ -366,25 +366,25 @@
   <!-- JAVASCRIPT APPLICATION LOGIC -->
   <script>
     /* ==========================================================================
-       0. VECTOR SVG ICONS FOR CARDS
+       0. VECTOR SVG ICONS FOR CARDS (Tươi sáng, viền đậm, độ bão hòa cao)
        ========================================================================== */
     const SVG_ICONS = {
       crown: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
             <linearGradient id="goldCrown" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fffbeb"/>
-              <stop offset="40%" stop-color="#fde047"/>
-              <stop offset="100%" stop-color="#f59e0b"/>
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="40%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#d97706"/>
             </linearGradient>
           </defs>
-          <path d="M15 72 L20 30 L38 52 L50 18 L62 52 L80 30 L85 72 Z" fill="url(#goldCrown)" stroke="#d97706" stroke-width="3" stroke-linejoin="round"/>
-          <rect x="18" y="72" width="64" height="13" rx="5" fill="url(#goldCrown)" stroke="#d97706" stroke-width="3"/>
-          <circle cx="50" cy="18" r="5.5" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+          <path d="M15 72 L20 30 L38 52 L50 18 L62 52 L80 30 L85 72 Z" fill="url(#goldCrown)" stroke="#78350f" stroke-width="3.5" stroke-linejoin="round"/>
+          <rect x="18" y="72" width="64" height="13" rx="5" fill="url(#goldCrown)" stroke="#78350f" stroke-width="3.5"/>
+          <circle cx="50" cy="18" r="5.5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
           <circle cx="20" cy="30" r="4.5" fill="#0284c7" stroke="#ffffff" stroke-width="1.8"/>
           <circle cx="80" cy="30" r="4.5" fill="#0284c7" stroke="#ffffff" stroke-width="1.8"/>
-          <circle cx="34" cy="78" r="3.5" fill="#ef4444"/>
-          <circle cx="50" cy="78" r="3.5" fill="#10b981"/>
+          <circle cx="34" cy="78" r="3.5" fill="#dc2626"/>
+          <circle cx="50" cy="78" r="3.5" fill="#16a34a"/>
           <circle cx="66" cy="78" r="3.5" fill="#0284c7"/>
         </svg>
       `,
@@ -394,20 +394,20 @@
           <defs>
             <linearGradient id="ribbonBlue" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#38bdf8"/>
-              <stop offset="50%" stop-color="#60a5fa"/>
-              <stop offset="100%" stop-color="#2563eb"/>
+              <stop offset="50%" stop-color="#2563eb"/>
+              <stop offset="100%" stop-color="#1d4ed8"/>
             </linearGradient>
             <linearGradient id="goldMedal" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#fef08a"/>
-              <stop offset="60%" stop-color="#fbbf24"/>
+              <stop offset="60%" stop-color="#f59e0b"/>
               <stop offset="100%" stop-color="#d97706"/>
             </linearGradient>
           </defs>
-          <polygon points="32,14 44,14 38,44 26,44" fill="url(#ribbonBlue)" stroke="#1d4ed8" stroke-width="2"/>
-          <polygon points="68,14 56,14 62,44 74,44" fill="url(#ribbonBlue)" stroke="#1d4ed8" stroke-width="2"/>
-          <circle cx="50" cy="62" r="26" fill="url(#goldMedal)" stroke="#b45309" stroke-width="3"/>
-          <circle cx="50" cy="62" r="20" fill="none" stroke="#fef3c7" stroke-width="2.5" stroke-dasharray="3 2"/>
-          <polygon points="50,47 54,57 65,58 57,65 60,76 50,70 40,76 43,65 35,58 46,57" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+          <polygon points="32,14 44,14 38,44 26,44" fill="url(#ribbonBlue)" stroke="#1e3a8a" stroke-width="2.5"/>
+          <polygon points="68,14 56,14 62,44 74,44" fill="url(#ribbonBlue)" stroke="#1e3a8a" stroke-width="2.5"/>
+          <circle cx="50" cy="62" r="26" fill="url(#goldMedal)" stroke="#78350f" stroke-width="3.5"/>
+          <circle cx="50" cy="62" r="20" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="3 2"/>
+          <polygon points="50,47 54,57 65,58 57,65 60,76 50,70 40,76 43,65 35,58 46,57" fill="#fffbeb" stroke="#78350f" stroke-width="1.8"/>
         </svg>
       `,
 
@@ -415,13 +415,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
             <linearGradient id="purpleShield" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#e879f9"/>
-              <stop offset="50%" stop-color="#a855f7"/>
+              <stop offset="0%" stop-color="#c084fc"/>
+              <stop offset="50%" stop-color="#9333ea"/>
               <stop offset="100%" stop-color="#6b21a8"/>
             </linearGradient>
           </defs>
-          <path d="M50 14 C75 14 84 24 84 45 C84 70 50 88 50 88 C50 88 16 70 16 45 C16 24 25 14 50 14 Z" fill="url(#purpleShield)" stroke="#fef08a" stroke-width="3.5"/>
-          <polygon points="50,30 55,44 70,45 58,54 62,69 50,60 38,69 42,54 30,45 45,44" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+          <path d="M50 14 C75 14 84 24 84 45 C84 70 50 88 50 88 C50 88 16 70 16 45 C16 24 25 14 50 14 Z" fill="url(#purpleShield)" stroke="#581c87" stroke-width="3.5"/>
+          <polygon points="50,30 55,44 70,45 58,54 62,69 50,60 38,69 42,54 30,45 45,44" fill="#fde047" stroke="#78350f" stroke-width="2"/>
         </svg>
       `,
 
@@ -434,19 +434,19 @@
             </linearGradient>
             <linearGradient id="starGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f472b6"/>
-              <stop offset="100%" stop-color="#ec4899"/>
+              <stop offset="100%" stop-color="#db2777"/>
             </linearGradient>
           </defs>
           <g transform="translate(34, 54) scale(0.95)">
-            <polygon points="0,-28 7,-8 28,-5 12,9 17,29 0,17 -17,29 -12,9 -28,-5 -7,-8" fill="url(#starGrad1)" stroke="#d97706" stroke-width="2.5"/>
-            <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.8"/>
+            <polygon points="0,-28 7,-8 28,-5 12,9 17,29 0,17 -17,29 -12,9 -28,-5 -7,-8" fill="url(#starGrad1)" stroke="#78350f" stroke-width="2.5"/>
+            <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.9"/>
           </g>
           <g transform="translate(66, 38) scale(1.1)">
-            <polygon points="0,-28 7,-8 28,-5 12,9 17,29 0,17 -17,29 -12,9 -28,-5 -7,-8" fill="url(#starGrad2)" stroke="#be185d" stroke-width="2.5"/>
-            <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.8"/>
+            <polygon points="0,-28 7,-8 28,-5 12,9 17,29 0,17 -17,29 -12,9 -28,-5 -7,-8" fill="url(#starGrad2)" stroke="#831843" stroke-width="2.5"/>
+            <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.9"/>
           </g>
-          <circle cx="16" cy="28" r="3" fill="#38bdf8"/>
-          <circle cx="82" cy="74" r="3.5" fill="#facc15"/>
+          <circle cx="16" cy="28" r="3" fill="#0284c7"/>
+          <circle cx="82" cy="74" r="3.5" fill="#d97706"/>
         </svg>
       `,
 
@@ -454,13 +454,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
             <linearGradient id="starSingle" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="30%" stop-color="#7dd3fc"/>
-              <stop offset="100%" stop-color="#0284c7"/>
+              <stop offset="0%" stop-color="#67e8f9"/>
+              <stop offset="50%" stop-color="#0284c7"/>
+              <stop offset="100%" stop-color="#0369a1"/>
             </linearGradient>
           </defs>
-          <polygon points="50,12 61,36 88,38 67,56 74,82 50,68 26,82 33,56 12,38 39,36" fill="url(#starSingle)" stroke="#0369a1" stroke-width="3" stroke-linejoin="round"/>
-          <polygon points="50,22 57,38 74,40 60,52 64,69 50,60 36,69 40,52 26,40 43,38" fill="#ffffff" opacity="0.5"/>
+          <polygon points="50,12 61,36 88,38 67,56 74,82 50,68 26,82 33,56 12,38 39,36" fill="url(#starSingle)" stroke="#0c4a6e" stroke-width="3.5" stroke-linejoin="round"/>
+          <polygon points="50,22 57,38 74,40 60,52 64,69 50,60 36,69 40,52 26,40 43,38" fill="#ffffff" opacity="0.45"/>
         </svg>
       `,
 
@@ -472,14 +472,14 @@
               <stop offset="100%" stop-color="#db2777"/>
             </linearGradient>
           </defs>
-          <path d="M38 32 L38 56 L62 56 L62 32 C62 26 38 26 38 32 Z" fill="url(#pinkChair)" stroke="#9f1239" stroke-width="2.5"/>
-          <path d="M34 56 L66 56 L66 64 L34 64 Z" fill="#fda4af" stroke="#9f1239" stroke-width="2" rx="3"/>
-          <line x1="38" y1="64" x2="32" y2="84" stroke="#e11d48" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="62" y1="64" x2="68" y2="84" stroke="#e11d48" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M22 36 A 34 34 0 0 1 78 36" fill="none" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
-          <polygon points="78,28 86,38 74,42" fill="#38bdf8"/>
-          <path d="M78 68 A 34 34 0 0 1 22 68" fill="none" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
-          <polygon points="22,76 14,66 26,62" fill="#38bdf8"/>
+          <path d="M38 32 L38 56 L62 56 L62 32 C62 26 38 26 38 32 Z" fill="url(#pinkChair)" stroke="#831843" stroke-width="3"/>
+          <path d="M34 56 L66 56 L66 64 L34 64 Z" fill="#fda4af" stroke="#831843" stroke-width="3" rx="3"/>
+          <line x1="38" y1="64" x2="32" y2="84" stroke="#831843" stroke-width="4" stroke-linecap="round"/>
+          <line x1="62" y1="64" x2="68" y2="84" stroke="#831843" stroke-width="4" stroke-linecap="round"/>
+          <path d="M22 36 A 34 34 0 0 1 78 36" fill="none" stroke="#0284c7" stroke-width="5" stroke-linecap="round"/>
+          <polygon points="78,28 86,38 74,42" fill="#0284c7"/>
+          <path d="M78 68 A 34 34 0 0 1 22 68" fill="none" stroke="#0284c7" stroke-width="5" stroke-linecap="round"/>
+          <polygon points="22,76 14,66 26,62" fill="#0284c7"/>
         </svg>
       `,
 
@@ -488,15 +488,15 @@
           <defs>
             <linearGradient id="clapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#4ade80"/>
-              <stop offset="100%" stop-color="#16a34a"/>
+              <stop offset="100%" stop-color="#15803d"/>
             </linearGradient>
           </defs>
-          <path d="M26 62 C26 48 40 40 50 48 L46 68 L34 76 Z" fill="url(#clapGrad)" stroke="#14532d" stroke-width="2.5"/>
-          <path d="M74 62 C74 48 60 40 50 48 L54 68 L66 76 Z" fill="url(#clapGrad)" stroke="#14532d" stroke-width="2.5"/>
-          <circle cx="50" cy="46" r="6" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
-          <line x1="50" y1="32" x2="50" y2="18" stroke="#facc15" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="36" y1="36" x2="24" y2="24" stroke="#facc15" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="64" y1="36" x2="76" y2="24" stroke="#facc15" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M26 62 C26 48 40 40 50 48 L46 68 L34 76 Z" fill="url(#clapGrad)" stroke="#14532d" stroke-width="3"/>
+          <path d="M74 62 C74 48 60 40 50 48 L54 68 L66 76 Z" fill="url(#clapGrad)" stroke="#14532d" stroke-width="3"/>
+          <circle cx="50" cy="46" r="6" fill="#fde047" stroke="#78350f" stroke-width="2"/>
+          <line x1="50" y1="32" x2="50" y2="18" stroke="#d97706" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="36" y1="36" x2="24" y2="24" stroke="#d97706" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="64" y1="36" x2="76" y2="24" stroke="#d97706" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       `,
 
@@ -505,14 +505,14 @@
           <defs>
             <linearGradient id="diceOrange" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#fde047"/>
-              <stop offset="60%" stop-color="#fb923c"/>
-              <stop offset="100%" stop-color="#ea580c"/>
+              <stop offset="60%" stop-color="#f97316"/>
+              <stop offset="100%" stop-color="#c2410c"/>
             </linearGradient>
           </defs>
-          <polygon points="50,20 76,34 50,48 24,34" fill="#ffedd5" stroke="#9a3412" stroke-width="2.5"/>
-          <polygon points="24,34 50,48 50,78 24,64" fill="url(#diceOrange)" stroke="#9a3412" stroke-width="2.5"/>
-          <polygon points="50,48 76,34 76,64 50,78" fill="#ea580c" stroke="#9a3412" stroke-width="2.5"/>
-          <circle cx="50" cy="34" r="4" fill="#9a3412"/>
+          <polygon points="50,20 76,34 50,48 24,34" fill="#ffedd5" stroke="#7c2d12" stroke-width="3"/>
+          <polygon points="24,34 50,48 50,78 24,64" fill="url(#diceOrange)" stroke="#7c2d12" stroke-width="3"/>
+          <polygon points="50,48 76,34 76,64 50,78" fill="#ea580c" stroke="#7c2d12" stroke-width="3"/>
+          <circle cx="50" cy="34" r="4" fill="#7c2d12"/>
           <circle cx="34" cy="50" r="3.5" fill="#ffffff"/>
           <circle cx="40" cy="64" r="3.5" fill="#ffffff"/>
           <circle cx="62" cy="50" r="3.5" fill="#ffffff"/>
@@ -528,11 +528,11 @@
               <stop offset="100%" stop-color="#064e3b"/>
             </linearGradient>
           </defs>
-          <rect x="15" y="20" width="70" height="50" rx="6" fill="#b45309" stroke="#78350f" stroke-width="2.5"/>
+          <rect x="15" y="20" width="70" height="50" rx="6" fill="#b45309" stroke="#451a03" stroke-width="3"/>
           <rect x="20" y="25" width="60" height="40" rx="3" fill="url(#boardGrad)"/>
-          <text x="32" y="50" font-family="'Quicksand', sans-serif" font-weight="bold" font-size="20" fill="#ffffff">A B C</text>
-          <polygon points="68,66 88,86 82,90 62,70" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
-          <line x1="58" y1="62" x2="70" y2="74" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+          <text x="32" y="50" font-family="'Quicksand', sans-serif" font-weight="900" font-size="20" fill="#ffffff">A B C</text>
+          <polygon points="68,66 88,86 82,90 62,70" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+          <line x1="58" y1="62" x2="70" y2="74" stroke="#fde047" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       `,
 
@@ -540,22 +540,22 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
             <linearGradient id="fanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#6ee7b7"/>
-              <stop offset="100%" stop-color="#059669"/>
+              <stop offset="0%" stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#047857"/>
             </linearGradient>
           </defs>
           <g transform="translate(50,50)">
-            <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="2"/>
+            <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="2.5"/>
             <g transform="rotate(120)">
-              <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="2"/>
+              <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="2.5"/>
             </g>
             <g transform="rotate(240)">
-              <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="2"/>
+              <path d="M0,0 C-8,-26 -4,-42 6,-42 C16,-42 12,-26 0,0" fill="url(#fanGrad)" stroke="#064e3b" stroke-width="2.5"/>
             </g>
-            <circle cx="0" cy="0" r="10" fill="#a7f3d0" stroke="#047857" stroke-width="3"/>
-            <circle cx="0" cy="0" r="4" fill="#047857"/>
+            <circle cx="0" cy="0" r="10" fill="#a7f3d0" stroke="#064e3b" stroke-width="3"/>
+            <circle cx="0" cy="0" r="4" fill="#064e3b"/>
           </g>
-          <path d="M68 62 C78 62 84 72 84 82 C74 82 64 76 68 62 Z" fill="#22c55e" stroke="#15803d" stroke-width="2"/>
+          <path d="M68 62 C78 62 84 72 84 82 C74 82 64 76 68 62 Z" fill="#16a34a" stroke="#064e3b" stroke-width="2.5"/>
         </svg>
       `,
 
@@ -564,16 +564,16 @@
           <defs>
             <linearGradient id="candyPink" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f472b6"/>
-              <stop offset="100%" stop-color="#e11d48"/>
+              <stop offset="100%" stop-color="#db2777"/>
             </linearGradient>
           </defs>
-          <line x1="38" y1="46" x2="22" y2="84" stroke="#d97706" stroke-width="5" stroke-linecap="round"/>
-          <line x1="62" y1="46" x2="78" y2="84" stroke="#d97706" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="38" cy="40" r="18" fill="url(#candyPink)" stroke="#be123c" stroke-width="2.5"/>
+          <line x1="38" y1="46" x2="22" y2="84" stroke="#78350f" stroke-width="5" stroke-linecap="round"/>
+          <line x1="62" y1="46" x2="78" y2="84" stroke="#78350f" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="38" cy="40" r="18" fill="url(#candyPink)" stroke="#831843" stroke-width="3"/>
           <path d="M38 28 A 12 12 0 0 1 50 40 A 6 6 0 0 1 38 46" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="62" cy="40" r="18" fill="#38bdf8" stroke="#0284c7" stroke-width="2.5"/>
+          <circle cx="62" cy="40" r="18" fill="#38bdf8" stroke="#0369a1" stroke-width="3"/>
           <path d="M62 28 A 12 12 0 0 1 74 40 A 6 6 0 0 1 62 46" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="50" cy="22" r="4" fill="#fde047" stroke="#d97706" stroke-width="1"/>
+          <circle cx="50" cy="22" r="4" fill="#fde047" stroke="#78350f" stroke-width="1.5"/>
         </svg>
       `,
 
@@ -581,16 +581,16 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
             <linearGradient id="giftBody" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fb7185"/>
-              <stop offset="100%" stop-color="#e11d48"/>
+              <stop offset="0%" stop-color="#f43f5e"/>
+              <stop offset="100%" stop-color="#be123c"/>
             </linearGradient>
           </defs>
-          <rect x="25" y="42" width="50" height="42" rx="5" fill="url(#giftBody)" stroke="#9f1239" stroke-width="2.5"/>
-          <rect x="20" y="32" width="60" height="14" rx="4" fill="#fda4af" stroke="#9f1239" stroke-width="2.5"/>
-          <rect x="44" y="32" width="12" height="52" fill="#fde047" stroke="#ca8a04" stroke-width="2"/>
-          <rect x="25" y="56" width="50" height="10" fill="#fde047" stroke="#ca8a04" stroke-width="2"/>
-          <ellipse cx="42" cy="26" rx="8" ry="6" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
-          <ellipse cx="58" cy="26" rx="8" ry="6" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+          <rect x="25" y="42" width="50" height="42" rx="5" fill="url(#giftBody)" stroke="#881337" stroke-width="3"/>
+          <rect x="20" y="32" width="60" height="14" rx="4" fill="#fda4af" stroke="#881337" stroke-width="3"/>
+          <rect x="44" y="32" width="12" height="52" fill="#fde047" stroke="#78350f" stroke-width="2"/>
+          <rect x="25" y="56" width="50" height="10" fill="#fde047" stroke="#78350f" stroke-width="2"/>
+          <ellipse cx="42" cy="26" rx="8" ry="6" fill="#fef08a" stroke="#78350f" stroke-width="2"/>
+          <ellipse cx="58" cy="26" rx="8" ry="6" fill="#fef08a" stroke="#78350f" stroke-width="2"/>
           <circle cx="50" cy="28" r="4.5" fill="#eab308"/>
         </svg>
       `,
@@ -599,27 +599,27 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
           <defs>
             <linearGradient id="sunPetals" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="0%" stop-color="#fde047"/>
               <stop offset="100%" stop-color="#f59e0b"/>
             </linearGradient>
           </defs>
           <g transform="translate(50,50)">
-            <ellipse cx="0" cy="-28" rx="8" ry="14" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="20" cy="-20" rx="8" ry="14" transform="rotate(45 20 -20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="28" cy="0" rx="8" ry="14" transform="rotate(90 28 0)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="20" cy="20" rx="8" ry="14" transform="rotate(135 20 20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="0" cy="28" rx="8" ry="14" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="-20" cy="20" rx="8" ry="14" transform="rotate(225 -20 20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="-28" cy="0" rx="8" ry="14" transform="rotate(270 -28 0)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <ellipse cx="-20" cy="-20" rx="8" ry="14" transform="rotate(315 -20 -20)" fill="url(#sunPetals)" stroke="#d97706" stroke-width="1.8"/>
-            <circle cx="0" cy="0" r="18" fill="#fbbf24" stroke="#b45309" stroke-width="2.5"/>
+            <ellipse cx="0" cy="-28" rx="8" ry="14" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="20" cy="-20" rx="8" ry="14" transform="rotate(45 20 -20)" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="28" cy="0" rx="8" ry="14" transform="rotate(90 28 0)" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="20" cy="20" rx="8" ry="14" transform="rotate(135 20 20)" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="0" cy="28" rx="8" ry="14" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="-20" cy="20" rx="8" ry="14" transform="rotate(225 -20 20)" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="-28" cy="0" rx="8" ry="14" transform="rotate(270 -28 0)" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <ellipse cx="-20" cy="-20" rx="8" ry="14" transform="rotate(315 -20 -20)" fill="url(#sunPetals)" stroke="#b45309" stroke-width="2"/>
+            <circle cx="0" cy="0" r="18" fill="#fbbf24" stroke="#78350f" stroke-width="3"/>
             <circle cx="-6" cy="-4" r="2.5" fill="#451a03"/>
             <circle cx="6" cy="-4" r="2.5" fill="#451a03"/>
             <circle cx="-5" cy="-5" r="0.8" fill="#ffffff"/>
             <circle cx="7" cy="-5" r="0.8" fill="#ffffff"/>
-            <path d="M-6 4 Q0 10 6 4" fill="none" stroke="#451a03" stroke-width="2.2" stroke-linecap="round"/>
-            <circle cx="-9" cy="2" r="2.5" fill="#f43f5e" opacity="0.6"/>
-            <circle cx="9" cy="2" r="2.5" fill="#f43f5e" opacity="0.6"/>
+            <path d="M-6 4 Q0 10 6 4" fill="none" stroke="#451a03" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="-9" cy="2" r="2.5" fill="#f43f5e" opacity="0.8"/>
+            <circle cx="9" cy="2" r="2.5" fill="#f43f5e" opacity="0.8"/>
           </g>
         </svg>
       `
@@ -661,7 +661,7 @@
 
     function loadSavedData() {
       try {
-        const saved = localStorage.getItem('privilege_cards_sunny_v2');
+        const saved = localStorage.getItem('privilege_cards_sunny_v3');
         if (saved) {
           cardsData = JSON.parse(saved);
         } else {
@@ -689,7 +689,7 @@
     }
 
     function saveCardsData() {
-      localStorage.setItem('privilege_cards_sunny_v2', JSON.stringify(cardsData));
+      localStorage.setItem('privilege_cards_sunny_v3', JSON.stringify(cardsData));
       updateCardCounters();
     }
 
@@ -832,7 +832,7 @@
     const sound = new SoundEngine();
 
     /* ==========================================================================
-       3. THREE.JS 3D SCENE (PASTEL YELLOW SUNSHINE)
+       3. THREE.JS 3D SCENE (ÁNH SÁNG CHUẨN, KHÔNG CHÁY SÁNG, KHÔNG LÓA MẮT)
        ========================================================================== */
     const canvas = document.getElementById('three-canvas');
     let scene, camera, renderer;
@@ -858,9 +858,8 @@
 
     function initThreeScene() {
       scene = new THREE.Scene();
-      // Nền pastel vàng nắng tươi sáng 100%
       scene.background = new THREE.Color(0xfef9c3);
-      scene.fog = new THREE.FogExp2(0xfef9c3, 0.016);
+      scene.fog = new THREE.FogExp2(0xfef9c3, 0.015);
 
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
       camera.position.set(0, 0.45, 12.2);
@@ -875,23 +874,20 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+      // Tone Mapping chuẩn xác - Giảm exposure xuống 0.96 để thẻ trắng không bị lóa trắng xóa!
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 0.96;
+
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2(-999, -999);
 
-      const ambientLight = new THREE.AmbientLight(0xfffaed, 2.4);
+      // ĐIỀU CHỈNH CƯỜNG ĐỘ ÁNH SÁNG DỊU NHẸ, GIỮ TRỌN VẸN ĐỘ ĐẬM CỦA MÀU SẮC
+      const ambientLight = new THREE.AmbientLight(0xfffaed, 1.15); // Cân bằng không làm cháy màu
       scene.add(ambientLight);
 
-      const sunLight1 = new THREE.DirectionalLight(0xffedd5, 1.2);
-      sunLight1.position.set(5, 8, 10);
+      const sunLight1 = new THREE.DirectionalLight(0xfff7ed, 0.65);
+      sunLight1.position.set(4, 7, 8);
       scene.add(sunLight1);
-
-      const lightGold = new THREE.PointLight(0xf59e0b, 1.8, 25);
-      lightGold.position.set(-6, 4, 6);
-      scene.add(lightGold);
-
-      const lightPeach = new THREE.PointLight(0xf472b6, 1.6, 25);
-      lightPeach.position.set(6, -3, 6);
-      scene.add(lightPeach);
 
       createFloatingCuteStickers();
       createCutePedestal();
@@ -979,15 +975,17 @@
     }
 
     /* ==========================================================================
-       4. TEXTURE DRAWING (MẶT TRƯỚC TRẮNG NGÀ & MẶT SAU HOA HƯỚNG DƯƠNG)
+       4. TEXTURE DRAWING (MẶT TRƯỚC SẮC NÉT, TƯƠNG PHẢN CAO, HOÀN TOÀN KHÔNG CHÓI)
        ========================================================================== */
 
+    /* 4.1 Mặt sau: Nền vàng nắng viền cam đậm, chữ nâu đậm cực kỳ rõ */
     function generateBackFaceTexture() {
       const c = document.createElement('canvas');
       c.width = 512;
       c.height = 700;
       const ctx = c.getContext('2d');
 
+      // Nền vàng nắng ấm
       const bgGrad = ctx.createLinearGradient(0, 0, 512, 700);
       bgGrad.addColorStop(0, '#fef08a');
       bgGrad.addColorStop(0.5, '#fde047');
@@ -995,7 +993,8 @@
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 512, 700);
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      // Chấm bi cam nhẹ
+      ctx.fillStyle = 'rgba(245, 158, 11, 0.18)';
       for (let x = 40; x < 512; x += 55) {
         for (let y = 40; y < 700; y += 55) {
           ctx.beginPath();
@@ -1004,14 +1003,16 @@
         }
       }
 
-      ctx.strokeStyle = '#f59e0b';
+      // Viền kép màu Cam Hổ Phách Đậm & Trắng tinh khôi
+      ctx.strokeStyle = '#c2410c';
       ctx.lineWidth = 14;
       ctx.strokeRect(18, 18, 476, 664);
 
       ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 5;
+      ctx.lineWidth = 4;
       ctx.strokeRect(30, 30, 452, 640);
 
+      // Icon Hoa hướng dương mặt cười SVG
       const backSvgImg = getSvgImage('magicBack');
       const drawCenterCrest = () => {
         ctx.drawImage(backSvgImg, 146, 225, 220, 220);
@@ -1026,13 +1027,14 @@
         };
       }
 
-      ctx.font = '900 26px "Quicksand", sans-serif';
+      // Tiêu đề mặt sau màu Nâu Hổ Phách Đậm (#78350f) - Đọc siêu rõ
+      ctx.font = '900 28px "Quicksand", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillStyle = '#b45309';
+      ctx.fillStyle = '#78350f';
       ctx.fillText('🌸 BÉ NGOAN LỚP 1B1 🌸', 256, 125);
 
       ctx.font = '800 20px "Quicksand", sans-serif';
-      ctx.fillStyle = '#ea580c';
+      ctx.fillStyle = '#9a3412';
       ctx.fillText('✦ CÔ HOÀI THANH KHEN TẶNG ✦', 256, 560);
 
       const texture = new THREE.CanvasTexture(c);
@@ -1041,40 +1043,49 @@
       return texture;
     }
 
+    /* 4.2 Mặt trước: Chữ to đậm (#0f172a), Băng rôn đậm chữ trắng, Hoàn toàn không chói */
     function generateFrontFaceTexture(card) {
       const c = document.createElement('canvas');
       c.width = 512;
       c.height = 700;
       const ctx = c.getContext('2d');
 
-      let themeColor = '#f59e0b';
-      let bannerColor = '#fef08a';
+      // BẢNG MÀU ĐẬM ĐÀ, SẮC NÉT, ĐỘ TƯƠNG PHẢN CAO NHẤT
+      let themeColor = '#d97706';      // Viền chính
+      let innerBorderColor = '#b45309'; // Viền phụ
       let rarityText = '★ BÉ NGOAN ★';
+      let subColor = '#c2410c';        // Màu phụ đề
 
       if (card.rarity === 'SSR') {
-        themeColor = '#f59e0b';
-        bannerColor = '#fef08a';
+        themeColor = '#d97706';        // Vàng hổ phách đậm
+        innerBorderColor = '#b45309';
         rarityText = '★ ĐẶC QUYỀN VÀNG KIM ★';
+        subColor = '#b45309';
       } else if (card.rarity === 'SR') {
-        themeColor = '#a855f7';
-        bannerColor = '#f3e8ff';
+        themeColor = '#7e22ce';        // Tím đậm
+        innerBorderColor = '#581c87';
         rarityText = '★ ĐẶC QUYỀN TÍM PASTEL ★';
+        subColor = '#6b21a8';
       } else if (card.rarity === 'PINK') {
-        themeColor = '#ec4899';
-        bannerColor = '#fce7f3';
+        themeColor = '#be185d';        // Hồng dâu đậm
+        innerBorderColor = '#9d174d';
         rarityText = '★ ĐẶC QUYỀN HỒNG DÂU ★';
+        subColor = '#9d174d';
       } else if (card.rarity === 'ORANGE') {
-        themeColor = '#ea580c';
-        bannerColor = '#ffedd5';
+        themeColor = '#c2410c';        // Cam cháy đậm
+        innerBorderColor = '#9a3412';
         rarityText = '★ ĐẶC QUYỀN CAM TƯƠI ★';
+        subColor = '#9a3412';
       } else if (card.rarity === 'GREEN') {
-        themeColor = '#16a34a';
-        bannerColor = '#dcfce7';
+        themeColor = '#15803d';        // Xanh lục đậm
+        innerBorderColor = '#166534';
         rarityText = '★ ĐẶC QUYỀN XANH LÁ ★';
+        subColor = '#166534';
       } else {
-        themeColor = '#0284c7';
-        bannerColor = '#e0f2fe';
+        themeColor = '#1d4ed8';        // Xanh dương đậm
+        innerBorderColor = '#1e40af';
         rarityText = '★ ĐẶC QUYỀN XANH TRỜI ★';
+        subColor = '#1e40af';
       }
 
       const texture = new THREE.CanvasTexture(c);
@@ -1082,42 +1093,48 @@
       texture.minFilter = THREE.LinearMipmapLinearFilter;
 
       function drawCardFace() {
-        ctx.fillStyle = '#ffffff';
+        // Nền thẻ màu Kem Vani cao cấp (#fffdf5) dịu mắt, hoàn toàn không bị chói lóa
+        ctx.fillStyle = '#fffdf5';
         ctx.fillRect(0, 0, 512, 700);
 
-        ctx.fillStyle = '#fefce8';
+        // Khung nền trong màu kem sữa ấm áp
+        ctx.fillStyle = '#fffbeb';
         ctx.fillRect(25, 25, 462, 650);
 
+        // Viền thẻ bo dày 16px màu ĐẬM ĐÀ
         ctx.strokeStyle = themeColor;
-        ctx.lineWidth = 14;
+        ctx.lineWidth = 16;
         ctx.strokeRect(18, 18, 476, 664);
 
-        ctx.strokeStyle = 'rgba(254, 240, 138, 0.9)';
-        ctx.lineWidth = 4;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.lineWidth = 3.5;
         ctx.strokeRect(28, 28, 456, 644);
 
-        ctx.fillStyle = bannerColor;
-        ctx.fillRect(40, 42, 432, 46);
-        ctx.strokeStyle = themeColor;
-        ctx.lineWidth = 2.5;
-        ctx.strokeRect(40, 42, 432, 46);
+        // BĂNG RÔN TRÊN: NỀN MÀU ĐẬM RỰC RỠ, CHỮ TRẮNG TINH KHÔI ĐỌC SIÊU RÕ
+        ctx.fillStyle = themeColor;
+        ctx.fillRect(38, 38, 436, 48);
 
         ctx.font = '900 22px "Quicksand", sans-serif';
-        ctx.fillStyle = '#451a03';
+        ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('🌸 LỚP 1B1 • CÔ HOÀI THANH 🌸', 256, 65);
+        ctx.fillText('🌸 LỚP 1B1 • CÔ HOÀI THANH 🌸', 256, 62);
 
-        ctx.fillStyle = themeColor;
+        // Huy hiệu độ hiếm
+        ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.roundRect(120, 100, 272, 32, 16);
+        ctx.roundRect(120, 98, 272, 34, 17);
         ctx.fill();
+        ctx.strokeStyle = themeColor;
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
 
         ctx.font = '900 15px "Quicksand", sans-serif';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(rarityText, 256, 116);
+        ctx.fillStyle = themeColor;
+        ctx.fillText(rarityText, 256, 115);
 
-        ctx.fillStyle = '#fffbeb';
+        // Vòng tròn chứa Icon SVG
+        ctx.fillStyle = '#fef3c7';
         ctx.beginPath();
         ctx.arc(256, 255, 115, 0, Math.PI * 2);
         ctx.fill();
@@ -1125,6 +1142,7 @@
         ctx.lineWidth = 4.5;
         ctx.stroke();
 
+        // Vẽ biểu tượng SVG sắc nét
         const iconKey = card.iconType || 'gift';
         const svgImg = getSvgImage(iconKey);
 
@@ -1139,8 +1157,9 @@
           svgImg.onload = renderSvg;
         }
 
-        ctx.font = '900 38px "Quicksand", sans-serif';
-        ctx.fillStyle = '#1e293b';
+        // TÊN ĐẶC QUYỀN: MÀU ĐEN THAN / XANH NAVY SIÊU ĐẬM (#0f172a), FONT 900 CỰC KỲ DỄ ĐỌC
+        ctx.font = '900 40px "Quicksand", sans-serif';
+        ctx.fillStyle = '#0f172a';
 
         const words = (card.title || '').split(' ');
         let lines = [];
@@ -1159,19 +1178,25 @@
 
         const titleStartY = lines.length > 1 ? 430 : 445;
         lines.forEach((line, index) => {
-          ctx.fillText(line, 256, titleStartY + index * 46);
+          ctx.fillText(line, 256, titleStartY + index * 48);
         });
 
+        // PHỤ ĐỀ: MÀU ĐẬM RÕ NÉT (subColor), HOÀN TOÀN KHÔNG DÙNG MÀU VÀNG NHẠT
         if (card.subtitle) {
-          ctx.font = '700 22px "Quicksand", sans-serif';
-          ctx.fillStyle = '#ea580c';
-          ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 46 + 24);
+          ctx.font = '800 23px "Quicksand", sans-serif';
+          ctx.fillStyle = subColor;
+          ctx.fillText(card.subtitle, 256, titleStartY + lines.length * 48 + 22);
         }
 
+        // Chân thẻ
         ctx.fillStyle = '#fef3c7';
         ctx.fillRect(40, 615, 432, 40);
-        ctx.font = '800 15px "Quicksand", sans-serif';
-        ctx.fillStyle = '#b45309';
+        ctx.strokeStyle = themeColor;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(40, 615, 432, 40);
+
+        ctx.font = '900 15px "Quicksand", sans-serif';
+        ctx.fillStyle = themeColor;
         ctx.fillText('✦ BÉ CHĂM NGOAN • CẢ LỚP YÊU QUÝ ✦', 256, 635);
 
         texture.needsUpdate = true;
@@ -1221,18 +1246,19 @@
       const cardGeometry = new THREE.BoxGeometry(CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH);
 
       activeCards.forEach((card, index) => {
+        // Cạnh thẻ màu vàng hổ phách dịu
         const edgeMaterial = new THREE.MeshStandardMaterial({
-          color: 0xfef08a,
-          metalness: 0.2,
-          roughness: 0.35,
+          color: 0xfde047,
+          metalness: 0.1,
+          roughness: 0.45,
           transparent: true,
           opacity: 1.0
         });
 
         const backMaterial = new THREE.MeshStandardMaterial({
           map: sharedBackTexture,
-          metalness: 0.1,
-          roughness: 0.4,
+          metalness: 0.05,
+          roughness: 0.5,
           transparent: true,
           opacity: 1.0
         });
@@ -1240,8 +1266,8 @@
         const frontTexture = generateFrontFaceTexture(card);
         const frontMaterial = new THREE.MeshStandardMaterial({
           map: frontTexture,
-          metalness: 0.1,
-          roughness: 0.4,
+          metalness: 0.05,
+          roughness: 0.5,
           transparent: true,
           opacity: 1.0
         });
@@ -1281,12 +1307,12 @@
 
       carouselGroup.rotation.y = 0;
       currentState = STATE_IDLE;
-      updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!');
+      updateStatusToast('Bấm nút <strong class="text-rose-700 underline font-black">"BẮT ĐẦU QUAY"</strong> - Vòng quay sẽ tự động dừng và trao thẻ!');
       updateHUDControlsForState(STATE_IDLE);
     }
 
     /* ==========================================================================
-       6. TỰ ĐỘNG QUAY THEO THỜI GIAN CÀI ĐẶT & DỪNG CHUẨN XÁC CHÍNH GIỮA (X=0)
+       6. TỰ ĐỘNG QUAY THEO THỜI GIAN & DỪNG CHUẨN XÁC CHÍNH TÂM
        ========================================================================== */
 
     function getSpinDuration() {
@@ -1295,7 +1321,6 @@
       return isNaN(val) ? 4 : val;
     }
 
-    // Lưu cài đặt thời gian
     document.getElementById('spin-duration-select').addEventListener('change', (e) => {
       localStorage.setItem('spin_duration_seconds', e.target.value);
     });
@@ -1306,21 +1331,18 @@
       currentState = STATE_SPINNING;
       const durationSeconds = getSpinDuration();
 
-      // Cập nhật giao diện đếm ngược
       let timeLeft = durationSeconds;
       mainActionIconBox.textContent = '⏳';
       mainActionLabel.textContent = `ĐANG QUAY... (${timeLeft}s)`;
-      mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-default overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-amber-950 shadow-lg border-2 border-white flex items-center gap-3 animate-pulse';
+      mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-default overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-slate-950 shadow-lg border-2 border-white flex items-center gap-3 animate-pulse';
 
-      updateStatusToast(`🌀 Đang quay trong <strong class="text-orange-600">${timeLeft} giây</strong>... Hãy cùng đếm ngược nào! 🌸`);
+      updateStatusToast(`🌀 Đang quay trong <strong class="text-rose-700">${timeLeft} giây</strong>... Hãy cùng đếm ngược nào! 🌸`);
 
-      // Âm thanh nhịp quay
       if (spinTickInterval) clearInterval(spinTickInterval);
       spinTickInterval = setInterval(() => {
         sound.playTick();
       }, 95);
 
-      // Đồng hồ đếm ngược giao diện
       if (countdownInterval) clearInterval(countdownInterval);
       countdownInterval = setInterval(() => {
         timeLeft--;
@@ -1332,7 +1354,6 @@
         }
       }, 1000);
 
-      // Quay tốc độ cao liên tục
       if (spinTween) spinTween.kill();
       spinTween = gsap.to(carouselGroup.rotation, {
         y: '+=31.4159',
@@ -1341,14 +1362,12 @@
         repeat: -1
       });
 
-      // TỰ ĐỘNG DỪNG KHI HẾT THỜI GIAN ĐÃ CÀI ĐẶT
       if (autoStopTimer) clearTimeout(autoStopTimer);
       autoStopTimer = setTimeout(() => {
         stopCarouselAndReveal();
       }, durationSeconds * 1000);
     }
 
-    /* Dừng vòng quay và đưa lá bài may mắn ra đúng CHÍNH GIỮA (x=0) */
     function stopCarouselAndReveal(targetMesh = null) {
       if (currentState !== STATE_SPINNING && currentState !== STATE_IDLE) return;
 
@@ -1387,15 +1406,13 @@
       hideStatusToast();
       updateHUDControlsForState(STATE_REVEALED);
 
-      // TÍNH TOÁN GÓC DỪNG CHUẨN XÁC ĐỐI DIỆN TRỰC TIẾP CAMERA
-      // Khi carouselGroup.rotation.y = -baseAngle, lá bài chosenIndex sẽ nằm ngay tại X = 0 thế giới!
       const targetAngle = -mesh.userData.baseAngle;
       const currentRotY = carouselGroup.rotation.y;
       const twoPi = Math.PI * 2;
       
       let diff = (targetAngle - currentRotY) % twoPi;
       if (diff > 0) diff -= twoPi;
-      const finalCarouselRotY = currentRotY + diff - twoPi * 2; // Thêm 2 vòng quay hãm phanh
+      const finalCarouselRotY = currentRotY + diff - twoPi * 2;
 
       gsap.to(carouselGroup.rotation, {
         y: finalCarouselRotY,
@@ -1407,10 +1424,7 @@
       });
     }
 
-    /* ĐƯA THẺ BÀI RA CHÍNH GIỮA MÀN HÌNH (CHUẨN TÂM X=0, KHÔNG BỊ LỆCH) */
     function revealWinningCard(mesh) {
-      // Đẩy thẻ bài tịnh tiến hướng tâm ra phía trước sát camera (R + 2.5)
-      // Nhân tỷ lệ (CAROUSEL_RADIUS + 2.5) với cả sin và cos để giữ nguyên X thế giới = 0!
       const targetRadius = CAROUSEL_RADIUS + 2.5;
       const angle = mesh.userData.baseAngle;
 
@@ -1422,7 +1436,6 @@
         ease: 'power2.out'
       });
 
-      // Phóng to to rõ để cả lớp nhìn thấy
       gsap.to(mesh.scale, {
         x: 1.38,
         y: 1.38,
@@ -1431,7 +1444,6 @@
         ease: 'back.out(1.5)'
       });
 
-      // Lật mặt trước hoàn hảo
       gsap.to(mesh.rotation, {
         y: mesh.userData.baseRotY + Math.PI,
         duration: 1.3,
@@ -1443,11 +1455,10 @@
       });
     }
 
-    /* Thu thẻ về lại đúng vị trí slot trên vòng tròn 3D khi bấm "QUAY TIẾP LƯỢT MỚI" */
     function resetCardBackToCarousel() {
       if (!revealedCardMesh) {
         currentState = STATE_IDLE;
-        updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> để bạn tiếp theo quay nhé!');
+        updateStatusToast('Bấm nút <strong class="text-rose-700 underline font-black">"BẮT ĐẦU QUAY"</strong> để bạn tiếp theo quay nhé!');
         updateHUDControlsForState(STATE_IDLE);
         return;
       }
@@ -1475,7 +1486,7 @@
         onComplete: () => {
           revealedCardMesh = null;
           currentState = STATE_IDLE;
-          updateStatusToast('Bấm nút <strong class="text-orange-600 underline font-black">"BẮT ĐẦU QUAY"</strong> để bạn tiếp theo quay nhé!');
+          updateStatusToast('Bấm nút <strong class="text-rose-700 underline font-black">"BẮT ĐẦU QUAY"</strong> để bạn tiếp theo quay nhé!');
           updateHUDControlsForState(STATE_IDLE);
         }
       });
@@ -1488,7 +1499,7 @@
         particleCount: 150,
         spread: 100,
         origin: { y: 0.5 },
-        colors: ['#f59e0b', '#ec4899', '#38bdf8', '#22c55e', '#ffffff']
+        colors: ['#d97706', '#db2777', '#0284c7', '#16a34a', '#ffffff']
       });
 
       setTimeout(() => {
@@ -1497,14 +1508,14 @@
           angle: 60,
           spread: 70,
           origin: { x: 0.1, y: 0.75 },
-          colors: ['#f59e0b', '#ec4899', '#fde047']
+          colors: ['#d97706', '#db2777', '#fde047']
         });
         confetti({
           particleCount: 90,
           angle: 120,
           spread: 70,
           origin: { x: 0.9, y: 0.75 },
-          colors: ['#38bdf8', '#a855f7', '#f59e0b']
+          colors: ['#0284c7', '#9333ea', '#d97706']
         });
       }, 250);
     }
@@ -1537,13 +1548,13 @@
       if (state === STATE_IDLE) {
         mainActionIconBox.textContent = '▶';
         mainActionLabel.textContent = 'BẮT ĐẦU QUAY';
-        mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
+        mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
       } else if (state === STATE_SPINNING) {
-        // Tự động quay, hiển thị nhịp quay
+        // Đang quay
       } else if (state === STATE_REVEALED) {
         mainActionIconBox.textContent = '↻';
         mainActionLabel.textContent = 'QUAY TIẾP LƯỢT MỚI';
-        mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-orange-400 via-amber-400 to-pink-400 hover:from-orange-300 hover:to-pink-300 text-amber-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
+        mainActionBtn.className = 'group relative px-9 md:px-12 py-3.5 md:py-4 rounded-2xl font-black text-xl md:text-2xl tracking-wider uppercase transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-r from-orange-400 via-amber-400 to-pink-400 hover:from-orange-300 hover:to-pink-300 text-slate-950 shadow-lg hover:scale-105 active:scale-95 border-2 border-white flex items-center gap-3';
       }
     }
 
@@ -1560,7 +1571,6 @@
       if (currentState === STATE_IDLE) {
         startCarouselSpin();
       } else if (currentState === STATE_SPINNING) {
-        // Nếu cô giáo muốn dừng sớm trước khi hết giờ thì dừng ngay
         stopCarouselAndReveal();
       } else if (currentState === STATE_REVEALED) {
         resetCardBackToCarousel();
@@ -1802,32 +1812,32 @@
       cardsManagerList.innerHTML = '';
       cardsData.forEach((card, index) => {
         const item = document.createElement('div');
-        item.className = 'flex items-center justify-between p-3 rounded-xl bg-amber-50/90 border border-amber-200 hover:border-amber-400 transition-colors shadow-sm';
+        item.className = 'flex items-center justify-between p-3 rounded-xl bg-amber-50/90 border-2 border-amber-300 hover:border-amber-500 transition-colors shadow-sm';
 
-        let badgeColor = 'bg-sky-100 text-sky-800 border-sky-300';
-        if (card.rarity === 'SSR') badgeColor = 'bg-amber-100 text-amber-800 border-amber-300';
-        if (card.rarity === 'SR') badgeColor = 'bg-purple-100 text-purple-800 border-purple-300';
-        if (card.rarity === 'PINK') badgeColor = 'bg-pink-100 text-pink-800 border-pink-300';
-        if (card.rarity === 'ORANGE') badgeColor = 'bg-orange-100 text-orange-800 border-orange-300';
-        if (card.rarity === 'GREEN') badgeColor = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+        let badgeColor = 'bg-sky-100 text-sky-900 border-sky-400';
+        if (card.rarity === 'SSR') badgeColor = 'bg-amber-100 text-amber-950 border-amber-400';
+        if (card.rarity === 'SR') badgeColor = 'bg-purple-100 text-purple-950 border-purple-400';
+        if (card.rarity === 'PINK') badgeColor = 'bg-pink-100 text-pink-950 border-pink-400';
+        if (card.rarity === 'ORANGE') badgeColor = 'bg-orange-100 text-orange-950 border-orange-400';
+        if (card.rarity === 'GREEN') badgeColor = 'bg-emerald-100 text-emerald-950 border-emerald-400';
 
         const svgSnippet = SVG_ICONS[card.iconType] || SVG_ICONS.gift;
 
         item.innerHTML = `
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-white border border-amber-300 flex items-center justify-center p-1.5 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-white border-2 border-amber-400 flex items-center justify-center p-1.5 shadow-sm">
               <div class="w-full h-full">${svgSnippet}</div>
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-black text-sm text-amber-950">${card.title}</span>
-                <span class="text-[10px] px-2 py-0.5 rounded-full border ${badgeColor} font-black">${card.rarity}</span>
+                <span class="font-black text-sm text-slate-900">${card.title}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full border-2 ${badgeColor} font-black">${card.rarity}</span>
               </div>
-              <p class="text-xs text-amber-700 font-bold">${card.subtitle || 'Không có mô tả'}</p>
+              <p class="text-xs text-amber-900 font-extrabold">${card.subtitle || 'Không có mô tả'}</p>
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <button class="btn-delete-card w-8 h-8 rounded-lg bg-rose-100 hover:bg-rose-500 text-rose-700 hover:text-white text-xs flex items-center justify-center transition-colors cursor-pointer border border-rose-200 font-black" data-index="${index}" title="Xóa thẻ">
+            <button class="btn-delete-card w-8 h-8 rounded-lg bg-rose-100 hover:bg-rose-500 text-rose-800 hover:text-white text-xs flex items-center justify-center transition-colors cursor-pointer border-2 border-rose-300 font-black" data-index="${index}" title="Xóa thẻ">
               ✕
             </button>
           </div>
@@ -1851,7 +1861,7 @@
     }
 
     /* ==========================================================================
-       9. MAIN RENDER LOOP (STICKER HOA VÀ MÂY BAY ĐUNG ĐƯA)
+       9. MAIN RENDER LOOP
        ========================================================================== */
     const clock = new THREE.Clock();
 
