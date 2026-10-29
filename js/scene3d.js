@@ -201,6 +201,11 @@ const Scene3D = {
     c.height = 700;
     const ctx = c.getContext('2d');
 
+    // Khởi tạo texture trước để tránh Temporal Dead Zone khi ảnh có sẵn trong cache
+    const texture = new THREE.CanvasTexture(c);
+    texture.generateMipmaps = true;
+    texture.minFilter = THREE.LinearMipmapLinearFilter;
+
     const bgGrad = ctx.createLinearGradient(0, 0, 512, 700);
     bgGrad.addColorStop(0, '#fef08a');
     bgGrad.addColorStop(0.5, '#fde047');
@@ -225,18 +230,6 @@ const Scene3D = {
     ctx.lineWidth = 4;
     ctx.strokeRect(30, 30, 452, 640);
 
-    const backImg = getCardIconImage('sunflower');
-    const drawCenterCrest = () => {
-      ctx.drawImage(backImg, 151, 230, 210, 210);
-      texture.needsUpdate = true;
-    };
-
-    if (backImg.complete && backImg.naturalWidth > 0) {
-      drawCenterCrest();
-    } else {
-      backImg.onload = drawCenterCrest;
-    }
-
     ctx.font = '900 28px "Baloo 2", "Nunito", sans-serif';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#78350f';
@@ -246,9 +239,23 @@ const Scene3D = {
     ctx.fillStyle = '#9a3412';
     ctx.fillText('✦ CÔ HOÀI THANH KHEN TẶNG ✦', 256, 560);
 
-    const texture = new THREE.CanvasTexture(c);
-    texture.generateMipmaps = true;
-    texture.minFilter = THREE.LinearMipmapLinearFilter;
+    const backImg = getCardIconImage('sunflower');
+    const drawCenterCrest = () => {
+      try {
+        ctx.drawImage(backImg, 151, 230, 210, 210);
+        texture.needsUpdate = true;
+      } catch (err) {
+        console.warn('Lỗi vẽ hoa hướng dương:', err);
+      }
+    };
+
+    if (backImg.complete && backImg.naturalWidth > 0) {
+      drawCenterCrest();
+    } else {
+      backImg.addEventListener('load', drawCenterCrest);
+    }
+
+    texture.needsUpdate = true;
     return texture;
   },
 
@@ -320,7 +327,11 @@ const Scene3D = {
       // Badge độ hiếm
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.roundRect(120, 94, 272, 32, 16);
+      if (typeof ctx.roundRect === 'function') {
+        ctx.roundRect(120, 94, 272, 32, 16);
+      } else {
+        ctx.rect(120, 94, 272, 32);
+      }
       ctx.fill();
       ctx.strokeStyle = themeColor;
       ctx.lineWidth = 2.5;
@@ -343,14 +354,18 @@ const Scene3D = {
       const iconImg = getCardIconImage(iconKey);
 
       const renderIcon = () => {
-        ctx.drawImage(iconImg, 171, 155, 170, 170);
-        texture.needsUpdate = true;
+        try {
+          ctx.drawImage(iconImg, 171, 155, 170, 170);
+          texture.needsUpdate = true;
+        } catch (err) {
+          console.warn('Lỗi vẽ icon thẻ bài:', err);
+        }
       };
 
       if (iconImg.complete && iconImg.naturalWidth > 0) {
         renderIcon();
       } else {
-        iconImg.onload = renderIcon;
+        iconImg.addEventListener('load', renderIcon);
       }
 
       // Tên đặc quyền: màu đen than đậm đà (#0f172a), font Baloo 2 + Nunito siêu nét tiếng Việt
